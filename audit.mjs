@@ -305,6 +305,23 @@ head('Lodging');
   // The per-person / per-room distinction is the single most expensive thing
   // to get wrong here, so every type has to state its unit.
   for (const t of STAY_TYPES) if (!/\/\s*(room|person|house)/.test(t.yen)) fail(`stay type "${t.name}" does not say what its price is per`);
+  // The range chart plots explicit figures rather than parsing the prose,
+  // because the hostel line carries two prices in two different units and a
+  // parser drew one bar spanning a dorm bed to a private room.
+  for (const t of STAY_TYPES) {
+    const c = t.chart;
+    if (!c) { fail(`stay type "${t.name}" has no chart figures`); continue; }
+    if (!(c.low > 0 && c.high > c.low)) fail(`stay type "${t.name}" has a bad chart range`);
+    if (!['person', 'room', 'house'].includes(c.unit)) fail(`stay type "${t.name}" charts an unknown unit "${c.unit}"`);
+    // The bar and the printed price must not disagree about the unit.
+    const prose = /\/\s*(room|person|house)/.exec(t.yen)[1];
+    const multi = /·/.test(t.yen);
+    if (!multi && prose !== c.unit) fail(`stay type "${t.name}" charts per ${c.unit} but prints per ${prose}`);
+    if (multi && !c.chartNote) fail(`stay type "${t.name}" prints two units and must say which one the bar shows`);
+    const inProse = t.yen.replace(/,/g, '');
+    if (!multi && (!inProse.includes(String(c.low)) || !inProse.includes(String(c.high))))
+      fail(`stay type "${t.name}" charts ${c.low}-${c.high}, which is not what its price string says`);
+  }
   for (const l of LODGING) {
     for (const k of ['city', 'jp', 'nights', 'where', 'why', 'avoid', 'tiers']) if (!l[k]) fail(`${l.city||'?'} missing ${k}`);
     if (l.tiers.map((t) => t.tier).join(',') !== TIERS.join(',')) fail(`${l.city} does not carry all three tiers in order`);
@@ -715,7 +732,11 @@ head('Scroll safety');
   // card starts inside a nested scroller it then has to escape.
   const css = html.slice(html.indexOf('<style>'), html.indexOf('</style>'))
     .replace(/\/\*[\s\S]*?\*\//g, '');
-  const allowedScrollers = ['.nav-in', '.track', '.dlg-body'];
+  // `.secnav` is the same deliberate strip as `.nav-in`: a horizontal chip row
+  // that must scroll sideways and must NOT pan vertically, so a finger landing
+  // on it still scrolls the page. It carries no `touch-action` for the same
+  // reason the tracks do not.
+  const allowedScrollers = ['.nav-in', '.track', '.dlg-body', '.secnav'];
   // `overflow-y:hidden` on a horizontal carousel is correct and deliberate: it
   // is what stops the track panning vertically under a finger. Everywhere else,
   // hidden is a scroll container nobody asked for and `clip` is the right word.

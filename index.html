@@ -509,6 +509,31 @@ dialog::backdrop{background:rgba(20,17,12,.55);backdrop-filter:blur(3px)}
 .hband + .h-sec + .sub, .hband + .sub{font-size:16.5px;line-height:1.62;
   color:var(--sumi-2);max-width:66ch}
 
+/* -- in-tab section navigation -------------------------------------- */
+/* The Destinations tab is twenty-one thousand pixels tall and Eating out is
+   fourteen. Prose length was never the problem on those — the problem is that
+   twenty screens of the same card shape have no landmarks in them, so there is
+   no way to tell where you are or to get anywhere without scrolling past
+   everything. This is a second, view-local nav that sits under the main one
+   and tracks what you are actually looking at. */
+.secnav{position:sticky;z-index:40;display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;margin:0 0 22px;padding:7px 0;
+  background:color-mix(in srgb,var(--washi) 92%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line);overscroll-behavior-x:contain}
+.secnav::-webkit-scrollbar{display:none}
+.secnav button{flex:none;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600;
+  color:var(--sumi-3);white-space:nowrap;border:1px solid transparent;transition:.16s}
+.secnav button:hover{color:var(--sumi);background:var(--card)}
+.secnav button[aria-current="true"]{color:var(--shu);border-color:color-mix(in srgb,var(--shu) 34%,transparent);
+  background:color-mix(in srgb,var(--shu-soft) 70%,transparent)}
+.dgroup{margin-bottom:30px}
+.cb-n{margin-left:10px;font-size:12px;font-weight:600;color:var(--sumi-3);
+  font-family:var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums;
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+.secnav .sn-n{font-variant-numeric:tabular-nums;opacity:.5;margin-right:5px;font-size:11px}
+@media(max-width:640px){.secnav button{font-size:12px;padding:5px 10px}}
+
 /* -- hero bands + motif work ---------------------------------------- */
 /* Every tab opens on a photograph instead of a paragraph. The band carries a
    scrim so white type stays legible over any image, and the tab's motif tiles
@@ -628,15 +653,63 @@ dialog::backdrop{background:rgba(20,17,12,.55);backdrop-filter:blur(3px)}
   border-bottom:1px solid var(--line);border-left:4px solid var(--tc)}
 .ctab-h h3{font-size:16px}
 .ctab-h .j{font-family:var(--serif);font-size:12.5px;color:var(--sumi-3);margin-left:auto;letter-spacing:.16em}
-.ptable{width:100%;border-collapse:collapse}
-.ptable td{padding:9px 20px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
-.ptable tr:last-child td{border-bottom:none}
-.ptable td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--sumi)}
-.ptable small{display:block;color:var(--sumi-3);font-size:12.5px;margin-top:2px}
+/* Each price row carries its own bar, log-scaled, sitting behind the text
+   rather than beside it — so the chart costs no extra height. */
+.plist{position:relative}
+.prow{position:relative;display:flex;gap:14px;align-items:baseline;
+  padding:9px 20px;border-bottom:1px solid var(--line);isolation:isolate}
+.prow:last-child{border-bottom:none}
+.prow::before{content:'';position:absolute;left:0;top:0;bottom:0;width:var(--w,0);
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--tc) 20%,transparent),
+    color-mix(in srgb,var(--tc) 7%,transparent));
+  z-index:-1;border-right:1px solid color-mix(in srgb,var(--tc) 34%,transparent)}
+.prow-t{flex:1;min-width:0;font-size:14px}
+.prow-t b{font-weight:600}
+.prow-t small{display:block;color:var(--sumi-3);font-size:12.5px;margin-top:2px}
+.prow-y{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700;font-size:14px}
+
+/* -- lodging price ranges on one axis ----------------------------- */
+.swchart{display:grid;gap:7px;font-variant-numeric:tabular-nums}
+.swrow,.swaxis{display:grid;grid-template-columns:118px 1fr 82px;gap:10px;align-items:center}
+.swlab{font-size:12.5px;color:var(--sumi-2);text-align:right;line-height:1.25}
+.swtrack{position:relative;height:15px;border-radius:4px;
+  background:color-mix(in srgb,var(--line) 55%,transparent)}
+.swbar{position:absolute;top:0;bottom:0;border-radius:4px}
+.sw-p{background:color-mix(in srgb,var(--shu) 68%,transparent)}
+.sw-r{background:color-mix(in srgb,var(--ai) 68%,transparent)}
+b.sw-p,b.sw-r{background:none;color:var(--shu)}
+b.sw-r{color:var(--ai)}
+.swv{font-size:12px;color:var(--sumi-2);font-weight:700;white-space:nowrap}
+.swv em{font-style:normal;font-weight:500;color:var(--sumi-3);margin-left:4px;font-size:10.5px}
+.swaxis{margin-top:3px}
+.swaxis .swtrack{background:none;height:14px;border-top:1px solid var(--line-2);border-radius:0}
+.swaxis i{position:absolute;top:0;width:1px;height:5px;background:var(--line-2)}
+.swaxis i b{position:absolute;left:0;top:6px;transform:translateX(-50%);
+  font-size:10px;color:var(--sumi-3);font-weight:600;white-space:nowrap}
+@media(max-width:560px){
+  .swrow,.swaxis{grid-template-columns:92px 1fr 66px;gap:7px}
+  .swlab{font-size:11.5px}
+}
 .lever{padding:15px 18px;border-left:4px solid var(--tc)}
 .lever h4{font-size:15px;margin-bottom:5px}
 .lever p{font-size:13.5px;color:var(--sumi-2)}
 .cd-items{margin-top:4px}
+/* -- countdown as a timeline -------------------------------------- */
+#countdown{position:relative;padding-left:32px}
+#countdown::before{content:'';position:absolute;left:9px;top:22px;bottom:26px;width:2px;
+  border-radius:2px;background:linear-gradient(180deg,
+    var(--shu) 0%,var(--kin) 26%,var(--ai) 52%,var(--matcha) 76%,var(--line-2) 100%)}
+.cdstage{position:relative;margin-bottom:16px}
+.cdstage>.level{margin:0}
+.cd-dot{position:absolute;left:-29px;top:19px;width:16px;height:16px;border-radius:50%;
+  background:var(--washi);border:3px solid var(--tc);z-index:1;
+  box-shadow:0 0 0 4px var(--washi)}
+@media(max-width:560px){
+  #countdown{padding-left:24px}
+  #countdown::before{left:6px}
+  .cd-dot{left:-24px;width:13px;height:13px;border-width:2.5px}
+}
 
 .btable{width:100%;border-collapse:collapse}
 .btable th{text-align:left;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3);padding:10px 12px;border-bottom:1px solid var(--line-2)}
@@ -872,7 +945,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
     <div class="h-sec"><h2>Destination library</h2><div class="rule"></div></div>
     <p class="sub">Everything in the template, plus the worthwhile things next door to it. <b>Core</b> is in the plan already; <b>Nearby</b> is close to somewhere you are already going; <b>Optional</b> involves a real trade-off, and the entry says what it is.</p>
     <div class="filters" id="filters"></div>
-    <div class="grid g3" id="dests"></div>
+    <div id="dests"></div>
   </section>
 
   <!-- ══ FOOD ══ -->
@@ -928,6 +1001,11 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
   <section class="view" id="v-stay">
     <div class="h-sec"><h2>The kinds of place you can stay</h2><div class="rule"></div></div>
     <p class="sub">Japan has categories of accommodation with no equivalent at home, and choosing the wrong <em>kind</em> costs more than choosing the wrong property. The number that matters most: a ryokan is priced per person and includes two meals, so its headline rate is not comparable to a hotel room at all.</p>
+    <div class="card" style="padding:20px 24px;margin-bottom:22px">
+      <h4 class="opts-h">What each kind costs a night</h4>
+      <p class="sub" style="font-size:13.5px;margin-bottom:14px">The bar is the usual range. Note which axis each one is on — <b class="sw-p">per person</b> bars and <b class="sw-r">per room</b> bars are not comparable, and that is the entire trap.</p>
+      <div class="swchart" id="stayChart"></div>
+    </div>
     <div class="grid g2" id="stayTypes" style="gap:16px;margin-bottom:38px"></div>
 
     <div class="h-sec"><h2>Where to sleep in each city</h2><div class="rule"></div></div>
@@ -1805,7 +1883,7 @@ function renderDests(){
   const list=DESTINATIONS.filter(d=>
     (fCity==='all'||d.city===fCity)&&(fTag==='all'||d.tags.includes(fTag))&&
     (!fQ||searchText(d).includes(fQ)));
-  dests.innerHTML=list.length?list.map(d=>{
+  const card=(d)=>{
     const[tc,tl]=TIER[d.tier];
     return `<article class="card dest">
       <div class="dest-img">${d.img
@@ -1828,7 +1906,25 @@ function renderDests(){
           ${mapsUrl(d.id)?`<a class="linkish" href="${mapsUrl(d.id)}" target="_blank" rel="noopener">Map ↗</a>`:''}
           ${d.url?`<a class="linkish" href="${esc(d.url)}" target="_blank" rel="noopener">${siteLabel(d)} ↗</a>`:''}
         </div></div></article>`;
-  }).join(''):`<p class="sub">Nothing matches that. Try clearing a filter.</p>`;
+  };
+  if(!list.length){
+    dests.innerHTML=`<p class="sub">Nothing matches that. Try clearing a filter.</p>`;
+    if(window.rebuildSecNav)window.rebuildSecNav('v-destinations');
+    return;
+  }
+  // City order follows the itinerary, not the alphabet — the library should
+  // read in the order you will actually be standing in these places.
+  const order=['Tokyo','Hakone','Kyoto','Uji','Nara','Osaka'];
+  const seen=[...new Set(list.map(d=>d.city))]
+    .sort((a,b)=>(order.indexOf(a)+1||99)-(order.indexOf(b)+1||99));
+  dests.innerHTML=seen.map(city=>{
+    const inCity=list.filter(d=>d.city===city);
+    return `<div class="dgroup" data-city-group="${esc(city)}">
+      <h3 class="citybar">${esc(city)}<span class="cb-n">${inCity.length}</span></h3>
+      <div class="grid g3">${inCity.map(card).join('')}</div>
+    </div>`;
+  }).join('');
+  if(window.rebuildSecNav)window.rebuildSecNav('v-destinations');
 }
 renderDests();
 filters.addEventListener('click',e=>{
@@ -2203,6 +2299,38 @@ logistics.innerHTML=LOGISTICS.map(g=>`
  */
 const TONE_BG=t=>`var(--${t==='sumi'?'sumi-3':t})`;
 
+/*
+ * The lodging tab argues that a ryokan rate and a hotel rate are different
+ * units. Arguing it in a paragraph asks the reader to hold two numbers in
+ * their head; drawing it on one axis, with the per-person bars marked apart
+ * from the per-room bars, makes the trap visible in about a second.
+ */
+{
+  const rows=(window.STAY_TYPES||[]).filter(t=>t.chart);
+  const cap=Math.max(...rows.map(t=>t.chart.high));
+  const pc=(v)=>v/cap*100;
+  const UNIT={person:['p','pp'],room:['r','room'],house:['r','house']};
+  stayChart.innerHTML=
+    rows.map(t=>{
+      const c=t.chart, [cls,lab]=UNIT[c.unit];
+      return `<div class="swrow"${c.chartNote?` title="${esc(c.chartNote)}"`:''}>
+        <span class="swlab">${esc(t.name)}</span>
+        <span class="swtrack">
+          <span class="swbar sw-${cls}" style="left:${pc(c.low).toFixed(1)}%;width:${Math.max(1.5,pc(c.high)-pc(c.low)).toFixed(1)}%"></span>
+        </span>
+        <span class="swv">${(c.low/1000).toFixed(0)}&ndash;${(c.high/1000).toFixed(0)}k<em>${lab}</em></span>
+      </div>`;
+    }).join('')+
+    `<div class="swaxis"><span class="swlab"></span><span class="swtrack">${
+      [0,15000,30000,45000,60000].filter(v=>v<=cap)
+        .map(v=>`<i style="left:${pc(v).toFixed(1)}%"><b>${v?'¥'+(v/1000)+'k':'¥0'}</b></i>`).join('')
+    }</span><span class="swv"></span></div>`;
+  const noted=rows.filter(t=>t.chart.chartNote);
+  if(noted.length)stayChart.insertAdjacentHTML('afterend',
+    `<p class="sub" style="font-size:12.5px;margin:12px 0 0">${
+      noted.map(t=>`<b>${esc(t.name)}</b> — ${esc(t.chart.chartNote)}.`).join(' ')}</p>`);
+}
+
 stayTypes.innerHTML=(window.STAY_TYPES||[]).map(t=>`
   <div class="card stype">
     <div class="stype-h" style="--tc:${TONE_BG(t.tone)}">
@@ -2336,13 +2464,34 @@ rateIn.oninput=()=>{
 };
 renderBudget();
 
-costs.innerHTML=(window.COSTS||[]).map(g=>`
-  <div class="card ctab">
-    <div class="ctab-h" style="--tc:${TONE_BG(g.tone)}"><h3>${esc(g.group)}</h3><span class="j">${esc(g.jp)}</span></div>
-    <table class="ptable">${g.items.map(it=>
-      `<tr><td>${esc(it.what)}<small>${esc(it.note)}</small></td>
-        <td class="num"><b>¥${esc(it.yen)}</b></td></tr>`).join('')}</table>
-  </div>`).join('');
+/*
+ * The price list IS the chart.
+ *
+ * Thirty-nine prices in two columns is a table you read one row at a time and
+ * come away from knowing nothing about scale. A bar behind each row costs no
+ * extra vertical space and answers the question the table cannot: how much
+ * dearer is this than that. LOG-scaled deliberately — the range runs from a
+ * 150-yen rice ball to a 40,000-yen omakase, and on a linear axis everything
+ * under a thousand yen is a bar too short to see.
+ */
+const yenOf=(s)=>{
+  const n=(String(s).match(/[\d,]+/g)||[]).map(x=>+x.replace(/,/g,'')).filter(x=>x>0);
+  return n.length?n.reduce((a,b)=>a+b,0)/n.length:0;
+};
+{
+  const all=(window.COSTS||[]).flatMap(g=>g.items.map(i=>yenOf(i.yen))).filter(v=>v>0);
+  const top=Math.log(Math.max(...all)+1);
+  const barW=(v)=>v>0?Math.max(3,Math.log(v+1)/top*100):0;
+  costs.innerHTML=(window.COSTS||[]).map(g=>`
+    <div class="card ctab">
+      <div class="ctab-h" style="--tc:${TONE_BG(g.tone)}"><h3>${esc(g.group)}</h3><span class="j">${esc(g.jp)}</span></div>
+      <div class="plist" style="--tc:${TONE_BG(g.tone)}">${g.items.map(it=>`
+        <div class="prow" style="--w:${barW(yenOf(it.yen)).toFixed(1)}%">
+          <div class="prow-t"><b>${esc(it.what)}</b><small>${esc(it.note)}</small></div>
+          <div class="prow-y">¥${esc(it.yen)}</div>
+        </div>`).join('')}</div>
+    </div>`).join('');
+}
 
 levers.innerHTML=(window.LEVERS||[]).map(l=>`
   <div class="card lever" style="--tc:${TONE_BG(l.tone)}">
@@ -2350,14 +2499,19 @@ levers.innerHTML=(window.LEVERS||[]).map(l=>`
   </div>`).join('');
 
 /* ── prep: countdown and packing ────────────────────────────────── */
+/* Five stacked boxes describe a sequence without looking like one. The spine
+   and the dated markers do the job the content was already doing in words. */
 countdown.innerHTML=(window.COUNTDOWN||[]).map((c,ci)=>`
-  <div class="level">
+  <div class="cdstage" style="--tc:var(--${c.tone})">
+    <span class="cd-dot"></span>
+    <div class="level">
     <div class="level-h ${c.critical?'lv-critical':'lv-flare'}">
       <h3>${esc(c.when)}</h3><span class="j">${esc(c.jp)}</span>
     </div>
     <div class="level-b">
       <p class="lead">${esc(c.lead)}</p>
       <div class="cd-items" id="cd-${ci}"></div>
+    </div>
     </div>
   </div>`).join('');
 (window.COUNTDOWN||[]).forEach((c,ci)=>
@@ -2439,6 +2593,92 @@ paintMotifs();
 // Repaint when the theme flips, in either direction and by either route.
 new MutationObserver(paintMotifs).observe(document.documentElement,{attributeFilter:['data-theme']});
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',paintMotifs);
+
+/* ── in-tab section navigation ──────────────────────────────────── */
+/**
+ * Only for views long enough to get lost in. Destinations is twenty-one
+ * thousand pixels tall and Eating out fourteen; a tab that fits in two screens
+ * needs no wayfinding, and a nav bar over a short page is just more chrome.
+ *
+ * Where the sections come from differs by view, because the structure does.
+ * Most tabs are a run of `.h-sec` headings. Destinations is a hundred and six
+ * cards grouped by city. Logistics is seven self-titled cards and no headings
+ * at all. Reading each one the way it is actually built beats forcing three
+ * different pages into one shape.
+ */
+(function sectionNav(){
+  const navEl=document.querySelector('nav');
+  const MIN_SECTIONS=3;
+  const SOURCES={
+    'v-destinations':v=>[...v.querySelectorAll('.dgroup')]
+      .map(g=>({el:g,label:g.dataset.cityGroup})),
+    'v-logistics':v=>[...v.querySelectorAll('.level')]
+      .map(g=>({el:g,label:g.querySelector('.level-h h3')?.textContent.trim()||''})),
+    default:v=>[...v.querySelectorAll(':scope > .h-sec')].filter(h=>h.querySelector('h2'))
+      .map(h=>({el:h,label:h.querySelector('h2').textContent.trim()})),
+  };
+  const strips=new Map();
+
+  const navH=()=>Math.round(navEl.getBoundingClientRect().height);
+
+  function build(view){
+    const old=view.querySelector(':scope > .secnav');
+    if(old)old.remove();
+    strips.delete(view.id);
+    const secs=(SOURCES[view.id]||SOURCES.default)(view).filter(s=>s.label);
+    if(secs.length<MIN_SECTIONS)return;
+
+    const strip=el('<div class="secnav"></div>');
+    secs.forEach((sec,i)=>{
+      if(!sec.el.id)sec.el.id=`${view.id}-s${i}`;
+      strip.appendChild(el(`<button type="button" data-target="${sec.el.id}">`+
+        `<span class="sn-n">${String(i+1).padStart(2,'0')}</span>${esc(sec.label)}</button>`));
+    });
+    strip.style.top=navH()+'px';
+    strip.addEventListener('click',e=>{
+      const b=e.target.closest('[data-target]');if(!b)return;
+      const t=document.getElementById(b.dataset.target);if(!t)return;
+      scrollTo({top:t.getBoundingClientRect().top+scrollY
+        -(navH()+strip.getBoundingClientRect().height+14),behavior:'smooth'});
+    });
+    const band=view.querySelector(':scope > .hband');
+    band?band.after(strip):view.prepend(strip);
+    strips.set(view.id,{view,strip,secs});
+  }
+
+  document.querySelectorAll('.view').forEach(v=>{if(v.id!=='v-print')build(v)});
+  window.rebuildSecNav=(id)=>{const v=document.getElementById(id);if(v){build(v);spy()}};
+
+  addEventListener('resize',()=>strips.forEach(({strip})=>strip.style.top=navH()+'px'));
+
+  /*
+   * Scroll spy on rAF rather than IntersectionObserver: the question is not
+   * "which headings are visible" but "which section am I inside", and between
+   * two headings none is on screen — an observer goes quiet exactly when you
+   * most want an answer.
+   */
+  let queued=false;
+  function spy(){
+    queued=false;
+    const vis=[...strips.values()].find(({view})=>getComputedStyle(view).display!=='none');
+    if(!vis)return;
+    const line=navH()+vis.strip.getBoundingClientRect().height+22;
+    let active=0;
+    vis.secs.forEach((s,i)=>{if(s.el.getBoundingClientRect().top<=line)active=i});
+    [...vis.strip.children].forEach((b,i)=>{
+      const on=i===active;
+      if((b.getAttribute('aria-current')==='true')!==on){
+        b.setAttribute('aria-current',on?'true':'false');
+        // Keep the current chip in view where the strip itself scrolls.
+        if(on&&vis.strip.scrollWidth>vis.strip.clientWidth+4)
+          b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+      }
+    });
+  }
+  addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(spy)}},{passive:true});
+  document.getElementById('tabs').addEventListener('click',()=>setTimeout(spy,0));
+  spy();
+})();
 
 /* ── credits ────────────────────────────────────────────────────── */
 credits.innerHTML=Object.entries(window.CREDITS||{}).map(([id,c])=>

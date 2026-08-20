@@ -23,6 +23,7 @@
 window.STAY_TYPES = [
   {
     "name": "Business hotel",
+    "chart": {"low": 10000, "high": 20000, "unit": "room"},
     "jp": "ビジネスホテル",
     "yen": "¥10,000–20,000 / room",
     "what": "A small, spotless, extremely well-engineered room with a unit bathroom, a desk, and a bed that takes up most of the floor. Chains like Toyoko Inn, APA, Dormy Inn and Sotetsu Fresa Inn are everywhere, always near a station, and never disappoint in either direction.",
@@ -32,6 +33,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Apartment hotel",
+    "chart": {"low": 18000, "high": 32000, "unit": "room"},
     "jp": "アパートメントホテル",
     "yen": "¥18,000–32,000 / room",
     "what": "A hotel room with a real kitchen, a washing machine and space to sit down that is not the bed. MIMARU and Oakwood are the well-known names; both are aimed squarely at families and longer stays.",
@@ -41,6 +43,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Ryokan",
+    "chart": {"low": 25000, "high": 60000, "unit": "person"},
     "jp": "旅館",
     "yen": "¥25,000–60,000 / person",
     "what": "A traditional inn: tatami floors, futon laid out while you are at dinner, yukata to wear around the building, and a kaiseki dinner and Japanese breakfast that are the substance of the price rather than an extra. Often with an onsen bath, sometimes with one attached to your own room.",
@@ -50,6 +53,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Minshuku and guesthouse",
+    "chart": {"low": 6000, "high": 14000, "unit": "person"},
     "jp": "民宿",
     "yen": "¥6,000–14,000 / person",
     "what": "The family-run version of a ryokan. Simpler rooms, shared bathrooms, home cooking rather than kaiseki, and an owner who will tell you exactly which bus to take.",
@@ -59,6 +63,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Machiya townhouse",
+    "chart": {"low": 25000, "high": 60000, "unit": "house"},
     "jp": "町家",
     "yen": "¥25,000–60,000 / house",
     "what": "A restored Kyoto merchant's house rented whole — wooden lattice front, a courtyard garden, a deep cedar bath, and usually a kitchen. You get the building to yourself.",
@@ -68,6 +73,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Hostel",
+    "chart": {"low": 8000, "high": 14000, "unit": "room", "chartNote": "private room; dorm beds run ¥3,500–6,000 per person"},
     "jp": "ゲストハウス",
     "yen": "¥3,500–6,000 / person dorm · ¥8,000–14,000 / room private",
     "what": "Japan's hostels are a different species — architect-designed, immaculate, with good coffee downstairs and private rooms that shame budget hotels elsewhere.",
@@ -77,6 +83,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Capsule hotel",
+    "chart": {"low": 4000, "high": 7000, "unit": "person"},
     "jp": "カプセルホテル",
     "yen": "¥4,000–7,000 / person",
     "what": "A sealed sleeping pod in a rack, with a locker, a large communal bath and a lounge. The modern ones — Nine Hours, First Cabin — are quiet, clean and oddly restful.",
@@ -86,6 +93,7 @@ window.STAY_TYPES = [
   },
   {
     "name": "Temple lodging",
+    "chart": {"low": 12000, "high": 25000, "unit": "person"},
     "jp": "宿坊",
     "yen": "¥12,000–25,000 / person",
     "what": "A room in a working temple, with vegetarian shōjin ryōri dinner and an optional dawn service you are welcome to attend. Kōya-san is the famous concentration of them.",
