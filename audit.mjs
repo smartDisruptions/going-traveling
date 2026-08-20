@@ -149,7 +149,7 @@ head('No baked-in diet');
   // shojin and vegan cooking really are soy-and-sesame built, which is a fact
   // about the cuisine; and one restaurant has a dish NAMED after a fruit it
   // does not contain, which is worth warning about precisely because of that.
-  const files = ['data-plan.js', 'data-eating.js', 'data-plans.js', 'data-alternatives.js',
+  const files = ['data-plan.js', 'data-eating.js', 'data-plans.js', 'data-alternatives.js', 'data-logistics.js',
     'data-destinations.js', 'data-destinations-2.js', 'data-destinations-3.js',
     'data-destinations-4.js', 'data-destinations-5.js', 'index.html'];
   const banned = [/\bmy wife\b/i, /\bshe carries\b/i, /\bEpiPen\b/, /\bIBS\b/,

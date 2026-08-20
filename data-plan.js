@@ -54,7 +54,7 @@ window.ITINERARY = [
     day: 5, city: 'Hakone', title: 'Tokyo → Hakone', jp: '箱根へ',
     theme: 'Transfer day. Forward the luggage, provision hard, arrive early.',
     blocks: [
-      { when: 'Morning', text: '📦 Send the large suitcases from Tokyo directly to the Kyoto apartment by takkyūbin. Roughly ¥2,000–3,000 per bag, arriving next afternoon. Carry only two nights of clothing, medications, EpiPens, food and documents.' },
+      { when: 'Morning', text: '📦 Send the large suitcases from Tokyo directly to the Kyoto apartment by takkyūbin. Roughly ¥2,000–3,000 per bag, arriving next afternoon. Carry only two nights of clothing, medication, auto-injectors, food and documents.' },
       { when: 'Provisioning', text: 'Buy everything for the full Hakone stay before you get on the mountain: two dinners, breakfasts, packed lunches, snacks, one shelf-stable backup meal, caffeine-free drinks. Do this at Odakyu OX by Odawara Station\u2019s east exit, the last full supermarket before the mountain — Gōra has convenience shopping, not a selection.' },
       { when: 'Transfer', text: 'Odakyu Romancecar from Shinjuku to Hakone-Yumoto, about 85 minutes, reserved seats. Book the front row if you can.' },
       { when: 'Side quest', text: '🎮 The Evangelion Store at Hakone-Yumoto. Hakone is Tokyo-3. Hakone-exclusive merchandise. Fifteen minutes, right on your way.' },

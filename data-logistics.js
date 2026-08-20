@@ -12,12 +12,12 @@ window.LOGISTICS = [
     lead: 'The one section on this page where getting it wrong ends the trip at the airport.',
     critical: true,
     items: [
-      { k: 'EpiPens are a "self-injection device"', v: 'Up to a one-month supply may be brought in with no advance paperwork. Carry the prescription and keep them in the original labelled packaging. Two devices for a twelve-day trip is comfortably inside that.' },
+      { k: 'Adrenaline auto-injectors are a "self-injection device"', v: 'Up to a one-month supply may be brought in with no advance paperwork. Carry the prescription and keep them in the original labelled packaging. Two devices for a twelve-day trip is comfortably inside that.' },
       { k: 'More than a month of anything needs a Yakkan Shoumei', v: 'That is an import certificate, applied for through the Regional Bureau of Health and Welfare covering your arrival airport, and it must be filed at least 14 days before you land. One certificate can cover several medicines and devices at once.' },
       { k: '⚠️ Pseudoephedrine is banned', v: 'Sudafed and many combination cold tablets contain it, and Japan classifies it as a stimulant raw material. It is prohibited at the border regardless of prescription. Check every box in the medicine bag before packing, including anything bought over the counter at home.' },
       { k: '⚠️ Stimulants are prohibited outright', v: 'Adderall, Dexedrine and similar ADHD medications cannot be brought into Japan under any circumstances, prescription or not. This is a criminal matter, not a customs formality.' },
       { k: 'Also worth checking', v: 'Some inhalers and codeine-containing painkillers are restricted by quantity. Anything unusual, confirm with the Narcotics Control Department before you fly rather than at the desk.' },
-      { k: 'Pack them as hand luggage', v: 'Medication, EpiPens and prescriptions travel in the cabin, together, in one place. Hold bags get delayed; these cannot.' },
+      { k: 'Pack them as hand luggage', v: 'Medication, auto-injectors and prescriptions travel in the cabin, together, in one place. Hold bags get delayed; these cannot.' },
     ],
     note: 'Do this check the week you book, not the week you fly — a Yakkan Shoumei has a two-week lead time and there is no way to hurry it.',
   },
@@ -70,7 +70,7 @@ window.LOGISTICS = [
     items: [
       { k: 'eSIM', v: 'The simplest option on a modern iPhone — buy before you fly, activate on landing, keep your home number for calls. 10–20 GB across twelve days is generous.' },
       { k: 'Offline maps', v: 'Download Tokyo, Hakone, Kyoto and Osaka in Google Maps before you go. Useful in the Hakone mountains and underground.' },
-      { k: 'Google Translate offline pack', v: 'Download Japanese. The camera mode reading an ingredient label is one of the most useful things on this trip — but treat it as a hint, never as clearance for the mango or soy question.' },
+      { k: 'Google Translate offline pack', v: 'Download Japanese. The camera mode reading an ingredient label is one of the most useful things on this trip — but check where your own allergen sits in Japan\'s labelling law first — a silent label only means something for the mandatory eight.' },
       { k: 'Battery', v: 'A power bank each. Long days, cold weather and constant maps use will flatten a phone by late afternoon, and the allergy card lives on a phone.' },
     ],
   },
