@@ -1,0 +1,2120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Going Traveling — Japan in 12 Days</title>
+<style>
+/* ======================================================================
+   A Japanese-inflected palette: washi paper, sumi ink, shu vermillion,
+   ai indigo, kin gold. Colours are named for what they are, not where
+   they are used, so a component can borrow one without lying about it.
+   ================================================================== */
+:root{
+  --washi:#f5f1e6; --washi-2:#efe9db; --washi-3:#e6dfcd;
+  --sumi:#1f1c18; --sumi-2:#3d3830; --sumi-3:#6b6355;
+  --shu:#b7332c; --shu-2:#d4544a; --shu-soft:#f3e2df;
+  --ai:#2a3b5e; --ai-2:#3f5680; --ai-soft:#e3e7ef;
+  --kin:#a8874e; --kin-2:#c9a86a; --kin-soft:#f2ead9;
+  --matcha:#5d6b4a; --matcha-soft:#e8ece2;
+  --line:#d8d0bd; --line-2:#c4b9a1;
+  --card:#fdfbf5; --raise:0 1px 2px rgba(31,28,24,.06), 0 8px 24px -12px rgba(31,28,24,.18);
+  --serif:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Songti SC","Noto Serif JP",Georgia,serif;
+  --sans:"Hiragino Sans","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --washi:#16150f; --washi-2:#1d1b14; --washi-3:#26231a;
+    --sumi:#efe9db; --sumi-2:#d3ccbb; --sumi-3:#9c9482;
+    --shu:#e0685e; --shu-2:#ef8479; --shu-soft:#33201d;
+    --ai:#8fa8d4; --ai-2:#a8bce0; --ai-soft:#1b2233;
+    --kin:#d3b177; --kin-2:#e3c893; --kin-soft:#2b2418;
+    --matcha:#9fb086; --matcha-soft:#1e231a;
+    --line:#35301f; --line-2:#4a4330; --card:#1c1a13;
+    --raise:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="light"]{
+  --washi:#f5f1e6; --washi-2:#efe9db; --washi-3:#e6dfcd;
+  --sumi:#1f1c18; --sumi-2:#3d3830; --sumi-3:#6b6355;
+  --shu:#b7332c; --shu-2:#d4544a; --shu-soft:#f3e2df;
+  --ai:#2a3b5e; --ai-2:#3f5680; --ai-soft:#e3e7ef;
+  --kin:#a8874e; --kin-2:#c9a86a; --kin-soft:#f2ead9;
+  --matcha:#5d6b4a; --matcha-soft:#e8ece2;
+  --line:#d8d0bd; --line-2:#c4b9a1; --card:#fdfbf5;
+  --raise:0 1px 2px rgba(31,28,24,.06), 0 8px 24px -12px rgba(31,28,24,.18);
+}
+:root[data-theme="dark"]{
+  --washi:#16150f; --washi-2:#1d1b14; --washi-3:#26231a;
+  --sumi:#efe9db; --sumi-2:#d3ccbb; --sumi-3:#9c9482;
+  --shu:#e0685e; --shu-2:#ef8479; --shu-soft:#33201d;
+  --ai:#8fa8d4; --ai-2:#a8bce0; --ai-soft:#1b2233;
+  --kin:#d3b177; --kin-2:#e3c893; --kin-soft:#2b2418;
+  --matcha:#9fb086; --matcha-soft:#1e231a;
+  --line:#35301f; --line-2:#4a4330; --card:#1c1a13;
+  --raise:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans); background:var(--washi); color:var(--sumi);
+  line-height:1.65; font-size:16px;
+  /* `overflow-x:hidden` used to be here, and it is why the page stopped
+     scrolling on a phone.
+     
+     Hidden is not just "do not show the sideways overflow" — it makes the
+     element a SCROLL CONTAINER, and because html is `visible` that value
+     propagates to the viewport and drags overflow-y from `visible` to `auto`
+     with it. The result is a scroller nested inside the viewer's own scroller.
+     Touch scrolling runs the inner one to its end and then has to hand the
+     gesture to the outer one, and in an embedded webview that handoff is
+     exactly what does not happen. You scroll a little and then nothing.
+     
+     `clip` is the primitive that was actually wanted: it clips the overflow
+     and creates no scroll container at all, so nothing propagates and there is
+     only ever one scroller. Nothing on this page overflows sideways anyway —
+     the layout was fixed properly when the budget table was restacked — so
+     this is a belt, not a brace. */
+  overflow-x:clip;
+  /* asanoha-ish hemp-leaf wash, very faint */
+  background-image:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb,var(--kin) 6%,transparent) 0 1px, transparent 1px);
+  background-size:26px 26px;
+}
+h1,h2,h3,h4,.serif{font-family:var(--serif);font-weight:600;letter-spacing:.01em}
+a{color:var(--ai);text-underline-offset:3px}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* -- seal / eyebrow ----------------------------------------------- */
+.eyebrow{
+  font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--sumi-3)
+}
+.seal{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:66px;height:66px;border:2.5px solid var(--shu);border-radius:8px;
+  color:var(--shu);font-family:var(--serif);font-size:23px;line-height:1.12;
+  /* Vertical, and sized so it breaks into exactly two columns of two — a
+     2×2 hanko. Let it wrap to four single-char columns and it reads as
+     gibberish to anyone who knows the script. */
+  writing-mode:vertical-rl;letter-spacing:0;padding:4px 1px;
+  background:color-mix(in srgb,var(--shu) 6%,transparent);flex:none
+}
+
+/* -- hero --------------------------------------------------------- */
+.hero{position:relative;padding:64px 0 44px;overflow:clip;border-bottom:1px solid var(--line)}
+.hero::before{
+  content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 12% 0%, color-mix(in srgb,var(--shu) 12%,transparent), transparent 60%),
+    radial-gradient(110% 80% at 92% 12%, color-mix(in srgb,var(--ai) 14%,transparent), transparent 62%);
+}
+.hero-in{position:relative;display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.hero h1{font-size:clamp(30px,5.2vw,52px);line-height:1.14;margin:10px 0 6px;max-width:16ch}
+.hero .jp{font-family:var(--serif);color:var(--shu);font-size:15px;letter-spacing:.4em;margin-bottom:14px}
+.hero p.lede{max-width:58ch;color:var(--sumi-2);font-size:17px}
+.route{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.leg{
+  display:flex;align-items:baseline;gap:8px;background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:7px 15px;box-shadow:var(--raise)
+}
+.leg b{font-family:var(--serif);font-size:15px}
+.leg span{font-size:12px;color:var(--sumi-3);letter-spacing:.06em}
+.leg-sep{color:var(--kin);font-size:17px}
+/* Stacked on a phone, the connectors point at nothing. */
+@media(max-width:560px){.leg-sep{display:none}.route{flex-direction:column;align-items:flex-start}}
+
+/* -- nav ---------------------------------------------------------- */
+nav{
+  position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--washi) 88%,transparent);
+  backdrop-filter:saturate(1.5) blur(12px);border-bottom:1px solid var(--line)
+}
+.nav-in{display:flex;gap:2px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:0 20px;max-width:1180px;margin:0 auto;
+  /* Nine tabs do not fit a phone, so this scrolls sideways. No `touch-action`
+     for the same reason as the swipe tracks: restricting it to pan-x would
+     forbid vertical scrolling from the strip the thumb most often lands on. */
+  overscroll-behavior-x:contain}
+.nav-in::-webkit-scrollbar{display:none}
+.tab{
+  padding:14px 15px;font-size:13.5px;font-weight:600;white-space:nowrap;color:var(--sumi-3);
+  border-bottom:2.5px solid transparent;transition:color .15s,border-color .15s
+}
+.tab:hover{color:var(--sumi)}
+.tab[aria-current="true"]{color:var(--shu);border-bottom-color:var(--shu)}
+.tab .t-jp{font-family:var(--serif);opacity:.65;margin-left:6px;font-size:12px}
+
+/* -- layout bits -------------------------------------------------- */
+section.view{padding:40px 0 80px;display:none}
+section.view.on{display:block}
+.h-sec{display:flex;align-items:flex-end;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.h-sec h2{font-size:clamp(23px,3.4vw,32px)}
+.h-sec .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line-2),transparent);min-width:40px}
+.sub{color:var(--sumi-3);max-width:70ch;margin-bottom:28px;font-size:15.5px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--raise)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+/* Four items in an auto-fit grid land 3+1, which reads as one card left over
+   rather than as a set. Two columns makes it a square. */
+.g4{grid-template-columns:repeat(2,1fr)}
+@media(max-width:700px){.g4{grid-template-columns:1fr}}
+
+.pill{
+  display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;
+  padding:3px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--sumi-3);
+  background:var(--washi-2);letter-spacing:.02em;white-space:nowrap
+}
+.pill.shu{color:var(--shu);border-color:color-mix(in srgb,var(--shu) 40%,transparent);background:var(--shu-soft)}
+.pill.ai{color:var(--ai);border-color:color-mix(in srgb,var(--ai) 40%,transparent);background:var(--ai-soft)}
+.pill.kin{color:var(--kin);border-color:color-mix(in srgb,var(--kin) 45%,transparent);background:var(--kin-soft)}
+.pill.matcha{color:var(--matcha);border-color:color-mix(in srgb,var(--matcha) 40%,transparent);background:var(--matcha-soft)}
+
+/* -- overview ----------------------------------------------------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:34px}
+.stat{padding:18px 16px;text-align:center;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.stat b{display:block;font-family:var(--serif);font-size:29px;color:var(--shu);line-height:1.1}
+.stat span{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3)}
+
+.principle{display:flex;gap:16px;padding:18px 20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.principle .n{
+  flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--serif);font-size:16px;color:#fff;background:var(--shu)
+}
+.principle h4{font-size:16px;margin-bottom:3px}
+.principle p{font-size:14px;color:var(--sumi-3)}
+
+.finding{border-left:3px solid var(--shu);padding:16px 20px;background:var(--shu-soft);border-radius:0 var(--r) var(--r) 0;margin-bottom:14px}
+.finding h4{color:var(--shu);font-size:15px;margin-bottom:5px}
+.finding p{font-size:14.5px;color:var(--sumi-2)}
+
+.booking-row{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line)}
+.booking-row:last-child{border-bottom:none}
+.booking-when{flex:none;width:150px;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--sumi-3);text-transform:uppercase;padding-top:2px}
+.booking-row h4{font-size:15.5px;margin-bottom:3px}
+.booking-row p{font-size:14px;color:var(--sumi-3)}
+.booking-row.crit h4{color:var(--shu)}
+@media(max-width:640px){.booking-row{flex-direction:column;gap:4px}.booking-when{width:auto}}
+
+/* -- itinerary ---------------------------------------------------- */
+.day{margin-bottom:16px;overflow:clip}
+.day-head{display:flex;gap:16px;align-items:center;padding:18px 20px;width:100%;text-align:left}
+.day-num{
+  flex:none;width:52px;height:52px;border-radius:10px;display:grid;place-items:center;
+  background:var(--ai-soft);border:1px solid color-mix(in srgb,var(--ai) 30%,transparent)
+}
+.day-num b{font-family:var(--serif);font-size:21px;color:var(--ai);line-height:1}
+.day-num span{font-size:9px;letter-spacing:.14em;color:var(--ai);text-transform:uppercase}
+.day-head .meta{flex:1;min-width:0}
+.day-head h3{font-size:18px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.day-head h3 .j{font-family:var(--serif);color:var(--shu);font-size:13px;letter-spacing:.16em;font-weight:400}
+.day-head p{font-size:14px;color:var(--sumi-3);margin-top:2px}
+.chev{flex:none;color:var(--sumi-3);transition:transform .2s;font-size:13px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:0 20px 20px;border-top:1px solid var(--line)}
+.day.open .day-body{display:block}
+.block{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.block:last-of-type{border-bottom:none}
+.block .w{flex:none;width:132px;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--kin);padding-top:3px}
+.block p{font-size:15px;color:var(--sumi-2)}
+/* A destination inside the prose. Underlined rather than coloured-and-bold so
+   a paragraph with four of them still reads as a sentence. */
+.dlink{
+  display:inline;font:inherit;color:var(--ai);padding:0;
+  text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--ai) 45%,transparent);
+  text-decoration-thickness:1.5px;text-underline-offset:2.5px;border-radius:3px
+}
+.dlink:hover{color:var(--shu);text-decoration-color:var(--shu)}
+.dlink:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+@media(max-width:640px){.block{flex-direction:column;gap:3px}.block .w{width:auto}}
+/* Three callout kinds, three colours. They were all green, so a planning aside
+   and a food-safety instruction looked like the same class of information —
+   which is the one distinction on this page that has to survive skimming. */
+/* -- swipeable alternatives ---------------------------------------- */
+/* The block is a flex row, so the swipe must claim the remaining width
+   explicitly. Left to size from content it collapsed to nothing: its options
+   are 100% of the track, and the track was 100% of its own contents. */
+.swipe{position:relative;flex:1;min-width:0}
+.track{
+  display:flex;overflow-x:auto;
+  /* The fix for a track that scrolled UP under the finger. `overflow-x:auto`
+     alone promotes the other axis to `auto` too, so the track was a vertical
+     scroller as well — and any time its content was a fraction of a pixel
+     taller than the height pinned below, an upward drag scrolled the card
+     instead of the page. `hidden` on the cross axis is the standard carousel
+     recipe: the browser will not pan an axis that is hidden, so the gesture
+     goes straight to the page. Height is still managed, so nothing clips. */
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;border-radius:10px;
+  /* NO `touch-action` here, deliberately, and the comment that used to sit in
+     this spot was wrong in a way worth recording.
+
+     `touch-action:pan-x` does not mean "horizontal gestures are mine, vertical
+     ones belong to the page". It means only horizontal panning is permitted
+     for a touch that starts here — vertical panning is forbidden outright, and
+     forbidden is not handed anywhere. Setting it turned "the page sometimes
+     stops scrolling over a card" into "the page never scrolls over a card".
+
+     The default, `auto`, is the correct behaviour: the browser reads the
+     direction of the drag and gives it to whichever scroller can use it —
+     sideways to this track, vertical to the page. It only ever failed here
+     because of two things that are now gone: body was a nested scroll
+     container, and this element carried `-webkit-overflow-scrolling:touch`, a
+     no-op since iOS 13 that promoted all 25 tracks to their own accelerated
+     scroll layers. */
+  /* Horizontal overscroll stops here rather than becoming a browser back
+     gesture — that part IS worth declaring, and it says nothing about the
+     vertical axis. */
+  overscroll-behavior-x:contain;
+  /* The track is only ever as tall as the option showing. Set from JS, because
+     a flex row sizes to its tallest child and nine options meant every one of
+     them was padded to the height of the longest — a page of blank space on a
+     phone, and a scroll container far bigger than it needed to be. */
+  height:var(--tk,auto);transition:height .22s ease
+  /* Deliberately NO scroll-behavior:smooth. The finger swipe is already
+     natively smooth; animating the arrow taps meant that if the animation
+     stalled — as it does in some embedded views — the label and dots said
+     "option 3" while the panel still showed option 1. An instant, always-
+     correct jump beats a pretty one that can lie. */
+}
+@media(prefers-reduced-motion:reduce){.track{transition:none}}
+.track::-webkit-scrollbar{display:none}
+.track:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.swopt{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;padding:2px 1px;align-self:flex-start}
+.swopt-h{display:flex;gap:9px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.swopt p{font-size:15px;color:var(--sumi-2)}
+.fits{margin-top:7px;font-size:13px;color:var(--sumi-3);border-left:2px solid var(--kin);padding-left:10px}
+.fits b{color:var(--kin)}
+.swipe-bar{display:flex;align-items:center;gap:8px;margin-top:8px}
+.swipe-n{
+  width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);color:var(--sumi-3);
+  display:grid;place-items:center;font-size:16px;line-height:1;flex:none
+}
+.swipe-n:hover{border-color:var(--shu);color:var(--shu)}
+.dots{display:flex;gap:5px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--line-2);transition:background .15s}
+.dot.on{background:var(--shu)}
+.swipe-lbl{font-size:11.5px;color:var(--sumi-3);margin-left:auto;letter-spacing:.04em}
+/* A block showing something other than the plan says so at a glance. */
+.swipe.swapped .track{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ai) 40%,transparent)}
+
+.food-note{margin-top:14px;padding:13px 16px;border-radius:10px;background:var(--matcha-soft);border:1px solid color-mix(in srgb,var(--matcha) 26%,transparent);font-size:14px}
+.food-note b{color:var(--matcha)}
+.food-note.warn{background:var(--shu-soft);border-color:color-mix(in srgb,var(--shu) 30%,transparent)}
+.food-note.warn b{color:var(--shu)}
+.food-note.aside{background:var(--kin-soft);border-color:color-mix(in srgb,var(--kin) 30%,transparent)}
+.food-note.aside b{color:var(--kin)}
+
+/* -- destination cards -------------------------------------------- */
+/* Search gets its own row — sharing one with the chips squeezed it until the
+   placeholder truncated. The two chip groups get a labelled row each, because
+   two identical "All" pills floating in one wrap gave no clue that city and
+   type were separate axes. */
+.filters{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.filters input{
+  width:100%;padding:10px 16px;border-radius:999px;border:1px solid var(--line-2);
+  background:var(--card);color:var(--sumi);font-size:14px;outline:none
+}
+.filters input:focus{border-color:var(--ai)}
+.frow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.flabel{
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sumi-3);width:52px;flex:none
+}
+@media(max-width:560px){.flabel{width:100%}}
+.fbtn{
+  font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line-2);
+  color:var(--sumi-3);background:var(--card)
+}
+.fbtn[aria-pressed="true"]{background:var(--sumi);color:var(--washi);border-color:var(--sumi)}
+
+.dest{overflow:clip;display:flex;flex-direction:column}
+.dest-img{aspect-ratio:16/10;background:var(--washi-3);position:relative;overflow:clip}
+.dest-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dest:hover .dest-img img{transform:scale(1.04)}
+.dest-ph{
+  width:100%;height:100%;display:grid;place-items:center;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 12px,color-mix(in srgb,var(--kin) 8%,transparent) 12px 13px),
+    linear-gradient(160deg,var(--ai-soft),var(--kin-soft));
+}
+/* The whole Japanese name, set vertically and allowed to break into columns
+   right-to-left like a shop sign. Cropping it to four characters split names
+   mid-word — 任天堂資料館 became 任天堂資, which is not a word. */
+.dest-ph span{font-family:var(--serif);font-size:26px;line-height:1.25;
+  color:color-mix(in srgb,var(--ai) 62%,transparent);writing-mode:vertical-rl;
+  letter-spacing:.08em;max-height:78%;text-align:center}
+.dest-tier{position:absolute;top:10px;left:10px}
+.dest-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.dest-body h3{font-size:17px;line-height:1.3}
+.dest-body .j{font-family:var(--serif);font-size:12px;color:var(--shu);letter-spacing:.14em;margin:2px 0 8px}
+.dest-body .blurb{font-size:14px;color:var(--sumi-2);flex:1}
+/* ── the plan picker ── */
+/* Small and quiet. It is a control you touch once a day, not the headline of
+   the card — the plan's own title is already the first line of the thesis. */
+.planpick{display:flex;align-items:center;gap:8px;margin:0 0 9px}
+.pp-l{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--sumi-3)}
+.planpick select{
+  font:inherit;font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  color:var(--sumi-2);background:var(--washi-2);border:1px solid var(--line-2);
+  border-radius:999px;padding:5px 26px 5px 12px;appearance:none;cursor:pointer;
+  max-width:100%;text-overflow:ellipsis;transition:border-color .16s,color .16s;
+  /* Chevron drawn in CSS — nothing external loads on this page. */
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 14px) 54%,calc(100% - 10px) 54%;
+  background-size:4px 4px,4px 4px;background-repeat:no-repeat}
+.planpick select:hover{border-color:var(--sumi-3);color:var(--sumi)}
+.planpick select:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.plan-moved{font-size:12px;line-height:1.5;color:var(--kin);margin:0 0 9px}
+.plan-moved b{font-weight:700}
+.plan-why,.plan-one{font-size:13.5px;line-height:1.6;color:var(--sumi-3);margin:0 0 16px;
+  padding-left:11px;border-left:2px solid var(--line-2)}
+/* The travel note under an option. `far` is the one that matters. */
+.leg{margin-top:8px;font-size:12.5px;line-height:1.5;font-variant-numeric:tabular-nums}
+.leg.ok{color:var(--sumi-3)}
+.leg.far{color:var(--kin);background:var(--kin-soft);border:1px solid color-mix(in srgb,var(--kin) 32%,transparent);
+  border-radius:8px;padding:7px 10px}
+.tool.on{border-color:color-mix(in srgb,var(--shu) 50%,transparent);color:var(--shu);background:var(--shu-soft)}
+@media(max-width:560px){.planpick select{flex:1;min-width:0}}
+
+.dest-facts{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 10px}
+/* A temple costs "¥500"; a restaurant costs "Courses ¥9,075 / ¥12,100 /
+   ¥16,940, tax and service included". The pills are nowrap by default, so the
+   cost one has to be allowed to break or it runs off the card. */
+.dest-facts .pill{white-space:normal;max-width:100%;text-align:left}
+/* The rating pill is a link to that place's Google reviews. */
+.pill.star{color:var(--kin);border-color:color-mix(in srgb,var(--kin) 45%,transparent);
+  background:var(--kin-soft);font-variant-numeric:tabular-nums;text-decoration:none}
+.pill.star:hover{border-color:var(--kin)}
+.rc{opacity:.65;font-weight:400}
+/* Says what the photograph actually is. Commons has no pictures of these
+   restaurants, so the image is either the building or the cuisine, and the
+   caption keeps it from silently claiming to be the room. */
+.img-note{position:absolute;left:0;right:0;bottom:0;padding:16px 12px 7px;
+  font-size:10.5px;line-height:1.35;color:#fff;letter-spacing:.02em;
+  background:linear-gradient(transparent,rgba(20,16,14,.72))}
+.dest-actions{display:flex;gap:8px;align-items:center;margin-top:auto;padding-top:10px;border-top:1px solid var(--line);flex-wrap:wrap}
+.linkish{font-size:12.5px;font-weight:600;color:var(--ai)}
+.linkish:hover{text-decoration:underline}
+
+/* -- detail drawer ------------------------------------------------ */
+dialog{
+  border:none;border-radius:var(--r);padding:0;max-width:760px;width:calc(100vw - 32px);
+  max-height:88vh;background:var(--card);color:var(--sumi);box-shadow:0 30px 80px -20px rgba(0,0,0,.5);
+  /* The `*{margin:0}` reset above wipes the UA stylesheet's `margin:auto` on
+     dialog, which is what centres a modal — without this it pins to the top
+     left of the viewport. Restore it explicitly. */
+  margin:auto
+}
+dialog::backdrop{background:rgba(20,17,12,.55);backdrop-filter:blur(3px)}
+.dlg-img{aspect-ratio:21/9;overflow:clip;background:var(--washi-3);position:relative}
+.dlg-img img{width:100%;height:100%;object-fit:cover}
+.dlg-body{padding:24px 26px 28px;overflow-y:auto;max-height:calc(88vh - 200px)}
+.dlg-body h2{font-size:25px}
+/* 44px, because a modal makes the page behind it inert: if this is hard to
+   hit, an accidentally-opened panel reads as the whole app having frozen. */
+.dlg-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:21px;line-height:1;display:grid;place-items:center}
+.dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:16px 0;font-size:14px}
+.dl dt{color:var(--sumi-3);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+.tiplist{list-style:none;margin:10px 0}
+.tiplist li{padding:7px 0 7px 20px;position:relative;font-size:14.5px;color:var(--sumi-2);border-bottom:1px dashed var(--line)}
+.tiplist li::before{content:"\2014";position:absolute;left:0;color:var(--kin)}
+.nearby{display:grid;gap:8px;margin-top:8px}
+.nearby div{padding:10px 13px;border-radius:9px;background:var(--washi-2);border:1px solid var(--line);font-size:13.5px}
+.nearby b{font-family:var(--serif)}
+
+/* -- food --------------------------------------------------------- */
+.level{border-radius:var(--r);border:1px solid var(--line);overflow:clip;background:var(--card)}
+.level-h{padding:15px 20px;display:flex;gap:12px;align-items:center;color:#fff}
+.level-h .lv{font-family:var(--serif);font-size:12px;letter-spacing:.2em;opacity:.85}
+.level-h h3{font-size:18px;color:#fff}
+.level-h .j{font-family:var(--serif);margin-left:auto;opacity:.8;letter-spacing:.2em;font-size:13px}
+.lv-critical{background:linear-gradient(100deg,#8f221c,var(--shu))}
+.lv-strict{background:linear-gradient(100deg,#7d3a12,#b8621f)}
+.lv-avoid{background:linear-gradient(100deg,#3b4a2c,var(--matcha))}
+.lv-flare{background:linear-gradient(100deg,#23324f,var(--ai-2))}
+.level-b{padding:16px 20px 20px}
+.level-b .lead{font-weight:600;margin-bottom:10px;font-size:15px}
+.level-b ul:not(.tiplist){list-style:none;columns:2;column-gap:26px}
+.level-b ul:not(.tiplist) li{font-size:14px;padding:4px 0 4px 16px;position:relative;break-inside:avoid;color:var(--sumi-2)}
+/* The cross means "excluded". Questions to ask are not exclusions, so the
+   marker must not leak onto every list that happens to sit in a level. */
+.level-b ul:not(.tiplist) li::before{content:"\00d7";position:absolute;left:0;color:var(--shu);font-weight:700}
+@media(max-width:620px){.level-b ul:not(.tiplist){columns:1}}
+/* The flare protocol lists actions, not exclusions. */
+.level-b ul.lv-do li::before{content:"\2022";color:var(--kin)}
+.lv-role{font-family:var(--serif);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--kin);margin-bottom:7px}
+.lv-g+.lv-g{margin-top:14px}
+.lv-gt{font-size:13px;letter-spacing:.04em;margin-bottom:5px}
+.g-strict{color:#b8621f}
+.g-avoid{color:var(--matcha)}
+.level-note{margin-top:13px;padding:11px 14px;border-radius:9px;background:var(--washi-2);border:1px solid var(--line);font-size:13.5px;color:var(--sumi-2)}
+
+.foodcols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+/* ── the allergen picker ── */
+.apick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.achip{display:flex;flex-direction:column;align-items:flex-start;gap:1px;
+  padding:8px 14px;border:1px solid var(--line);border-radius:11px;background:var(--washi-2);
+  color:var(--sumi-2);cursor:pointer;transition:border-color .16s,background .16s,color .16s;text-align:left}
+.achip b{font-size:13.5px;font-weight:700;letter-spacing:.01em}
+.achip span{font-family:var(--serif);font-size:11px;color:var(--sumi-3);letter-spacing:.06em}
+.achip:hover{border-color:var(--sumi-3)}
+.achip.on{background:var(--shu-soft);border-color:color-mix(in srgb,var(--shu) 55%,transparent);color:var(--shu)}
+.achip.on span{color:var(--sumi-2)}
+.achip.clear{justify-content:center;align-self:stretch;font-size:12px;font-weight:600;color:var(--sumi-3)}
+.alg{padding:22px 24px;margin-bottom:18px}
+.alg-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.alg-h h3{font-size:21px}
+.alg-h .j{font-family:var(--serif);color:var(--shu);font-size:12.5px;letter-spacing:.1em;margin-top:2px}
+.alg-lead{font-size:15.5px;color:var(--sumi-2);margin-bottom:12px}
+.alg-law{font-size:13.5px;line-height:1.6;color:var(--sumi-2);background:var(--washi-2);
+  border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin-bottom:16px}
+.alg h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--kin);margin:18px 0 8px}
+.fmts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.fmts{grid-template-columns:1fr}}
+.fmt{border:1px solid var(--line);border-left:3px solid var(--line-2);border-radius:9px;padding:10px 13px}
+.fmt.matcha{border-left-color:var(--matcha)}
+.fmt.kin{border-left-color:var(--kin)}
+.fmt.shu{border-left-color:var(--shu)}
+.fmt-h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+.fmt-h b{font-family:var(--serif);font-size:15px}
+.fmt-h .j{font-family:var(--serif);font-size:11.5px;color:var(--shu);letter-spacing:.1em}
+.fmt p{font-size:13px;color:var(--sumi-2);line-height:1.55}
+.alg-cols{gap:22px}
+@media(max-width:760px){.foodcols{grid-template-columns:1fr}}
+.chiplist{display:flex;flex-wrap:wrap;gap:7px}
+.chip-ok{font-size:13px;padding:5px 11px;border-radius:8px;background:var(--matcha-soft);border:1px solid color-mix(in srgb,var(--matcha) 30%,transparent);color:var(--sumi-2)}
+.chip-no{font-size:13px;padding:5px 11px;border-radius:8px;background:var(--shu-soft);border:1px solid color-mix(in srgb,var(--shu) 26%,transparent);color:var(--sumi-2)}
+
+.cardface{border:1.5px solid var(--sumi);border-radius:12px;padding:22px 24px;background:var(--card)}
+.cardface h4{font-size:14px;letter-spacing:.05em;color:var(--shu);margin:16px 0 5px}
+.cardface h4:first-child{margin-top:0}
+.cardface p{font-size:14px;color:var(--sumi-2);margin-bottom:4px}
+.cardface .jpx{font-family:var(--serif);line-height:1.9}
+.qlist{counter-reset:q;list-style:none}
+.qlist li{counter-increment:q;padding:9px 0 9px 34px;position:relative;font-size:14.5px;border-bottom:1px solid var(--line)}
+.qlist li::before{
+  content:counter(q);position:absolute;left:0;top:8px;width:22px;height:22px;border-radius:50%;
+  background:var(--ai-soft);color:var(--ai);font-size:11.5px;font-weight:700;display:grid;place-items:center
+}
+
+/* -- budget ------------------------------------------------------- */
+.btable{width:100%;border-collapse:collapse}
+.btable th{text-align:left;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3);padding:10px 12px;border-bottom:1px solid var(--line-2)}
+.btable td{padding:12px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:top}
+.btable td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.btable small{display:block;color:var(--sumi-3);font-size:12.5px;margin-top:2px}
+.segbtns{display:inline-flex;border:1px solid var(--line-2);border-radius:8px;overflow:clip}
+.segbtns button{padding:4px 10px;font-size:11.5px;font-weight:600;color:var(--sumi-3);background:var(--card)}
+.segbtns button[aria-pressed="true"]{background:var(--ai);color:#fff}
+.total{display:flex;justify-content:space-between;align-items:baseline;padding:18px 12px 4px;font-family:var(--serif)}
+.total b{font-size:31px;color:var(--shu);font-variant-numeric:tabular-nums}
+/* Three columns plus a segmented control does not fit a phone — it overflowed
+   by ~10px and clipped the amount, which is the one number on the screen.
+   Restack instead of scrolling sideways: the label takes a line, the control
+   and the figure share the next. */
+@media(max-width:560px){
+  .btable tr.bhead{display:none}
+  .btable tr{display:grid;grid-template-columns:1fr auto;gap:8px 12px;
+    padding:13px 2px;border-bottom:1px solid var(--line)}
+  .btable td{border:none;padding:0}
+  .btable td:first-child{grid-column:1/-1;font-weight:600}
+  .btable td:nth-child(2){justify-self:start;align-self:center}
+  .btable td.num{justify-self:end;align-self:center;font-size:17px;font-weight:700}
+}
+
+/* -- checklist ---------------------------------------------------- */
+.check{display:flex;gap:11px;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);margin-bottom:8px;cursor:pointer;align-items:flex-start}
+.check input{margin-top:3px;accent-color:var(--shu);width:17px;height:17px;flex:none}
+.check span{font-size:14.5px}
+.check span em{display:block;font-style:normal;font-size:11.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--sumi-3);margin-top:1px}
+.check.done span{opacity:.45;text-decoration:line-through}
+.check.done span em{text-decoration:none}
+
+/* -- route map ---------------------------------------------------- */
+.mapwrap{padding:8px 20px 16px;margin-bottom:34px}
+/* One continuous rail behind the stops; each row sits on it. */
+.rline{position:relative;padding:10px 0}
+.rline::before{content:"";position:absolute;left:7px;top:22px;bottom:22px;width:3px;
+  background:linear-gradient(180deg,var(--shu),var(--kin));border-radius:2px}
+.rstop,.rbranch{display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:10px 8px 10px 0;border-radius:10px;position:relative}
+.rstop:hover,.rbranch:hover{background:var(--washi-2)}
+.rstop:focus-visible,.rbranch:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.rs-dot{flex:none;width:17px;height:17px;border-radius:50%;background:var(--card);
+  border:3px solid var(--shu);margin-left:-1px;margin-top:3px;z-index:1}
+.rstop-exit .rs-dot{border-color:var(--kin);border-radius:4px}
+.rs-body{flex:1;min-width:0}
+.rs-name b{font-family:var(--serif);font-size:18px}
+.rs-name i{font-family:var(--serif);font-style:normal;color:var(--shu);font-size:13px;
+  letter-spacing:.14em;margin-left:6px}
+.rs-sub{display:block;font-size:13.5px;color:var(--sumi-3)}
+.rs-meta{flex:none;font-size:12px;font-weight:600;color:var(--sumi-3);
+  background:var(--washi-2);border:1px solid var(--line);border-radius:999px;
+  padding:3px 10px;margin-top:4px;white-space:nowrap}
+/* Connector text sits between two stops, indented past the rail. */
+.rleg{display:flex;gap:10px;align-items:baseline;padding:3px 0 3px 34px;flex-wrap:wrap}
+.rleg-t{font-size:13px;color:var(--sumi-3)}
+.rleg-m{font-size:12px;font-weight:700;color:var(--kin);font-variant-numeric:tabular-nums}
+/* Branches hang off the main line rather than sitting on it. */
+.rbranches{margin-left:34px;border-left:2px dashed var(--ai);padding-left:4px}
+.rbranch{padding:7px 8px}
+.rb-dot{flex:none;width:9px;height:9px;border-radius:50%;background:var(--card);
+  border:2.5px solid var(--ai);margin-left:-9px;margin-top:6px}
+.rb-body b{font-size:15px;font-family:var(--serif)}
+.rb-body i{font-family:var(--serif);font-style:normal;color:var(--shu);font-size:11.5px;
+  letter-spacing:.12em;margin-left:5px}
+.rb-body small{display:block;font-size:12.5px;color:var(--sumi-3)}
+.mapnote{font-size:13px;color:var(--sumi-3);margin-top:10px}
+@media(max-width:560px){
+  /* Give the body the whole line so the night-count pill wraps beneath it.
+     Sharing a row, the pill squeezed the body to about half the width and
+     "Arrive Haneda or Narita" broke across three lines. */
+  .rstop{flex-wrap:wrap;row-gap:3px}
+  /* The PILL takes the full basis so it is the thing that wraps. Giving the
+     body 100% instead pushed it below the dot, where it started at the
+     container edge and the text ran straight through the rail. */
+  .rs-body{flex:1 1 auto;min-width:0}
+  /* flex-basis:100% is what makes it wrap, but it also stretches the pill into
+     a full-width bar — so on this breakpoint it stops being a pill and becomes
+     the line of text it reads as anyway. */
+  .rs-meta{order:3;flex:0 0 100%;margin-left:31px;margin-top:0;
+    background:none;border:none;padding:0;color:var(--kin)}
+}
+
+/* -- eating out --------------------------------------------------- */
+.ratingkey{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.rk{font-size:13px;color:var(--sumi-3);display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+.citybar{
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--sumi-3);
+  border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:14px;font-family:var(--sans);font-weight:700
+}
+.place{padding:18px 20px;display:flex;flex-direction:column}
+.place-h{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.daylink{cursor:pointer;border-style:dashed}
+.daylink:hover{background:var(--ai);color:#fff}
+.place-n{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ai);display:inline-block}
+.place-n:not(a){color:var(--sumi)}
+.place-jp{font-family:var(--serif);color:var(--shu);font-size:12.5px;letter-spacing:.12em;margin:2px 0 8px}
+.place-use{font-size:13.5px;color:var(--sumi-3);margin-bottom:8px}
+.place-use b{color:var(--kin)}
+.place-why{font-size:14.5px;color:var(--sumi-2);margin-bottom:10px;flex:1}
+.place-concern{font-size:13.5px;color:var(--sumi-3);margin-top:9px;font-style:italic}
+.reqbox{margin-top:10px;border:1px solid var(--line);border-radius:9px;padding:9px 13px;background:var(--washi-2)}
+.reqbox summary{font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--ai);cursor:pointer}
+.reqbox .tiplist li{padding:5px 0 5px 18px;font-size:13.5px}
+.statusrow{display:flex;gap:9px;align-items:center;margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+.statusrow span{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3)}
+.statusrow select{
+  flex:1;padding:6px 9px;border-radius:8px;border:1px solid var(--line-2);
+  background:var(--card);color:var(--sumi);font-size:13px
+}
+/* Status colour carries the workflow, and stops short of ever saying "safe". */
+.st-lead{border-color:var(--line-2)}
+.st-awaiting{color:var(--kin);border-color:color-mix(in srgb,var(--kin) 45%,transparent);background:var(--kin-soft)}
+.st-conditional{color:var(--matcha);border-color:color-mix(in srgb,var(--matcha) 45%,transparent);background:var(--matcha-soft)}
+.st-rejected{color:var(--shu);border-color:color-mix(in srgb,var(--shu) 45%,transparent);background:var(--shu-soft)}
+.st-reconfirmed{color:var(--matcha);border-color:var(--matcha);background:var(--matcha-soft);font-weight:700}
+
+/* -- lodging options ---------------------------------------------- */
+.opts{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.opts-h{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sumi-3);margin-bottom:10px}
+.opt{padding:12px 14px;border-radius:10px;background:var(--washi-2);border:1px solid var(--line);margin-bottom:9px}
+.opt-best{border-color:color-mix(in srgb,var(--matcha) 40%,transparent)}
+.opt-note{border-color:color-mix(in srgb,var(--kin) 40%,transparent);background:var(--kin-soft)}
+.opt-top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.opt-name{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ai)}
+.opt-name:not(a){color:var(--sumi)}
+.opt-price{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--kin);white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.opt-total{font-size:12px;color:var(--sumi-3);font-variant-numeric:tabular-nums}
+.opt p{font-size:14px;color:var(--sumi-2);margin-top:6px}
+@media(max-width:560px){
+  /* Short pills read better on one line, but a long price or a tax note held
+     to nowrap sets a min-content width the phone cannot honour — the lodging
+     card pushed 35px past the viewport. Let the long ones wrap. */
+  .opt-price{margin-left:0;white-space:normal}
+  .pill{white-space:normal}
+}
+
+/* -- logistics ---------------------------------------------------- */
+.logi{display:grid;grid-template-columns:minmax(150px,.9fr) 2fr;gap:0}
+.logi dt{font-weight:700;font-size:14px;padding:11px 14px 11px 0;border-top:1px solid var(--line)}
+.logi dd{font-size:14.5px;color:var(--sumi-2);padding:11px 0;border-top:1px solid var(--line)}
+.logi dt:first-of-type,.logi dt:first-of-type + dd{border-top:none}
+.logi dt.warn{color:var(--shu)}
+@media(max-width:640px){
+  .logi{grid-template-columns:1fr}
+  .logi dt{padding:12px 0 2px;border-top:1px solid var(--line)}
+  .logi dd{padding:0 0 12px;border-top:none}
+}
+
+/* -- misc --------------------------------------------------------- */
+.toolbar{display:flex;gap:8px;align-items:center;margin-left:auto}
+.tool{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);color:var(--sumi-3);background:var(--card);white-space:nowrap}
+.tool:hover{border-color:var(--shu);color:var(--shu)}
+footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);font-size:13px}
+.credits{columns:3;column-gap:22px;font-size:11.5px;line-height:1.55;margin-top:12px}
+@media(max-width:760px){.credits{columns:1}}
+.notice{padding:14px 18px;border-radius:var(--r);background:var(--kin-soft);border:1px solid color-mix(in srgb,var(--kin) 34%,transparent);font-size:14px;margin-bottom:22px}
+
+@media print{
+  nav,.hero,.toolbar,footer,.tab{display:none!important}
+  /* Print what is on screen. The first version printed only the allergy card,
+     so pressing Cmd-P on any other tab produced a near-blank sheet — and the
+     itinerary and day plans are exactly what you want on paper in a country
+     where your phone may be flat. The card still gets its own route, via the
+     Print card button adding .print-card to the body. */
+  section.view{display:none!important}
+  section.view.on{display:block!important}
+  body.print-card section.view.on{display:none!important}
+  body.print-card section#v-print{display:block!important}
+  body{background:#fff;color:#000}
+  .cardface{border:2px solid #000;page-break-inside:avoid}
+  .day,.level,.card,.principle{page-break-inside:avoid;box-shadow:none}
+  .day-body{display:block!important}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="seal">旅</div>
+    <div style="flex:1;min-width:280px">
+      <div class="jp">日本 ・ 十二日間</div>
+      <h1>Going Traveling</h1>
+      <p class="lede">Twelve days, three bases, no backtracking. Tokyo for the city, Hakone to stop moving, Kyoto for the history &mdash; and an allergy system you point at your own allergens rather than someone else&#8217;s.</p>
+      <div class="route" id="route"></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-in" id="tabs"></div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ══ OVERVIEW ══ -->
+  <section class="view" id="v-overview">
+    <div class="h-sec"><h2>The shape of the trip</h2><div class="rule"></div>
+      <div class="toolbar"><button class="tool" id="themeBtn">◐ Theme</button><button class="tool" id="resetBtn">↺ Reset changes</button></div>
+    </div>
+    <p class="sub">Twelve days, three bases, no backtracking. Tokyo for the city and the gaming, Hakone to stop moving, Kyoto for the history and the evenings. Every place named in the plan links through to its own detail — what it costs, how long it takes, how to get there, and what is worth doing next door.</p>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="h-sec"><h2>The route</h2><div class="rule"></div></div>
+    <p class="sub">Three bases, four intercity moves, nothing repeated. Tap a stop to jump to that part of the plan.</p>
+    <div class="card mapwrap"><div id="routemap"></div><p class="mapnote" id="mapnote"></p></div>
+
+    <div class="h-sec"><h2>The four principles</h2><div class="rule"></div></div>
+    <p class="sub">Japanese seasoning is built on a handful of fermented pastes and sauces that are structural in Japanese cooking. Even plain-looking meat, fish, vegetables, noodles, rice bowls and broths are seasoned with sauces made off-site. Everything below follows from that.</p>
+    <div class="grid g4" id="principles" style="margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>What the research changed</h2><div class="rule"></div></div>
+    <p class="sub" id="labelLead"></p>
+    <div id="findings" style="margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>Book in this order</h2><div class="rule"></div></div>
+    <p class="sub">One booking constrains everything else, so it goes first — including before flights.</p>
+    <div class="card" style="padding:6px 22px" id="bookings"></div>
+  </section>
+
+  <!-- ══ ITINERARY ══ -->
+  <section class="view" id="v-itinerary">
+    <div class="h-sec"><h2>Day by day</h2><div class="rule"></div>
+      <div class="toolbar"><button class="tool" id="nearOnly">◎ Only what’s nearby</button><button class="tool" id="expandAll">⌄ Expand all</button></div>
+    </div>
+    <p class="sub">Tap a day to open it. Underlined places open their full detail — hours, cost, getting there, what to watch out for, and what else is nearby.</p>
+    <div id="days"></div>
+  </section>
+
+  <!-- ══ DESTINATIONS ══ -->
+  <section class="view" id="v-destinations">
+    <div class="h-sec"><h2>Destination library</h2><div class="rule"></div></div>
+    <p class="sub">Everything in the template, plus the worthwhile things next door to it. <b>Core</b> is in the plan already; <b>Nearby</b> is close to somewhere you are already going; <b>Optional</b> involves a real trade-off, and the entry says what it is.</p>
+    <div class="filters" id="filters"></div>
+    <div class="grid g3" id="dests"></div>
+  </section>
+
+  <!-- ══ FOOD ══ -->
+  <section class="view" id="v-food">
+    <div class="h-sec"><h2>Your allergens</h2><div class="rule"></div></div>
+    <p class="sub">Pick what you need to avoid. Everything below — the formats worth ordering, the places it hides, the questions that resolve it and the card you hand over — is written from your selection. Nothing here assumes anyone else&#8217;s diet.</p>
+    <div id="allergenPicker" class="apick"></div>
+    <div id="allergenOut"></div>
+
+    <div class="h-sec" style="margin-top:38px"><h2>How Japan labels allergens</h2><div class="rule"></div></div>
+    <p class="sub" id="labelLead"></p>
+    <div class="grid g2" id="findings" style="margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>The four principles</h2><div class="rule"></div></div>
+    <div class="grid g2" id="principles" style="margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>What usually works, and what is complicated</h2><div class="rule"></div></div>
+    <div class="foodcols" style="margin-bottom:16px">
+      <div class="card" style="padding:20px">
+        <h3 style="font-size:16px;margin-bottom:4px;color:var(--matcha)">Usually workable</h3>
+        <p class="sub" style="font-size:13.5px;margin-bottom:12px" id="okNote"></p>
+        <div class="chiplist" id="okList"></div>
+      </div>
+      <div class="card" style="padding:20px">
+        <h3 style="font-size:16px;margin-bottom:4px;color:var(--shu)">Complicated</h3>
+        <p class="sub" style="font-size:13.5px;margin-bottom:12px" id="noNote"></p>
+        <div class="chiplist" id="noList"></div>
+      </div>
+    </div>
+    <div class="notice" id="falseFriends" style="margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>Your card</h2><div class="rule"></div>
+      <div class="toolbar"><button class="tool" id="printCard">&#9113; Print card</button><button class="tool" id="copyJP">&#10696; Copy Japanese</button></div>
+    </div>
+    <p class="sub" id="cardDisc"></p>
+    <div class="foodcols" style="margin-bottom:38px">
+      <div class="cardface" id="cardEN"></div>
+      <div class="cardface jpx" id="cardJP"></div>
+    </div>
+
+    <div class="h-sec"><h2>Ask every restaurant, in writing</h2><div class="rule"></div></div>
+    <p class="sub">The screening questions, the venues that publish an allergen policy, and what a good answer looks like, all live together on the next tab.</p>
+    <button class="tool" data-goto-tab="eating" style="font-size:14px;padding:10px 18px">Eating out &#8594;</button>
+
+    <div class="h-sec" style="margin-top:38px"><h2>Daily rhythm</h2><div class="rule"></div></div>
+    <div class="grid g3" id="rhythm"></div>
+
+    <div class="h-sec" style="margin-top:38px"><h2>Carry always</h2><div class="rule"></div></div>
+    <div class="grid g2"><div id="emergency"></div><div id="prepFood"></div></div>
+  </section>
+
+  <!-- ══ STAY ══ -->
+  <section class="view" id="v-stay">
+    <div class="h-sec"><h2>Where you sleep is half the food plan</h2><div class="rule"></div></div>
+    <p class="sub">A kitchen at every stop is what makes the rest of this possible. It is not about cooking every meal — it is about never being forced into an unsafe one.</p>
+    <div class="grid" id="lodging" style="gap:18px"></div>
+  </section>
+
+  <!-- ══ BUDGET ══ -->
+  <section class="view" id="v-budget">
+    <div class="h-sec"><h2>Budget</h2><div class="rule"></div></div>
+    <p class="sub">Set each line to the low, middle or high end and the total follows. Saved in this browser.</p>
+    <div class="card" style="padding:8px 14px 20px"><table class="btable" id="budget"></table>
+      <div class="total"><span>Estimated total</span><b id="btotal">—</b></div>
+      <p class="sub" style="padding:0 12px;font-size:13.5px" id="bnote"></p>
+    </div>
+  </section>
+
+  <!-- ══ EATING OUT ══ -->
+  <section class="view" id="v-eating">
+    <div class="h-sec"><h2>Eating out</h2><div class="rule"></div></div>
+    <p class="sub">Nothing here is vetted. Every entry is a candidate worth sending the written questions to, and the reason it is worth the effort — the confirmation still has to come back from the kitchen, in writing, before anyone books.</p>
+    <div class="grid" id="model" style="gap:16px;margin-bottom:22px"></div>
+    <div class="card" style="padding:18px 22px;margin-bottom:34px">
+      <h4 class="opts-h">What to establish for any restaurant</h4>
+      <dl class="logi" id="screenList"></dl>
+    </div>
+
+    <div class="h-sec"><h2>What to order, by format</h2><div class="rule"></div></div>
+    <p class="sub">Choose the shape of the meal first. These are the Japanese formats where an excellent dish fits almost as written — not compromises, but some of the best food in the country.</p>
+    <div class="grid g2" id="cuisines" style="margin-bottom:22px"></div>
+    <div class="card" style="padding:18px 22px;margin-bottom:34px">
+      <h4 class="opts-h">Harder, but not forbidden</h4>
+      <p class="sub" style="font-size:13.5px;margin-bottom:12px">These rank below the formats above because a compatible dish is harder to find — not because they are banned.</p>
+      <dl class="logi" id="harder"></dl>
+    </div>
+
+    <div class="h-sec"><h2>The candidates</h2><div class="rule"></div></div>
+    <p class="sub">Screened at the venue first, then judged on which dishes actually work. Set each one's status as you hear back — it saves in this browser.</p>
+    <div id="ratingkey" class="ratingkey"></div>
+    <div id="places" style="margin-bottom:34px"></div>
+
+    <div class="h-sec"><h2>Ruled out</h2><div class="rule"></div></div>
+    <p class="sub">With the reason, so nobody researches them again in six weeks.</p>
+    <div class="grid g2" id="excluded" style="margin-bottom:34px"></div>
+
+    <div class="h-sec"><h2>The inquiry</h2><div class="rule"></div>
+      <div class="toolbar"><button class="tool" id="copyInq">&#10696; Copy the email</button></div>
+    </div>
+    <p class="sub">Send this in English and in professionally translated Japanese, before reserving anything.</p>
+    <div class="cardface" id="inquiry" style="margin-bottom:34px"></div>
+
+    <div class="h-sec"><h2>Accept, or reject</h2><div class="rule"></div></div>
+    <p class="sub">Judge the reply against these before booking. A restaurant that clears the left column is conditionally approved against the date of its answer — never "safe".</p>
+    <div class="foodcols" style="margin-bottom:34px">
+      <div class="card" style="padding:20px"><h3 style="font-size:16px;color:var(--matcha);margin-bottom:10px">Accept when</h3><ul class="tiplist" id="acceptList"></ul></div>
+      <div class="card" style="padding:20px"><h3 style="font-size:16px;color:var(--shu);margin-bottom:10px">Reject when</h3><ul class="tiplist" id="rejectList"></ul></div>
+    </div>
+
+    <div class="h-sec"><h2>Where the food comes from</h2><div class="rule"></div></div>
+    <p class="sub">Most meals are cooked, not booked. These are the shops that make that possible.</p>
+    <div class="grid" id="grocery" style="gap:16px;margin-bottom:22px"></div>
+    <div class="foodcols" style="margin-bottom:34px">
+      <div class="card" style="padding:20px"><h3 style="font-size:16px;color:var(--matcha);margin-bottom:10px">Buy</h3><div class="chiplist" id="groceryBuy"></div></div>
+      <div class="card" style="padding:20px"><h3 style="font-size:16px;color:var(--shu);margin-bottom:10px">Avoid</h3><div class="chiplist" id="groceryAvoid"></div></div>
+    </div>
+
+    <div class="h-sec"><h2>The realistic pattern</h2><div class="rule"></div></div>
+    <div class="grid g3" id="pattern" style="margin-bottom:34px"></div>
+
+  </section>
+
+  <!-- ══ LOGISTICS ══ -->
+  <section class="view" id="v-logistics">
+    <div class="h-sec"><h2>Logistics</h2><div class="rule"></div></div>
+    <p class="sub">Everything the itinerary assumes but never says: what gets stopped at the border, what moves you between cities, what you pay with, and what you do if something goes wrong.</p>
+    <div class="grid" id="logistics" style="gap:16px"></div>
+  </section>
+
+  <!-- ══ PREP ══ -->
+  <section class="view" id="v-prep">
+    <div class="h-sec"><h2>Before you fly</h2><div class="rule"></div></div>
+    <p class="sub">Test everything at home. Nothing gets introduced for the first time in Japan.</p>
+    <div class="foodcols">
+      <div><h3 style="font-size:16px;margin-bottom:12px">Comfort meals to establish</h3><div id="ck-food"></div></div>
+      <div><h3 style="font-size:16px;margin-bottom:12px">Carry with you</h3><div id="ck-carry"></div></div>
+    </div>
+    <div class="h-sec" style="margin-top:34px"><h2>Booking checklist</h2><div class="rule"></div></div>
+    <div id="ck-book"></div>
+  </section>
+
+  <!-- print-only card -->
+  <section class="view" id="v-print">
+    <div class="cardface" id="printEN" style="margin-bottom:14px"></div>
+    <div class="cardface jpx" id="printJP"></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><b>Photography</b> — all images from Wikimedia Commons under the licence noted. Practical details (hours, prices, ticket rules) were current when this was built and drift constantly; confirm each before you book.</p>
+  <div class="credits" id="credits"></div>
+</footer>
+
+<dialog id="dlg"><div id="dlgIn"></div></dialog>
+
+<script src="data-destinations.js"></script>
+<script src="data-destinations-2.js"></script>
+<script src="data-destinations-3.js"></script>
+<script src="data-destinations-4.js"></script>
+<script src="data-destinations-5.js"></script>
+<script src="data-geo.js"></script>
+<script src="data-reviews.js"></script>
+<script src="data-zones.js"></script>
+<script src="data-plans.js"></script>
+<script src="data-allergens.js"></script>
+<script src="data-plan.js"></script>
+<script src="data-logistics.js"></script>
+<script src="data-alternatives.js"></script>
+<script src="data-eating.js"></script>
+<script src="credits.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   State lives in localStorage and holds only what the reader set: budget
+   levels and ticked boxes. The itinerary itself is never copied there, so
+   editing the plan in data-plan.js still reaches someone who has already
+   opened the page.
+   ══════════════════════════════════════════════════════════════════ */
+const KEY='japan-trip-v1';
+const S=Object.assign({budget:{},checks:{},venues:{},picks:{},plans:{},nearOnly:false,allergens:null,theme:null},
+  JSON.parse(localStorage.getItem(KEY)||'{}'));
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+
+const D=Object.fromEntries(DESTINATIONS.map(d=>[d.id,d]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const el=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstElementChild};
+
+/* ── theme ──────────────────────────────────────────────────────── */
+if(S.theme)document.documentElement.dataset.theme=S.theme;
+themeBtn.onclick=()=>{
+  const cur=document.documentElement.dataset.theme
+    ||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  S.theme=cur==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=S.theme;save();
+};
+
+/* ── tabs ───────────────────────────────────────────────────────── */
+const TABS=[['overview','Overview','概要'],['itinerary','Itinerary','日程'],['destinations','Destinations','行き先'],
+            ['food','Food safety','食事'],['eating','Eating out','外食'],['stay','Lodging','宿'],['logistics','Logistics','交通'],
+            ['budget','Budget','予算'],['prep','Prep','準備']];
+tabs.innerHTML=TABS.map(([id,en,jp])=>
+  `<button class="tab" data-v="${id}">${en}<span class="t-jp">${jp}</span></button>`).join('');
+/**
+ * Switch view, landing at the top of the CONTENT rather than the top of the
+ * page.
+ *
+ * Scrolling to 0 put the masthead back on screen every single time, so every
+ * tab change cost a scroll past a header you had already read. Scrolling to the
+ * nav's own offset parks the sticky bar against the top of the viewport with
+ * the new view immediately beneath it — the tabs stay exactly where your thumb
+ * left them, which is the whole point of a sticky bar.
+ *
+ * `scroll:false` is for the initial load, where the masthead is the correct
+ * thing to see and moving the page under someone would be the bug.
+ */
+function show(v,{scroll=true}={}){
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-current',String(t.dataset.v===v)));
+  // Assigning location.hash would itself jump the page; replaceState will not.
+  history.replaceState(null,'','#'+v);
+  // Measure the masthead, NOT the nav. offsetTop on a position:sticky element
+  // reports where it is currently stuck, so once the page was scrolled it
+  // returned the current scroll position and scrolling "to the nav" became a
+  // no-op. The masthead is in normal flow and the nav sits directly after it,
+  // so its height is the nav's real position in the document.
+  if(scroll)window.scrollTo({top:document.querySelector('.hero').offsetHeight,behavior:'instant'});
+  // The tracks can only be positioned once the view has a width.
+  if(v==='itinerary'&&typeof restorePicks==='function'){restorePicks();watchTracks();fitAllTracks();}
+}
+tabs.onclick=e=>{const b=e.target.closest('.tab');if(b)show(b.dataset.v)};
+// Cross-tab pointers, e.g. the Food tab handing off to Eating out.
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-goto-tab]');if(b)show(b.dataset.gotoTab);
+});
+
+/* ── hero route ─────────────────────────────────────────────────── */
+route.innerHTML=[['Tokyo','東京',4],['Hakone','箱根',2],['Kyoto','京都',5]]
+  .map(([n,j,x])=>`<span class="leg"><b>${n}</b><span>${j} · ${x} nights</span></span>`)
+  .join('<span class="leg-sep">—</span>');
+
+/* ── overview ───────────────────────────────────────────────────── */
+stats.innerHTML=[[12,'Days'],[3,'Bases'],[DESTINATIONS.length,'Destinations'],
+  ['$11–12.5k','Target, two people']]
+  .map(([n,l])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('');
+
+/* ── route map ──────────────────────────────────────────────────── */
+/**
+ * The route as a rail diagram read top to bottom.
+ *
+ * A tile map cannot load under the published page's CSP, and a coastline would
+ * answer the wrong question anyway — planning needs what connects to what and
+ * how long it takes. The first attempt drew that as a pseudo-geographic
+ * scatter and every leg label collided with a stop label, which is the failure
+ * mode a real transit map avoids by going linear. So: one vertical line, stops
+ * on it, journey times on the connectors, branches stubbed off Kyoto. It also
+ * happens to be the shape Japanese rail maps already use, and it reads on a
+ * phone without a second layout.
+ */
+(function drawMap(){
+  const row=(s)=>{
+    if(s.leg)return `<div class="rleg"><span class="rleg-t">${esc(s.leg)}</span>
+      <span class="rleg-m">${esc(s.time)}</span></div>`;
+    const branches=(s.branches||[]).map(b=>`
+      <button class="rbranch" data-goto="${b.day}" aria-label="${esc(b.label)} — ${esc(b.sub)}, ${esc(b.meta)}">
+        <span class="rb-dot" aria-hidden="true"></span>
+        <span class="rb-body"><b>${esc(b.label)}</b> <i>${esc(b.jp)}</i>
+          <small>${esc(b.sub)} · ${esc(b.time)} · ${esc(b.meta)}</small></span>
+      </button>`).join('');
+    return `<button class="rstop rstop-${s.kind}" data-goto="${s.day}"
+        aria-label="${esc(s.label)} — ${esc(s.sub)}, ${esc(s.meta)}">
+        <span class="rs-dot" aria-hidden="true"></span>
+        <span class="rs-body">
+          <span class="rs-name"><b>${esc(s.label)}</b> <i>${esc(s.jp)}</i></span>
+          <span class="rs-sub">${esc(s.sub)}</span>
+        </span>
+        <span class="rs-meta">${esc(s.meta)}</span>
+      </button>${branches?`<div class="rbranches">${branches}</div>`:''}`;
+  };
+  routemap.innerHTML=`<div class="rline">${ROUTEMAP.stops.map(row).join('')}</div>`;
+  mapnote.textContent=ROUTEMAP.note;
+  routemap.addEventListener('click',e=>{
+    const g=e.target.closest('[data-goto]');if(!g)return;
+    show('itinerary',{scroll:false});
+    const d=document.querySelector(`.day[data-day="${g.dataset.goto}"]`);
+    if(!d)return;
+    d.classList.add('open');
+    // Land on the TOP of the day, clear of the sticky bar. scrollIntoView with
+    // block:'center' put the middle of the card at the middle of the screen,
+    // so arriving from the map dropped you into the afternoon of a day you had
+    // not started reading — and block:'start' would slide the heading under
+    // the nav instead.
+    const nav=document.querySelector('nav');
+    const y=d.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-14;
+    window.scrollTo({top:Math.max(0,y),behavior:'instant'});
+  });
+})();
+
+principles.innerHTML=FOOD.principles.map(p=>
+  `<div class="principle"><div class="n">${p.n}</div><div><h4>${esc(p.t)}</h4><p>${esc(p.d)}</p></div></div>`).join('');
+
+labelLead.textContent=FOOD.labelling.headline;
+findings.innerHTML=FOOD.labelling.points.map(p=>
+  `<div class="finding"><h4>${esc(p.k)}</h4><p>${esc(p.v)}</p></div>`).join('');
+
+bookings.innerHTML=BOOKINGS.map(b=>
+  `<div class="booking-row${b.critical?' crit':''}"><div class="booking-when">${esc(b.when)}</div>
+   <div><h4>${b.critical?'★ ':''}${esc(b.what)}</h4><p>${esc(b.d)}</p></div></div>`).join('');
+
+/* ── linking the plan to the library ────────────────────────────── */
+/**
+ * Turn destination names in the day's prose into buttons that open that
+ * destination's detail panel.
+ *
+ * Names are linked where they are already written rather than listed in a
+ * separate row, so the plan still reads as prose. Each destination links once
+ * per day — on its first mention — because a paragraph with the same place
+ * underlined four times reads as noise, not as help.
+ *
+ * `extra` covers the cases where the prose does not use the library's own
+ * title: the entry is "Uji Riverside", the sentence says "the Uji riverside".
+ */
+const LINK_ALIASES=(()=>{
+  const extra={
+    uji:['Uji riverside','Uji River','Uji'],
+    'hakone-yumoto':['Hakone-Yumoto','Evangelion Store'],
+    'shibuya':['Shibuya PARCO','Nintendo TOKYO','Pokémon Center Shibuya','CAPCOM STORE TOKYO'],
+    'manga-museum':['Kyoto International Manga Museum','Manga Museum'],
+    'nintendo-museum':['Nintendo Museum'],
+    'hakone-openair':['Open-Air Museum'],
+    'lake-ashi':['Lake Ashi','Hakone Shrine'],
+    'hakone-ropeway':['ropeway','Ōwakudani'],
+    'sannenzaka':['Sannenzaka','Ninenzaka'],
+    'philosophers-path':["Philosopher's Path"],
+    'den-den-town':['Den Den Town'],
+    'togetsukyo':['Togetsukyō bridge','Togetsukyō'],
+    'arashiyama':['bamboo grove','Arashiyama'],
+    'tenryu-ji':['Tenryū-ji'],
+    'nishiki':['Nishiki Market','Nishiki'],
+    'kibune':['Kibune','Kurama'],
+    'nara':['Nara'],
+    'sensoji':['Sensō-ji & Asakusa','Sensō-ji','Asakusa'],
+    'tokyo-station':['Tokyo Station & Marunouchi','Tokyo Station','Marunouchi'],
+    'nakamise':['Nakamise-dōri','Nakamise'],
+    'akihabara':['Akihabara Electric Town','Akihabara'],
+    'fushimi-inari':['Fushimi Inari Taisha','Fushimi Inari'],
+    'skytree':['Tokyo Skytree','Skytree'],
+    'shinjuku-gyoen':['Shinjuku Gyoen'],
+    'ghibli-museum':['Ghibli Museum'],
+    'ohara':['Ōhara','Sanzen-in'],
+    'sagano-train':['Sagano Romantic Train','Sagano'],
+    'usj':['Universal Studios Japan','Super Nintendo World'],
+    'kodai-ji':['Kōdai-ji'],
+    'gora':['Gōra'],
+    // Restaurants. The prose names most of them exactly, so only the ones
+    // written differently in a day need an alias. The restaurant YASAKA must
+    // carry its hotel: matching is case-insensitive, so a bare "YASAKA" also
+    // catches the Yasaka Pagoda two days earlier and sends you to a ¥33,000
+    // teppanyaki counter from a sentence about walking past a pagoda.
+    'eat-gora':['Gōra Brewery & Grill','Gōra Brewery'],
+    'eat-hyatt':['Hyatt Regency'],
+    'eat-yasaka':['YASAKA at the Park Hyatt'],
+    'eat-hyoto':['Kyoto Hyōtō','Hyōtō'],
+    'eat-rock':['Yakiniku ROCK'],
+  };
+  const map=[];
+  for(const d of DESTINATIONS){
+    const set=new Set([d.name,d.name.split(' & ')[0],d.name.split(' (')[0],...(extra[d.id]||[])]);
+    map.push([d.id,[...set].filter(Boolean)]);
+  }
+  return map;
+})();
+
+const reEsc=(s)=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+// A letter or digit either side means we are inside a longer word — which is
+// how a bare "Nara" would otherwise light up inside "Narita Express".
+const isWordChar=(ch)=>!!ch&&/[\p{L}\p{N}]/u.test(ch);
+
+/** @param used  Set of ids already linked on this day; mutated. */
+function linkifyDests(escaped,used){
+  const hits=[];
+  for(const [id,aliases] of LINK_ALIASES){
+    if(used.has(id))continue;
+    // Every alias is tried and the EARLIEST match wins, not the longest alias.
+    // Taking the first alias that matched linked "Pokémon Center Shibuya" and
+    // skipped the "Shibuya PARCO" three words earlier in the same sentence.
+    // Case-insensitive because the prose sentence-cases things the library
+    // titles lower — "Bamboo grove before 8am" against "bamboo grove".
+    let best=null;
+    for(const a of aliases){
+      const re=new RegExp(reEsc(esc(a)),'gi');
+      let m;
+      while((m=re.exec(escaped))){
+        if(isWordChar(escaped[m.index-1])||isWordChar(escaped[m.index+m[0].length]))continue;
+        if(!best||m.index<best.start||(m.index===best.start&&m[0].length>best.end-best.start)){
+          best={start:m.index,end:m.index+m[0].length,id};
+        }
+        break;
+      }
+    }
+    if(best)hits.push(best);
+  }
+  // Earliest first, longest wins a tie, and never overlap an existing link.
+  hits.sort((a,b)=>a.start-b.start||(b.end-b.start)-(a.end-a.start));
+  let out='',cursor=0;
+  for(const h of hits){
+    if(h.start<cursor||used.has(h.id))continue;
+    used.add(h.id);
+    out+=escaped.slice(cursor,h.start)+
+      `<button class="dlink" data-open="${h.id}">${escaped.slice(h.start,h.end)}</button>`;
+    cursor=h.end;
+  }
+  return out+escaped.slice(cursor);
+}
+
+/* ── itinerary ──────────────────────────────────────────────────── */
+
+/**
+ * A time block, swipeable when alternatives exist for it.
+ *
+ * Built on CSS scroll-snap rather than a JS gesture handler: the browser
+ * already knows how to throw a scroller with a finger, keep momentum, and
+ * respect the OS reduced-motion setting. Re-implementing that in JS produces
+ * something that feels almost right, which is worse than native.
+ *
+ * Each option carries its own link set, because you may only ever read the
+ * alternative — it has to stand alone rather than inherit the planned text's
+ * already-linked places.
+ */
+/* ── how far is that, really ─────────────────────────────────────── */
+
+/**
+ * Minutes between two destinations.
+ *
+ * Same zone means walking, timed from the verified coordinates at 4.5 km/h.
+ * Different zones means the hand-entered LEGS table, which holds the real
+ * journey time for every pair this itinerary can produce. Anything LEGS does
+ * not cover is estimated from straight-line distance and flagged `est`, so the
+ * app can print "≈" and never pass a guess off as a timetable.
+ */
+function travel(a,b){
+  const g=window.GEO||{}, ga=g[a], gb=g[b];
+  if(!ga||!gb)return null;
+  const R=6371, rad=x=>x*Math.PI/180;
+  const dLat=rad(gb.lat-ga.lat), dLng=rad(gb.lng-ga.lng);
+  const h=Math.sin(dLat/2)**2+Math.cos(rad(ga.lat))*Math.cos(rad(gb.lat))*Math.sin(dLng/2)**2;
+  const km=R*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));
+  const za=(window.ZONE||{})[a], zb=(window.ZONE||{})[b];
+  if(za&&zb&&za===zb)  return {min:Math.max(3,Math.round(km*13)), how:'walk', est:false, km};
+  const leg=za&&zb?(window.LEGS||{})[[za,zb].sort().join('|')]:undefined;
+  if(leg!=null)        return {min:leg, how:'transit', est:false, km};
+  if(km<=1)            return {min:Math.max(3,Math.round(km*13)), how:'walk', est:true, km};
+  return {min:Math.round((10+km*3)/5)*5, how:'transit', est:true, km};
+}
+
+/** The shortest hop from an option to anything the plan already visits. */
+function nearestStop(destId,stops){
+  let best=null;
+  for(const s of stops){
+    if(s===destId)return {min:0,how:'walk',est:false,stop:s};
+    const t=travel(destId,s);
+    if(t&&(!best||t.min<best.min))best={...t,stop:s};
+  }
+  return best;
+}
+
+/**
+ * The line under a far option. This is the whole point of the feature: you may
+ * still choose it, but not without being told what it costs.
+ */
+function travelNote(o,plan){
+  if(!o.dest||!plan||!plan.stops||!plan.stops.length)return '';
+  const t=nearestStop(o.dest,plan.stops);
+  if(!t)return '';
+  const near=D[t.stop];
+  const how=t.how==='walk'?'on foot':'each way';
+  const approx=t.est?'≈':'';
+  // The option IS one of the plan's stops — "0 min from itself" is not a
+  // sentence anyone wants to read.
+  if(t.min===0)
+    return `<p class="leg ok">Already on this plan &mdash; swapping here just gives it more of the day.</p>`;
+  if(t.min<=window.FAR_MINUTES)
+    return `<p class="leg ok">${approx}${t.min} min ${how} from ${esc(near?near.name:t.stop)} &mdash; inside this plan's area.</p>`;
+  return `<p class="leg far">&#9888;&#65039; ${approx}${t.min} min each way from ${esc(near?near.name:t.stop)}, the closest thing on this plan. Taking it means the rest of the day moves with you.</p>`;
+}
+
+/**
+ * A time block, swipeable when alternatives exist for it.
+ *
+ * Built on CSS scroll-snap rather than a JS gesture handler: the browser
+ * already knows how to throw a scroller with a finger, keep momentum, and
+ * respect the OS reduced-motion setting. Re-implementing that in JS produces
+ * something that feels almost right, which is worse than native.
+ *
+ * Each option carries its own link set, because you may only ever read the
+ * alternative — it has to stand alone rather than inherit the planned text's
+ * already-linked places.
+ */
+function renderBlock(d,b,link,planId,plan,alts){
+  const key=`${d.day}|${planId}|${b.when}`;
+  let opts=alts||[];
+  // "Only what's nearby" drops the options this plan cannot absorb. The planned
+  // block is never dropped — it defines the area rather than being judged by it.
+  if(S.nearOnly)opts=opts.filter(o=>{
+    if(!o.dest)return true;
+    const t=nearestStop(o.dest,plan.stops||[]);
+    return !t||t.min<=window.FAR_MINUTES;
+  });
+  opts=[{label:'Planned',text:b.text,planned:true},...opts];
+  if(opts.length===1){
+    return `<div class="block"><div class="w">${esc(b.when)}</div><p>${link(b.text)}</p></div>`;
+  }
+  const pick=Math.min(S.picks[key]||0,opts.length-1);
+  return `<div class="block"><div class="w">${esc(b.when)}</div>
+    <div class="swipe${pick>0?' swapped':''}" data-key="${esc(key)}" data-i="${pick}">
+      <div class="track" tabindex="0" role="group"
+           aria-label="${esc(b.when)} — ${opts.length} options, swipe to compare">
+        ${opts.map((o,i)=>`<article class="swopt" aria-roledescription="option" aria-label="${i+1} of ${opts.length}: ${esc(o.label)}">
+          <div class="swopt-h">
+            <span class="pill ${o.planned?'shu':'ai'}">${esc(o.label)}</span>
+            ${o.dest&&D[o.dest]?`<button class="linkish" data-open="${o.dest}">Full detail &#8594;</button>`:''}
+          </div>
+          <p>${o.planned?link(o.text):linkifyDests(esc(o.text),new Set())}</p>
+          ${o.fits?`<p class="fits"><b>Why it works here</b> — ${esc(o.fits)}</p>`:''}
+          ${o.planned?'':travelNote(o,plan)}
+        </article>`).join('')}
+      </div>
+      <div class="swipe-bar">
+        <button class="swipe-n" data-nudge="-1" aria-label="Previous option">&#8249;</button>
+        <span class="dots">${opts.map((o,i)=>`<span class="dot${i===pick?' on':''}"></span>`).join('')}</span>
+        <button class="swipe-n" data-nudge="1" aria-label="Next option">&#8250;</button>
+        <span class="swipe-lbl">${pick===0?'Swipe for alternatives':`Alternative ${pick} of ${opts.length-1}`}</span>
+      </div>
+    </div></div>`;
+}
+
+/**
+ * A day, in whichever plan is selected.
+ *
+ * Plan A's blocks live in data-plan.js and its alternatives in ALTS; plan B
+ * carries both itself. Everything downstream — the swipe, the travel notes,
+ * the saved pick — is keyed by plan, so switching does not inherit a choice
+ * made about a different day.
+ */
+/**
+ * Which plan is on a day, and where it came from.
+ *
+ * A day no longer owns its plan. `S.plans[day]` holds a reference like "4b" —
+ * day 4's plan B — so any shape written for one day can be assigned to any
+ * other day sharing a base. The blocks and the alternatives travel with the
+ * plan, not with the day, which is the part that has to be got right: plan A
+ * of day 4 must bring ALTS['4|Afternoon'] with it even when it is showing on
+ * day 2.
+ */
+const planRef=(day)=>{
+  const v=S.plans[day];
+  // Values were 'a'/'b' before plans became portable. Read them as this day's.
+  if(v==='a'||v==='b')return day+v;
+  return v||(day+'a');
+};
+const baseOf=(day)=>(window.BASES||[]).find(b=>b.days.includes(day));
+const planTitle=(ref)=>{const r=resolvePlan(ref);return r?r.plan.title:null};
+
+function resolvePlan(ref){
+  const m=/^(\d+)([ab])$/.exec(ref||'');
+  if(!m)return null;
+  const srcDay=+m[1], key=m[2];
+  const P=(window.PLANS||{})[srcDay];
+  const src=ITINERARY.find(x=>x.day===srcDay);
+  if(!P||!P[key]||!src)return null;
+  const pl=P[key];
+  return key==='a'
+    ? {srcDay,key,ref,plan:pl,blocks:src.blocks,alts:w=>((window.ALTS||{})[`${srcDay}|${w}`]||[])}
+    : {srcDay,key,ref,plan:pl,blocks:pl.blocks||src.blocks,alts:w=>((pl.alts||{})[w]||[])};
+}
+
+/** Every shape this day is allowed to take: anything from its own base. */
+function shapesFor(day){
+  const b=baseOf(day); if(!b)return [];
+  const out=[];
+  for(const d of b.days){
+    const P=(window.PLANS||{})[d];
+    if(!P||P.single)continue;
+    for(const k of ['a','b'])if(P[k])out.push({ref:d+k,srcDay:d,key:k,title:P[k].title});
+  }
+  return out;
+}
+
+function planOf(d){
+  const P=(window.PLANS||{})[d.day]||{};
+  const own={id:'a',only:true,blocks:d.blocks,ref:null,srcDay:d.day,
+    alts:k=>((window.ALTS||{})[`${d.day}|${k}`]||[]),
+    plan:{title:'One plan',thesis:P.single||d.theme||'',stops:d.dests||[]}};
+  // Degrade to the plain day rather than throwing: a build that failed to
+  // bundle data-plans.js once left every view after this one empty.
+  if(P.single||!P.a||!P.b)return own;
+  const ref=planRef(d.day);
+  const r=resolvePlan(ref)||resolvePlan(d.day+'a');
+  if(!r)return own;
+  return {...r, id:r.key, only:false, foreign:r.srcDay!==d.day, shapes:shapesFor(d.day)};
+}
+
+function renderDays(){
+  days.innerHTML=ITINERARY.map(d=>{
+    const warn=/⚠️/.test(d.food);
+    const {id,plan,blocks,alts,only,foreign,srcDay}=planOf(d);
+    const ref=planRef(d.day);
+    const dupe=(ITINERARY.find(x=>x.day!==d.day&&!planOf(x).only&&planRef(x.day)===ref)||{}).day;
+    // One set per day, so a place links on its first mention and reads as
+    // ordinary text everywhere after.
+    const used=new Set();
+    const link=(s)=>linkifyDests(esc(s),used);
+    // A native <select>. Eight Tokyo shapes will not fit as buttons, the OS
+    // picker is better on a phone than anything hand-rolled, and it is one
+    // fewer custom touch target on a page that has had enough trouble with
+    // those.
+    const shapes=planOf(d).shapes||[];
+    const groups=[...new Set(shapes.map(x=>x.srcDay))];
+    const picker=()=>`<label class="planpick"><span class="pp-l">Plan</span>
+      <select data-plan-day="${d.day}" aria-label="Plan for day ${d.day}">${
+        groups.map(sd=>{
+          const src=ITINERARY.find(x=>x.day===sd);
+          const label=sd===d.day?`This day — day ${sd}`:`Day ${sd} · ${src?src.title:''}`;
+          return `<optgroup label="${esc(label)}">${
+            shapes.filter(x=>x.srcDay===sd).map(x=>
+              `<option value="${x.ref}"${x.ref===ref?' selected':''}>${x.key.toUpperCase()} · ${esc(x.title)}</option>`
+            ).join('')}</optgroup>`;
+        }).join('')}</select>
+      </label>`;
+    return `<article class="card day" data-day="${d.day}">
+      <button class="day-head">
+        <div class="day-num"><b>${d.day}</b><span>Day</span></div>
+        <div class="meta">
+          <h3>${esc(d.title)} <span class="j">${esc(d.jp)}</span>${
+            // The pill says where you sleep. On departure day that is nowhere,
+            // and a pill reading "Departure" next to the title "Departure" is
+            // just the word twice.
+            d.city===d.title?'':` <span class="pill ai">${esc(d.city)}</span>`}</h3>
+          <p>${esc(d.theme)}</p>
+        </div><span class="chev">▶</span>
+      </button>
+      <div class="day-body">
+        ${only
+          ? `<div class="plan-one">${esc(plan.thesis)}</div>`
+          : `${picker()}
+             ${foreign?`<div class="plan-moved">Written for <b>day ${srcDay}</b>.</div>`:''}
+             ${dupe?`<div class="plan-moved">Also assigned to day ${dupe}. Two days cannot both do it.</div>`:''}
+             <div class="plan-why">${esc(plan.thesis)}</div>`}
+        ${blocks.map(b=>renderBlock(d,b,link,id,plan,alts(b.when))).join('')}
+        ${d.note?`<div class="food-note aside"><b>Note</b> — ${link(d.note)}</div>`:''}
+        <div class="food-note${warn?' warn':''}"><b>Food</b> — ${link(d.food)}</div>
+      </div></article>`;
+  }).join('');
+}
+renderDays();
+
+/* Scroll each track to the option that was chosen last time. */
+function restorePicks(){
+  days.querySelectorAll('.swipe').forEach(sw=>{
+    const tr=sw.querySelector('.track');
+    // A hidden view has no width, so scrollLeft would be a no-op and the track
+    // would silently sit on the planned option while the dots said otherwise.
+    if(!tr.clientWidth)return;
+    const i=S.picks[sw.dataset.key]||0;
+    tr.scrollLeft=i*tr.clientWidth;
+  });
+}
+restorePicks();
+
+/* Which option is showing is whatever the scroller settled on. Reading it back
+   from scrollLeft keeps the finger, the arrows and the saved state agreeing —
+   there is no separate notion of "selected" to drift out of sync. */
+/**
+ * A track is exactly as tall as the option you are looking at.
+ *
+ * Without this a flex row takes the height of its tallest child, so day 6 —
+ * nine options, one of them long — reserved that height for all nine. On a
+ * phone that is most of a screen of blank space per block, and it turned the
+ * itinerary into a wall of scroll containers taller than the viewport.
+ */
+const fitTrack=(sw)=>{
+  const tr=sw.querySelector('.track');
+  // No width means no layout yet — a hidden view, or an embedded frame that has
+  // not been sized. Measuring here returns nonsense and pinning a track to
+  // nonsense is worse than leaving it alone, so leave it alone.
+  if(!tr.clientWidth)return;
+  const p=tr.children[Number(sw.dataset.i||0)];
+  if(!p)return;
+  // Release the height before measuring. Reading a child while the parent is
+  // already pinned to a previous value measures the pin, not the content.
+  tr.style.removeProperty('--tk');
+  // Round UP. offsetHeight truncates a fractional layout, and a track one
+  // pixel shorter than its panel has one pixel of vertical scrollable overflow
+  // — enough for a downward drag to be consumed by the track instead of the
+  // page, which feels exactly like the page refusing to scroll.
+  const h=Math.ceil(p.getBoundingClientRect().height);
+  if(h>0)tr.style.setProperty('--tk',h+'px');
+};
+const fitAllTracks=()=>days.querySelectorAll('.swipe').forEach(fitTrack);
+
+/**
+ * Re-fit whenever a track's WIDTH changes — not its height, which this very
+ * function sets and which would loop forever.
+ *
+ * This is what makes the sizing safe in an embedded viewer, where the frame is
+ * often laid out at zero and again at its real width a frame or two later. A
+ * one-shot measurement at load would pin every block to whatever nonsense the
+ * first pass saw; the observer simply corrects itself when the width arrives.
+ */
+const seenW=new WeakMap();
+const trackRO=typeof ResizeObserver==='function'?new ResizeObserver(es=>{
+  for(const e of es){
+    const w=Math.round(e.contentRect.width);
+    if(!w||seenW.get(e.target)===w)continue;
+    seenW.set(e.target,w);
+    const sw=e.target.closest('.swipe');
+    if(sw){
+      // The pick is expressed in page widths, so a resize invalidates it too.
+      const tr=sw.querySelector('.track');
+      tr.scrollLeft=(Number(sw.dataset.i)||0)*w;
+      fitTrack(sw);
+    }
+  }
+}):null;
+const watchTracks=()=>{ if(trackRO)days.querySelectorAll('.track').forEach(t=>trackRO.observe(t)); };
+watchTracks(); fitAllTracks();
+
+const applySwipe=(sw,i)=>{
+  // The element carries the current index. Arrow arithmetic must not read
+  // scrollLeft, which lags behind during a smooth scroll — two quick taps
+  // would then both compute "one past zero" and go nowhere.
+  sw.dataset.i=i;
+  const dots=[...sw.querySelectorAll('.dot')];
+  dots.forEach((d,n)=>d.classList.toggle('on',n===i));
+  const lbl=sw.querySelector('.swipe-lbl');
+  lbl.textContent=i===0?'Swipe for alternatives':`Alternative ${i} of ${dots.length-1}`;
+  sw.classList.toggle('swapped',i>0);
+  fitTrack(sw);
+  if((S.picks[sw.dataset.key]||0)!==i){S.picks[sw.dataset.key]=i;save()}
+};
+/* Read the settled position back after a finger swipe. Never called straight
+   after an arrow: with scroll-behavior:smooth the assignment animates, so
+   scrollLeft still holds the OLD page for a few frames and the dots would
+   record where you just were. */
+const syncSwipe=(sw)=>{
+  const tr=sw.querySelector('.track');
+  applySwipe(sw,Math.round(tr.scrollLeft/tr.clientWidth));
+};
+let swTimer;
+days.addEventListener('scroll',e=>{
+  const sw=e.target.closest?.('.track')?.parentElement;
+  if(!sw||!sw.classList.contains('swipe'))return;
+  clearTimeout(swTimer);swTimer=setTimeout(()=>syncSwipe(sw),90);
+},true);
+
+days.addEventListener('change',e=>{
+  const sel=e.target.closest('select[data-plan-day]');
+  if(!sel)return;
+  const day=sel.dataset.planDay;
+  if(S.plans[day]===sel.value)return;
+  S.plans[day]=sel.value; save();
+  const open=[...days.querySelectorAll('.day.open')].map(x=>x.dataset.day);
+  renderDays();
+  open.forEach(x=>days.querySelector(`.day[data-day="${x}"]`)?.classList.add('open'));
+  restorePicks();watchTracks();fitAllTracks();
+});
+
+days.addEventListener('click',e=>{
+  // The picker is a <select>; a click on it must not reach the day header and
+  // fold the card shut underneath the open menu.
+  if(e.target.closest('.planpick')){e.stopPropagation();return}
+  const n=e.target.closest('[data-nudge]');
+  if(n){
+    // Compute the target page and scrollTo it, rather than scrollBy. A relative
+    // nudge accumulates rounding against scroll-snap and can stall entirely;
+    // an absolute target lands on the same page every time and clamps cleanly
+    // at both ends.
+    const sw=n.closest('.swipe'),tr=sw.querySelector('.track');
+    const pages=sw.querySelectorAll('.swopt').length;
+    const here=Number(sw.dataset.i||0);
+    const want=Math.min(pages-1,Math.max(0,here+Number(n.dataset.nudge)));
+    tr.scrollLeft=want*tr.clientWidth;
+    // Update from the intent, not from a mid-animation measurement.
+    applySwipe(sw,want);
+    return;
+  }
+  // A destination link inside an open day opens its panel; it must not also
+  // reach the header and collapse the day out from under the dialog.
+  // Matched on the attribute, not on .dlink: the inline links in the prose and
+  // the "Full detail" button on a swipe alternative are styled differently but
+  // do the same thing, and keying on the class left the button inert.
+  const link=e.target.closest('[data-open]');
+  if(link){e.stopPropagation();openDest(link.dataset.open);return}
+  const head=e.target.closest('.day-head');
+  // A collapsed day has no layout, so its tracks measure zero. Fit them the
+  // moment it opens rather than leaving every block one option tall.
+  if(head){const day=head.parentElement;day.classList.toggle('open');
+    if(day.classList.contains('open')){day.querySelectorAll('.swipe').forEach(sw=>{
+      const tr=sw.querySelector('.track');
+      if(tr.clientWidth)tr.scrollLeft=(Number(sw.dataset.i)||0)*tr.clientWidth;
+      fitTrack(sw);});}}
+});
+// The same links appear in the lodging copy.
+lodging.addEventListener('click',e=>{
+  const link=e.target.closest('[data-open]');
+  if(link)openDest(link.dataset.open);
+});
+/* Drop every alternative the selected plan cannot absorb. Off by default: the
+   far options are real choices, they just need to be priced. */
+const syncNear=()=>{
+  nearOnly.textContent=S.nearOnly?'◉ Only what’s nearby':'◎ Only what’s nearby';
+  nearOnly.classList.toggle('on',!!S.nearOnly);
+  nearOnly.title=S.nearOnly
+    ?`Hiding options more than ${window.FAR_MINUTES} minutes from the plan you have selected.`
+    :`Showing every option, with a travel note on anything over ${window.FAR_MINUTES} minutes away.`;
+};
+nearOnly.onclick=()=>{
+  S.nearOnly=!S.nearOnly; save(); syncNear();
+  const open=[...days.querySelectorAll('.day.open')].map(x=>x.dataset.day);
+  renderDays();
+  open.forEach(x=>days.querySelector(`.day[data-day="${x}"]`)?.classList.add('open'));
+  restorePicks();watchTracks();fitAllTracks();
+};
+syncNear();
+
+expandAll.onclick=()=>{
+  const any=days.querySelector('.day:not(.open)');
+  days.querySelectorAll('.day').forEach(d=>d.classList.toggle('open',!!any));
+  expandAll.textContent=any?'⌃ Collapse all':'⌄ Expand all';
+};
+
+/* ── destinations ───────────────────────────────────────────────── */
+let fCity='all', fTag='all', fQ='';
+const CITIES=['all',...new Set(DESTINATIONS.map(d=>d.city))];
+const TAGS=['all','romance','gaming','anime','history','nature','art','food','tech','culture'];
+filters.innerHTML=
+  `<input id="q" placeholder="Search destinations, areas, anything…" aria-label="Search destinations">`+
+  `<div class="frow" role="group" aria-label="Filter by city"><span class="flabel">Where</span>`+
+  CITIES.map(c=>`<button class="fbtn" data-city="${c}" aria-pressed="${c==='all'}">${c==='all'?'All':c}</button>`).join('')+
+  `</div><div class="frow" role="group" aria-label="Filter by type"><span class="flabel">Type</span>`+
+  TAGS.map(t=>`<button class="fbtn" data-tag="${t}" aria-pressed="${t==='all'}">${t==='all'?'All':t}</button>`).join('')+
+  `</div>`;
+
+const TIER={core:['shu','Core'],nearby:['kin','Nearby'],optional:['ai','Optional']};
+
+/**
+ * The Google Maps link for a destination.
+ *
+ * Built as /maps/search/<name>/@<lat>,<lng>,17z rather than ?q=<name>, because
+ * a bare query resolves to whatever Google ranks highest on Earth — and this
+ * library contains a hotel café called Camellia, a restaurant called YASAKA
+ * next to a shrine and a pagoda of the same name, and a yakiniku house called
+ * Hiro. The coordinate comes from OpenStreetMap (or, for six restaurants OSM
+ * does not carry, from Google's own resolved place), so the map opens on the
+ * verified point and the search is biased to it.
+ */
+const mapsUrl=(id)=>{
+  const g=(window.GEO||{})[id]; if(!g)return null;
+  return 'https://www.google.com/maps/search/'+encodeURIComponent(g.q)+
+         '/@'+g.lat+','+g.lng+',17z';
+};
+/* The reviews page, where the destination has one. Five streets and districts
+   do not — Google files them as roads, which carry no reviews. */
+const rev=(id)=>(window.REVIEWS||{})[id]||null;
+const rating=(r)=>`★ ${r.rating.toFixed(1)} <span class="rc">(${r.count.toLocaleString()})</span>`;
+/* `url` started life as a restaurant booking page and now also carries museum
+   and temple sites, where "Menu & booking" is the wrong words entirely. */
+const siteLabel=(d)=>d.tags.includes('food')?'Menu &amp; booking':'Official site';
+
+/* Search every word a person might actually type — including the ones that
+   only appear in a tip or a nearby-place note. Searching "onsen" and getting
+   nothing back, on a trip built around a private hot spring, is the kind of
+   result that makes someone stop trusting the search box. Built once per
+   destination and cached. */
+const searchText=(d)=>d._s||(d._s=[
+  d.name,d.jp,d.area,d.city,d.blurb,d.detail,d.why,d.food,d.time,d.cost,d.station,
+  d.tier,...d.tags,...d.tips,...d.nearby.flatMap(n=>[n.name,n.note])
+].join(' ').toLowerCase());
+function renderDests(){
+  const list=DESTINATIONS.filter(d=>
+    (fCity==='all'||d.city===fCity)&&(fTag==='all'||d.tags.includes(fTag))&&
+    (!fQ||searchText(d).includes(fQ)));
+  dests.innerHTML=list.length?list.map(d=>{
+    const[tc,tl]=TIER[d.tier];
+    return `<article class="card dest">
+      <div class="dest-img">${d.img
+        ?`<img src="${d.img}" alt="${esc(d.name)}" loading="lazy">`
+        :`<div class="dest-ph"><span>${esc(d.jp)}</span></div>`}
+        ${d.img&&d.imgNote?`<div class="img-note">${esc(d.imgNote)}</div>`:''}
+        <span class="pill ${tc} dest-tier">${tl}</span></div>
+      <div class="dest-body">
+        <h3>${esc(d.name)}</h3><div class="j">${esc(d.jp)}</div>
+        <p class="blurb">${esc(d.blurb)}</p>
+        <div class="dest-facts">
+          <span class="pill">${esc(d.city)}</span>
+          <span class="pill">⏱ ${esc(d.time)}</span>
+          ${rev(d.id)?`<a class="pill star" href="${rev(d.id).url}" target="_blank" rel="noopener"
+             title="Google reviews for ${esc(rev(d.id).name)}">${rating(rev(d.id))}</a>`:''}
+          <span class="pill">${esc(d.cost)}</span>
+        </div>
+        <div class="dest-actions">
+          <button class="linkish" data-open="${d.id}">Full detail →</button>
+          ${mapsUrl(d.id)?`<a class="linkish" href="${mapsUrl(d.id)}" target="_blank" rel="noopener">Map ↗</a>`:''}
+          ${d.url?`<a class="linkish" href="${esc(d.url)}" target="_blank" rel="noopener">${siteLabel(d)} ↗</a>`:''}
+        </div></div></article>`;
+  }).join(''):`<p class="sub">Nothing matches that. Try clearing a filter.</p>`;
+}
+renderDests();
+filters.addEventListener('click',e=>{
+  const c=e.target.closest('[data-city]'),t=e.target.closest('[data-tag]');
+  if(c){fCity=c.dataset.city;filters.querySelectorAll('[data-city]').forEach(b=>b.setAttribute('aria-pressed',String(b===c)))}
+  if(t){fTag=t.dataset.tag;filters.querySelectorAll('[data-tag]').forEach(b=>b.setAttribute('aria-pressed',String(b===t)))}
+  if(c||t)renderDests();
+});
+q.oninput=e=>{fQ=e.target.value.toLowerCase().trim();renderDests()};
+dests.addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]'); if(o)openDest(o.dataset.open);
+});
+
+/* ── detail dialog ──────────────────────────────────────────────── */
+function openDest(id){
+  const d=D[id];if(!d)return;
+  const[tc,tl]=TIER[d.tier];
+  dlgIn.innerHTML=`
+    <div style="position:relative">
+      <div class="dlg-img">${d.img?`<img src="${d.img}" alt="${esc(d.name)}">`:`<div class="dest-ph"><span>${esc(d.jp)}</span></div>`}${
+        d.img&&d.imgNote?`<div class="img-note">${esc(d.imgNote)}</div>`:''}</div>
+      <button class="dlg-close" onclick="dlg.close()">×</button>
+    </div>
+    <div class="dlg-body">
+      <span class="pill ${tc}">${tl}</span>
+      <h2 style="margin-top:8px">${esc(d.name)}</h2>
+      <div style="font-family:var(--serif);color:var(--shu);letter-spacing:.18em;font-size:13px;margin-bottom:12px">${esc(d.jp)}</div>
+      <p style="font-size:16px;color:var(--sumi-2)">${esc(d.blurb)}</p>
+      <dl class="dl">
+        <dt>Where</dt><dd>${esc(d.area)}, ${esc(d.city)}</dd>
+        <dt>Getting there</dt><dd>${esc(d.station)}${
+          mapsUrl(d.id)?` — <a href="${mapsUrl(d.id)}" target="_blank" rel="noopener">open in Google Maps ↗</a>`:''}</dd>
+        <dt>Time</dt><dd>${esc(d.time)}</dd>
+        <dt>Cost</dt><dd>${esc(d.cost)}</dd>
+        ${rev(d.id)
+          ? `<dt>Reviews</dt><dd><a href="${rev(d.id).url}" target="_blank" rel="noopener">${
+              rating(rev(d.id))} on Google ↗</a>${
+              // Say whose reviews these are when the listing is named
+              // differently from the card — the bridge under Nihonbashi, the
+              // hotel around a restaurant.
+              rev(d.id).name.toLowerCase()!==d.name.toLowerCase()
+                ? ` <span class="rc">— listed as ${esc(rev(d.id).name)}</span>` : ''}</dd>`
+          : `<dt>Reviews</dt><dd class="rc">No Google review page — this is a street or district, not a listing.</dd>`}
+        ${d.url?`<dt>${d.tags.includes('food')?'Booking':'Website'}</dt><dd><a href="${esc(d.url)}" target="_blank" rel="noopener">${siteLabel(d)} ↗</a></dd>`:''}
+      </dl>
+      <p style="font-size:15px;color:var(--sumi-2);margin-bottom:14px">${esc(d.detail)}</p>
+      <div class="food-note aside"><b>Why it is here</b> — ${esc(d.why)}</div>
+      <div class="food-note${/⚠️/.test(d.food)?' warn':''}" style="margin-top:10px"><b>Food</b> — ${esc(d.food)}</div>
+      <h3 style="margin:22px 0 2px;font-size:17px">Practical notes</h3>
+      <ul class="tiplist">${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+      <h3 style="margin:18px 0 8px;font-size:17px">Also nearby</h3>
+      <div class="nearby">${d.nearby.map(n=>`<div><b>${esc(n.name)}</b> — ${esc(n.note)}</div>`).join('')}</div>
+    </div>`;
+  dlg.showModal();
+}
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+
+/* ── food safety, driven by whatever you select ──────────────────── */
+
+/**
+ * The whole page is a function of one array of allergen ids.
+ *
+ * The previous version of this app had one traveller's restrictions written
+ * into every string on every tab, which made the food pages useless to anybody
+ * else and, worse, quietly misleading — advice for avoiding one ingredient
+ * tells you nothing about avoiding another. So the content moved into
+ * data-allergens.js and the page asks instead. Selection is saved like any
+ * other preference.
+ */
+const A=window.ALLERGENS||{}, FMT=window.FORMATS||{};
+if(!Array.isArray(S.allergens))S.allergens=(window.DEFAULT_ALLERGENS||['peanut']).slice();
+
+const LAW={
+  mandatory:{label:'Labelled by law',tone:'matcha',
+    note:'One of the eight Japan requires on packaged food. A label that stays silent is meaningful — this is the strongest ground you get here.'},
+  'mandatory-partial':{label:'Partly labelled by law',tone:'kin',
+    note:'Some of this group is mandatory, the rest only recommended. Read the entry rather than the category.'},
+  recommended:{label:'Recommended only',tone:'kin',
+    note:'Encouraged, not required. A package can contain it and say nothing at all.'},
+  partial:{label:'Barely covered',tone:'kin',
+    note:'Only specific members of the group appear on the recommended list. The category as a whole is not covered.'},
+  none:{label:'Not labelled at all',tone:'shu',
+    note:'On neither list. Reading a label proves nothing; the only useful information comes from asking a person.'},
+};
+const TONE_F={easy:['matcha','Straightforward'],ok:['kin','Workable, with questions'],harder:['shu','Hard here']};
+
+const renderPicker=()=>{
+  allergenPicker.innerHTML=Object.entries(A).map(([id,x])=>{
+    const on=S.allergens.includes(id);
+    return `<button class="achip${on?' on':''}" data-allergen="${id}" aria-pressed="${on}">
+      <b>${esc(x.name)}</b><span>${esc(x.jp)}</span></button>`;
+  }).join('')+`<button class="achip clear" data-allergen-clear aria-label="Clear all">Clear</button>`;
+};
+
+const renderAllergens=()=>{
+  const picked=S.allergens.filter(id=>A[id]);
+  if(!picked.length){
+    allergenOut.innerHTML=`<div class="notice">Nothing selected. Pick one or more above and this page rewrites itself — formats, hiding places, questions and card. Everything further down the page is general advice that holds whatever you avoid.</div>`;
+    return;
+  }
+  allergenOut.innerHTML=picked.map(id=>{
+    const x=A[id], law=LAW[x.law]||LAW.none;
+    return `<article class="card alg">
+      <div class="alg-h">
+        <div><h3>${esc(x.name)}</h3><div class="j">${esc(x.jp)} &middot; ${esc(x.romaji)}</div></div>
+        <span class="pill ${law.tone}">${esc(law.label)}</span>
+      </div>
+      <p class="alg-lead">${esc(x.lead)}</p>
+      <div class="alg-law"><b>${esc(law.label)}</b> &mdash; ${esc(x.lawNote)}</div>
+
+      <h4>Where it hides</h4>
+      <ul class="tiplist">${x.hidden.map(h=>`<li>${esc(h)}</li>`).join('')}</ul>
+
+      <h4>Formats, ranked for this allergen</h4>
+      <div class="fmts">${x.formats.map(f=>{
+        const [tone,lbl]=TONE_F[f.tone]||TONE_F.ok;
+        const meta=FMT[f.id]||{name:f.id,jp:''};
+        return `<div class="fmt ${tone}">
+          <div class="fmt-h"><b>${esc(meta.name)}</b><span class="j">${esc(meta.jp)}</span>
+            <span class="pill ${tone}">${esc(lbl)}</span></div>
+          <p>${esc(f.why)}</p></div>`;
+      }).join('')}</div>
+
+      <div class="foodcols alg-cols">
+        <div><h4>Order this</h4><div class="chiplist">${x.order.map(o=>`<span class="chip-ok">${esc(o)}</span>`).join('')}</div></div>
+        <div><h4>Ask this</h4><ul class="tiplist">${x.ask.map(q=>`<li>${esc(q)}</li>`).join('')}</ul></div>
+      </div>
+    </article>`;
+  }).join('');
+};
+
+/* The card is assembled from the same selection. */
+const renderCard=()=>{
+  const picked=S.allergens.filter(id=>A[id]);
+  cardDisc.textContent=CARD.disclaimer;
+  const en=[`<h4>${esc(CARD.openingEn)}</h4>`];
+  const jp=[`<h4>${esc(CARD.openingJp)}</h4>`];
+  picked.forEach((id,n)=>{
+    const x=A[id];
+    en.push(`<h4>${n+1}. ${esc(x.name.toUpperCase())}</h4><p>${esc(x.card)}</p>`);
+    jp.push(`<h4>${n+1}．${esc(x.jp)}</h4><p>${esc(x.cardJp)}</p>`);
+  });
+  if(!picked.length){
+    en.push(`<p>Select an allergen above and its paragraph appears here, in both languages.</p>`);
+    jp.push(`<p>上でアレルゲンを選択してください。</p>`);
+  }
+  en.push(`<h4>WHAT WOULD WORK</h4><p>${esc(CARD.workableEn)}</p>`);
+  jp.push(`<h4>食べられるもの</h4><p>${esc(CARD.workableJp)}</p>`);
+  en.push(`<h4>${esc(CARD.emergency.h)}</h4><p>${esc(CARD.emergency.b)}</p>`);
+  jp.push(`<h4>${esc(CARD.emergency.h)}</h4><p>${esc(CARD.emergency.b)}</p>`);
+  cardEN.innerHTML=en.join(''); cardJP.innerHTML=jp.join('');
+  printEN.innerHTML=en.join(''); printJP.innerHTML=jp.join('');
+};
+
+const renderFood=()=>{renderPicker();renderAllergens();renderCard();
+  if(typeof renderInq==='function')renderInq();};
+
+allergenPicker.addEventListener('click',e=>{
+  const clear=e.target.closest('[data-allergen-clear]');
+  if(clear){S.allergens=[];save();renderFood();return}
+  const b=e.target.closest('[data-allergen]');
+  if(!b)return;
+  const id=b.dataset.allergen;
+  S.allergens=S.allergens.includes(id)?S.allergens.filter(x=>x!==id):[...S.allergens,id];
+  save(); renderFood();
+});
+
+labelLead.textContent=FOOD.labelling.headline;
+findings.innerHTML=FOOD.labelling.points.map(p=>
+  `<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:6px;color:var(--shu)">${esc(p.k)}</h4><p style="font-size:14px;color:var(--sumi-2)">${esc(p.v)}</p></div>`).join('');
+principles.innerHTML=FOOD.principles.map(p=>
+  `<div class="card principle" style="padding:18px 20px"><div class="pn">${p.n}</div><h4>${esc(p.t)}</h4><p>${esc(p.d)}</p></div>`).join('');
+okNote.textContent=FOOD.workableNote;
+okList.innerHTML=FOOD.workable.map(f=>`<span class="chip-ok">${esc(f)}</span>`).join('');
+noNote.textContent=FOOD.dangerNote;
+noList.innerHTML=FOOD.danger.map(f=>`<span class="chip-no">${esc(f)}</span>`).join('');
+falseFriends.innerHTML=`<b>${esc(FOOD.falseFriends.title)}</b> — ${esc(FOOD.falseFriends.text)}`;
+rhythm.innerHTML=[['Breakfast',FOOD.rhythm.breakfast],['Lunch',FOOD.rhythm.lunch],['Dinner',FOOD.rhythm.dinner],['The point',FOOD.rhythm.goal]]
+  .map(([h,b])=>`<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:5px;color:var(--kin)">${h}</h4><p style="font-size:14px;color:var(--sumi-2)">${esc(b)}</p></div>`).join('');
+emergency.innerHTML=`<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:8px">Emergency kit</h4><ul class="tiplist">${FOOD.emergency.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`;
+prepFood.innerHTML=`<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:8px">Established before departure</h4><ul class="tiplist">${FOOD.prepBeforeYouGo.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`;
+renderFood();
+
+printCard.onclick=()=>{
+  // Swap to the card for the duration of the print job, then put the page back
+  // — leaving the class on would silently hijack the next Cmd-P.
+  document.body.classList.add('print-card');
+  const restore=()=>document.body.classList.remove('print-card');
+  window.addEventListener('afterprint',restore,{once:true});
+  print();
+  setTimeout(restore,1000); // browsers that never fire afterprint
+};
+copyJP.onclick=async()=>{
+  // Copies whatever is currently on the Japanese card face, so it always
+  // matches what is printed rather than a separately-maintained string.
+  const t=[...cardJP.children].map(e=>e.textContent.trim()).join('\n');
+  try{await navigator.clipboard.writeText(t);flash('Japanese card copied')}catch{flash('Copy failed')}
+};
+
+/* ── eating out ─────────────────────────────────────────────────── */
+
+const TONE={strong:'matcha',several:'matcha',one:'kin',confirm:'kin',venue:'shu',none:'shu'};
+const STATUS_LABEL=Object.fromEntries(EATING.statuses.map(s=>[s.id,s.label]));
+
+model.innerHTML=`<div class="card" style="padding:18px 22px">
+    <h3 style="font-size:19px;margin-bottom:4px">${esc(EATING.model.title)}</h3>
+    <p style="font-size:14.5px;color:var(--sumi-2)">${esc(EATING.model.lead)}</p></div>`+
+  EATING.model.levels.map(l=>`
+  <div class="level">
+    <div class="level-h lv-${l.tone}"><span class="lv">LEVEL ${l.n}</span><h3>${esc(l.title)}</h3></div>
+    <div class="level-b">
+      <p class="lead">${esc(l.lead)}</p>
+      <ul class="tiplist">${l.points.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="level-note"><b>Rule</b> — ${esc(l.rule)}</div>
+    </div></div>`).join('');
+
+screenList.innerHTML=EATING.screen.map(x=>`<dt>${esc(x.k)}</dt><dd>${esc(x.v)}</dd>`).join('');
+
+cuisines.innerHTML=EATING.cuisines.map(c=>`
+  <div class="card" style="padding:18px 20px">
+    <div style="display:flex;gap:9px;align-items:baseline;flex-wrap:wrap;margin-bottom:7px">
+      <b style="font-family:var(--serif);font-size:18px">${esc(c.name)}</b>
+      <span style="font-family:var(--serif);color:var(--shu);font-size:12.5px;letter-spacing:.12em">${esc(c.jp)}</span>
+      <span class="pill ${c.rank==='best'?'matcha':'kin'}" style="margin-left:auto">${c.rank==='best'?'Fits as written':'Fits with a question'}</span>
+    </div>
+    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:10px">${esc(c.why)}</p>
+    <div class="food-note aside"><b>Order</b> — ${c.order.map(esc).join(' · ')}</div>
+    <div class="food-note${c.ask.some(a=>/\u26a0/.test(a))?' warn':''}" style="margin-top:8px"><b>Ask</b>
+      <ul class="tiplist" style="margin:4px 0 0">${c.ask.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>
+    <p style="font-size:13.5px;color:var(--sumi-3);margin-top:9px"><b style="color:var(--shu)">Skip</b> — ${esc(c.avoid)}</p>
+    ${c.note?`<p style="font-size:13px;color:var(--sumi-3);margin-top:7px;font-style:italic">${esc(c.note)}</p>`:''}
+  </div>`).join('');
+
+harder.innerHTML=EATING.harder.map(h=>`<dt>${esc(h.name)}</dt><dd>${esc(h.why)}</dd>`).join('');
+
+ratingkey.innerHTML=EATING.statuses.map(r=>
+  `<span class="rk"><span class="pill ${r.tone}">${esc(r.label)}</span></span>`).join('')
+  +`<span class="rk" style="color:var(--sumi-3);font-style:italic">${esc(EATING.asOf)}</span>`;
+
+const vstat=(id)=>S.venues[id]||{status:null,date:''};
+function renderPlaces(){
+  const byCity=[...new Set(EATING.places.map(p=>p.city))];
+  places.innerHTML=byCity.map(city=>`
+    <h3 class="citybar">${esc(city)}</h3>
+    <div class="grid g2" style="margin-bottom:22px">
+    ${EATING.places.filter(p=>p.city===city).sort((a,b)=>a.rank-b.rank).map(p=>{
+      const st=vstat(p.id), shown=st.status||p.status;
+      return `<div class="card place">
+        <div class="place-h">
+          <span class="pill ${TONE[shown]}">${esc(STATUS_LABEL[shown])}</span>
+          ${p.day?`<button class="pill ai daylink" data-day="${p.day}">Day ${p.day}</button>`:''}
+          ${st.date?`<span class="pill">${esc(st.date)}</span>`:''}
+        </div>
+        ${p.url
+          ? `<a class="place-n" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)} <span aria-hidden="true">&#8599;</span></a>`
+          : `<span class="place-n">${esc(p.name)}</span>`}
+        <div class="place-jp">${esc(p.jp)}</div>
+        <div class="dest-facts">
+          <span class="pill">${esc(p.venue)}</span>
+          <span class="pill">${esc(p.cuisine)}</span>
+          <span class="pill">${esc(p.travel)}</span>
+        </div>
+        <p class="place-use"><b>Use it for</b> &#8212; ${esc(p.use)}</p>
+        <p class="place-why">${esc(p.why)}</p>
+        <div class="food-note aside"><b>Order</b> &#8212; ${p.order.map(esc).join(' · ')}</div>
+        <div class="food-note${/\u26a0/.test(p.allergen||'')?' warn':''}" style="margin-top:8px"><b>Allergen note</b> &#8212; ${esc(p.allergen||'')}</div>
+        <details class="reqbox"><summary>What to ask before booking</summary>
+          <ul class="tiplist">${p.ask.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></details>
+        <label class="statusrow"><span>Status</span>
+          <select data-vid="${p.id}">
+            ${EATING.statuses.map(x=>`<option value="${x.id}"${x.id===shown?' selected':''}>${esc(x.label)}</option>`).join('')}
+          </select></label>
+      </div>`;}).join('')}
+    </div>`).join('');
+}
+renderPlaces();
+places.addEventListener('change',e=>{
+  const sel=e.target.closest('[data-vid]');if(!sel)return;
+  S.venues[sel.dataset.vid]={status:sel.value,date:new Date().toISOString().slice(0,10)};
+  save();renderPlaces();flash('Status saved');
+});
+places.addEventListener('click',e=>{
+  const b=e.target.closest('.daylink');if(!b)return;
+  show('itinerary',{scroll:false});
+  const d=document.querySelector(`.day[data-day="${b.dataset.day}"]`);
+  if(!d)return; d.classList.add('open');
+  const nav=document.querySelector('nav');
+  window.scrollTo({top:Math.max(0,d.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-14),behavior:'instant'});
+});
+
+excluded.innerHTML=EATING.excluded.map(e=>`
+  <div class="card" style="padding:16px 18px;border-color:color-mix(in srgb,var(--shu) 34%,transparent)">
+    <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:5px">
+      <b style="font-family:var(--serif);font-size:16px">${esc(e.name)}</b>
+      <span class="pill">${esc(e.city)}</span>
+    </div>
+    <p style="font-size:14px;color:var(--sumi-2)">${esc(e.reason)}</p>
+  </div>`).join('');
+
+const INQ=EATING.inquiry;
+/* The template fills itself in from whatever is selected on the Food safety
+   page, so the email you copy names YOUR allergens in both languages rather
+   than a placeholder you have to remember to edit. */
+const inqNames=()=>{
+  const p=(S.allergens||[]).filter(id=>ALLERGENS[id]);
+  return p.length?p.map(id=>`${ALLERGENS[id].name} (${ALLERGENS[id].jp})`).join(', '):'[your allergen]';
+};
+const inqText=()=>[
+  `Subject: ${INQ.subject} — ${inqNames()}`,'',INQ.opening,'',
+  `The allergen: ${inqNames()}.`,'',
+  ...INQ.fields.map(f=>`${f.k}: ${f.v}`),'',INQ.allowed,'','Please answer:',
+  ...INQ.questions.map((q,i)=>`${i+1}. ${q.replace('[allergen]',inqNames())}`),
+].join('\n');
+const renderInq=()=>{inquiry.innerHTML=`
+  <h4>SUBJECT</h4><p>${esc(INQ.subject)} &mdash; ${esc(inqNames())}</p>
+  <h4>THE OPENING</h4><p>${esc(INQ.opening)}</p>
+  <h4>WHAT TO INCLUDE</h4>
+  <dl class="dl">${INQ.fields.map(f=>`<dt>${esc(f.k)}</dt><dd>${esc(f.v)}</dd>`).join('')}</dl>
+  <h4>THE FRAMING THAT WORKS</h4><p>${esc(INQ.allowed)}</p>
+  <h4>PLEASE ANSWER</h4>
+  <ol class="qlist">${INQ.questions.map(q=>`<li>${esc(q.replace('[allergen]',inqNames()))}</li>`).join('')}</ol>`;};
+renderInq();
+copyInq.onclick=async()=>{
+  try{await navigator.clipboard.writeText(inqText());flash('Inquiry copied')}catch{flash('Copy failed')}
+};
+
+acceptList.innerHTML=EATING.accept.map(x=>`<li>${esc(x)}</li>`).join('');
+rejectList.innerHTML=EATING.reject.map(x=>`<li>${esc(x)}</li>`).join('');
+
+grocery.innerHTML=GROCERY.map(g=>`
+  <div class="card" style="padding:18px 20px">
+    <h3 style="font-size:17px;margin-bottom:10px">${esc(g.city)}</h3>
+    <dl class="logi">
+      ${g.primary.map(x=>`<dt>${esc(x.name)}</dt><dd>${esc(x.note)}</dd>`).join('')}
+      ${(g.emergency||[]).map(x=>`<dt class="warn">${esc(x.name)}</dt><dd>${esc(x.note)}</dd>`).join('')}
+    </dl>
+    ${g.warn?`<div class="food-note warn" style="margin-top:12px"><b>Careful</b> — ${esc(g.warn)}</div>`:''}
+  </div>`).join('');
+groceryBuy.innerHTML=GROCERY_RULES.buy.map(x=>`<span class="chip-ok">${esc(x)}</span>`).join('');
+groceryAvoid.innerHTML=GROCERY_RULES.avoid.map(x=>`<span class="chip-no">${esc(x)}</span>`).join('');
+
+pattern.innerHTML=EATING.pattern.map(p=>`
+  <div class="card" style="padding:18px 20px">
+    <h3 style="font-size:17px;margin-bottom:8px">${esc(p.city)}</h3>
+    <ul class="tiplist">${p.lines.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>
+  </div>`).join('');
+
+
+/* ── logistics ──────────────────────────────────────────────────── */
+logistics.innerHTML=LOGISTICS.map(g=>`
+  <div class="level">
+    <div class="level-h ${g.critical?'lv-critical':'lv-flare'}">
+      <h3>${esc(g.title)}</h3><span class="j">${esc(g.jp)}</span>
+    </div>
+    <div class="level-b">
+      <p class="lead">${esc(g.lead)}</p>
+      <dl class="logi">${g.items.map(i=>
+        `<dt${/⚠️/.test(i.k)?' class="warn"':''}>${esc(i.k)}</dt><dd>${esc(i.v)}</dd>`).join('')}</dl>
+      ${g.note?`<div class="level-note">${esc(g.note)}</div>`:''}
+    </div></div>`).join('');
+
+/* ── lodging ────────────────────────────────────────────────────── */
+lodging.innerHTML=LODGING.map(l=>{
+  // One set per card, so a place links on its first mention here too.
+  const seen=new Set();
+  const lk=(t)=>linkifyDests(esc(t),seen);
+  return `
+  <div class="card" style="padding:22px 24px">
+    <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px">
+      <h3 style="font-size:20px">${esc(l.city)}</h3>
+      <span class="pill shu">${l.nights} nights</span>
+      <span class="pill kin">${esc(l.est)}</span>
+      <span class="pill">${esc(l.style)}</span>
+    </div>
+    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:10px"><b>Where:</b> ${lk(l.where)}</p>
+    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:14px">${lk(l.why)}</p>
+    ${/* Once real properties are listed below, the old "look at" hints just say
+          the same names again a paragraph earlier. */''}
+    <div class="${l.options?.length?'':'foodcols'}" style="gap:14px">
+      <div><h4 style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sumi-3);margin-bottom:6px">Non-negotiable</h4>
+        <div class="chiplist">${l.must.map(m=>`<span class="chip-ok">${esc(m)}</span>`).join('')}</div></div>
+      ${l.options?.length?'':`<div><h4 style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sumi-3);margin-bottom:6px">Look at</h4>
+        <ul class="tiplist" style="margin:0">${l.examples.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`}
+    </div>
+    ${l.warn?`<div class="food-note warn" style="margin-top:14px"><b>Careful</b> — ${lk(l.warn)}</div>`:''}
+    ${(l.options||[]).length?`<div class="opts">
+      <h4 class="opts-h">Actual properties</h4>
+      ${l.options.map(o=>`<div class="opt opt-${o.fit}">
+        <div class="opt-top">
+          ${o.url
+            ? `<a class="opt-name" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.name)} <span aria-hidden="true">↗</span></a>`
+            : `<span class="opt-name">${esc(o.name)}</span>`}
+          <span class="opt-price">${esc(o.price)}</span>
+        </div>
+        ${o.total?`<div class="opt-total">${esc(o.total)}</div>`:''}
+        <p>${lk(o.note)}</p>
+      </div>`).join('')}
+    </div>`:''}
+  </div>`;}).join('');
+
+/* ── budget ─────────────────────────────────────────────────────── */
+const money=n=>'$'+n.toLocaleString('en-US');
+function renderBudget(){
+  budget.innerHTML=`<tr class="bhead"><th>Line</th><th style="text-align:center">Level</th><th class="num" style="text-align:right">Amount</th></tr>`+
+    BUDGET.rows.map((r,i)=>{
+      const lv=S.budget[i]||'mid';
+      const val=lv==='lo'?r.lo:lv==='hi'?r.hi:Math.round((r.lo+r.hi)/2);
+      return `<tr><td>${esc(r.k)}${r.note?`<small>${esc(r.note)}</small>`:''}</td>
+        <td style="text-align:center"><span class="segbtns">
+          ${['lo','mid','hi'].map(k=>`<button data-i="${i}" data-lv="${k}" aria-pressed="${lv===k}">${k==='lo'?'Low':k==='hi'?'High':'Mid'}</button>`).join('')}
+        </span></td><td class="num">${money(val)}</td></tr>`;
+    }).join('');
+  const total=BUDGET.rows.reduce((s,r,i)=>{const lv=S.budget[i]||'mid';
+    return s+(lv==='lo'?r.lo:lv==='hi'?r.hi:Math.round((r.lo+r.hi)/2))},0);
+  btotal.textContent=money(total);
+  bnote.textContent=`Planning target ${money(BUDGET.target.lo)}–${money(BUDGET.target.hi)}. ${BUDGET.note}`;
+}
+renderBudget();
+budget.addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(!b)return;
+  S.budget[b.dataset.i]=b.dataset.lv;save();renderBudget()});
+
+/* ── checklists ─────────────────────────────────────────────────── */
+/** Items are a string, or {t,sub} where the timing is set apart from the task. */
+function checklist(host,items,ns){
+  host.innerHTML=items.map((item,i)=>{
+    const k=ns+i,on=!!S.checks[k];
+    const t=typeof item==='string'?item:item.t, sub=typeof item==='string'?'':item.sub;
+    return `<label class="check${on?' done':''}"><input type="checkbox" data-k="${k}"${on?' checked':''}>
+      <span>${esc(t)}${sub?`<em>${esc(sub)}</em>`:''}</span></label>`;
+  }).join('');
+}
+checklist(document.getElementById('ck-food'),FOOD.prepBeforeYouGo,'f');
+checklist(document.getElementById('ck-carry'),FOOD.emergency,'c');
+// Timing goes in its own muted span. Joined with a dash it produced
+// "Nintendo Museum lottery — First — before anything else", two dashes deep.
+checklist(document.getElementById('ck-book'),BOOKINGS.map(b=>({t:b.what,sub:b.when})),'b');
+document.addEventListener('change',e=>{
+  const c=e.target.closest('input[data-k]');if(!c)return;
+  S.checks[c.dataset.k]=c.checked;save();c.closest('.check').classList.toggle('done',c.checked);
+});
+
+/* ── credits ────────────────────────────────────────────────────── */
+credits.innerHTML=Object.entries(window.CREDITS||{}).map(([id,c])=>
+  `<div><a href="${esc(c.page)}" target="_blank" rel="noopener">${esc(c.title)}</a> — ${esc(c.author)} (${esc(c.licence)})</div>`).join('');
+
+/* ── reset + toast ──────────────────────────────────────────────── */
+resetBtn.onclick=()=>{
+  if(!confirm('Reset your budget levels and ticked boxes back to the defaults?'))return;
+  localStorage.removeItem(KEY);location.reload();
+};
+let toastT;
+function flash(msg){
+  let t=document.getElementById('toast');
+  if(!t){t=el(`<div id="toast" style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+    background:var(--sumi);color:var(--washi);padding:11px 20px;border-radius:999px;font-size:14px;
+    z-index:99;box-shadow:var(--raise);transition:opacity .25s"></div>`);document.body.appendChild(t)}
+  t.textContent=msg;t.style.opacity='1';clearTimeout(toastT);
+  toastT=setTimeout(()=>t.style.opacity='0',2200);
+}
+
+/* Own the landing position rather than letting the browser restore wherever
+   the last visit happened to stop — on a tabbed page that restores you into
+   the middle of a view you are no longer looking at. Arriving at the top is
+   right for the masthead; arriving on a deep-linked tab should skip it. */
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+const start=(location.hash||'#overview').slice(1);
+const known=TABS.some(([id])=>id===start);
+show(known?start:'overview',{scroll:known&&start!=='overview'});
+</script>
+</body>
+</html>
