@@ -133,12 +133,30 @@ nav{
   position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--washi) 88%,transparent);
   backdrop-filter:saturate(1.5) blur(12px);border-bottom:1px solid var(--line)
 }
-.nav-in{display:flex;gap:2px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:0 20px;max-width:1180px;margin:0 auto;
-  /* Nine tabs do not fit a phone, so this scrolls sideways. No `touch-action`
-     for the same reason as the swipe tracks: restricting it to pan-x would
-     forbid vertical scrolling from the strip the thumb most often lands on. */
-  overscroll-behavior-x:contain}
-.nav-in::-webkit-scrollbar{display:none}
+/*
+ * The primary nav WRAPS at every width. It never scrolls, and it never hides
+ * a tab.
+ *
+ * It used to scroll sideways always, which silently put four of the nine tabs
+ * out of reach on a shrunken desktop window: `scrollbar-width:none` left
+ * nothing to grab, there were no arrows, and a mouse wheel does not scroll a
+ * horizontal container. Not awkward — unreachable.
+ *
+ * The first fix branched on `pointer:coarse` to keep the drag behaviour on
+ * phones. That was the wrong instinct twice over: it cannot be verified in a
+ * headless browser (which reports coarse at every size), and hybrid laptops
+ * misreport it, so the failure mode is once again "some people cannot reach
+ * some tabs" — just a smaller group. Input type is the wrong question. Every
+ * pointer can click a thing it can see, so the answer is to always show
+ * everything and pay for it in a second row, shrinking the tabs on narrow
+ * screens so that row stays cheap.
+ */
+/* Left-aligned, not centred. Centring leaves the last row's orphan floating in
+   the middle of the bar — at 760px that is a lone "Prep" that reads as a
+   mistake. Ragged-left reads as a wrap. */
+.nav-in{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-start;
+  padding:0 16px;max-width:1180px;margin:0 auto}
+
 .tab{
   padding:14px 15px;font-size:13.5px;font-weight:600;white-space:nowrap;color:var(--sumi-3);
   border-bottom:2.5px solid transparent;transition:color .15s,border-color .15s
@@ -146,6 +164,19 @@ nav{
 .tab:hover{color:var(--sumi)}
 .tab[aria-current="true"]{color:var(--shu);border-bottom-color:var(--shu)}
 .tab .t-jp{font-family:var(--serif);opacity:.65;margin-left:6px;font-size:12px}
+/* These MUST come after the base `.tab` rules above: same specificity, so
+   source order decides, and written earlier they were silently overridden and
+   the nav stayed 108px tall in two rows.
+
+   The Japanese subtitles go first — dropping them keeps all nine tabs on one
+   row down to roughly 800px instead of 1180px. Below that the tabs tighten so
+   a second row costs about 78px rather than 106px. */
+@media(max-width:1080px){.tab .t-jp{display:none}}
+/* Tighten BEFORE the wrap point, not after it. At 820px the bar had already
+   been wrapping for a hundred pixels at full padding, so the second row cost
+   108px when it could cost 86px. */
+@media(max-width:960px){.tab{padding:9px 11px;font-size:13px}}
+@media(max-width:440px){.tab{padding:8px 8px;font-size:12.5px}.nav-in{gap:1px;padding:0 8px}}
 
 /* -- layout bits -------------------------------------------------- */
 section.view{padding:40px 0 80px;display:none}
@@ -157,8 +188,12 @@ section.view.on{display:block}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--raise)}
 .grid{display:grid;gap:18px}
-.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-.g3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+/* `minmax(320px,1fr)` cannot go below 320px, so on a 320px-wide phone the
+   track is wider than the padded page and every card in the grid overflows —
+   silently, because the body clips rather than scrolls. `min(100%,320px)` lets
+   the track collapse to the container when there is not room for the ideal. */
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
 /* Four items in an auto-fit grid land 3+1, which reads as one card left over
    rather than as a set. Two columns makes it a square. */
 .g4{grid-template-columns:repeat(2,1fr)}
@@ -516,22 +551,45 @@ dialog::backdrop{background:rgba(20,17,12,.55);backdrop-filter:blur(3px)}
    no way to tell where you are or to get anywhere without scrolling past
    everything. This is a second, view-local nav that sits under the main one
    and tracks what you are actually looking at. */
-.secnav{position:sticky;z-index:40;display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;
-  scrollbar-width:none;-ms-overflow-style:none;margin:0 0 22px;padding:7px 0;
+/*
+ * The section strip keeps ONE row and earns it with affordances.
+ *
+ * Unlike the tab bar it cannot simply wrap — eight chips with labels like
+ * "What to pack for Japan specifically" would run three rows deep and turn a
+ * convenience layer into a wall of sticky chrome. So it scrolls, and every way
+ * a person might try to move it works: drag on touch, arrow buttons on a
+ * mouse, the wheel while hovering, and the keyboard. The edges fade so it
+ * always LOOKS like there is more, which is the part the old nav never did.
+ */
+.snwrap{position:sticky;top:var(--navh,53px);z-index:40;display:flex;align-items:stretch;margin:0 0 22px;
   background:color-mix(in srgb,var(--washi) 92%,transparent);
-  backdrop-filter:saturate(1.4) blur(10px);
-  border-bottom:1px solid var(--line);overscroll-behavior-x:contain}
+  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.secnav{flex:1;min-width:0;display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;padding:7px 0;
+  overscroll-behavior-x:contain}
 .secnav::-webkit-scrollbar{display:none}
+.snwrap.can-scroll .secnav{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%)}
 .secnav button{flex:none;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600;
   color:var(--sumi-3);white-space:nowrap;border:1px solid transparent;transition:.16s}
 .secnav button:hover{color:var(--sumi);background:var(--card)}
+.secnav button:focus-visible{outline:2px solid var(--ai);outline-offset:1px}
 .secnav button[aria-current="true"]{color:var(--shu);border-color:color-mix(in srgb,var(--shu) 34%,transparent);
   background:color-mix(in srgb,var(--shu-soft) 70%,transparent)}
-.dgroup{margin-bottom:30px}
-.cb-n{margin-left:10px;font-size:12px;font-weight:600;color:var(--sumi-3);
-  font-family:var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums;
-  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
 .secnav .sn-n{font-variant-numeric:tabular-nums;opacity:.5;margin-right:5px;font-size:11px}
+/* Arrows only where dragging is not available. A touch device gets the fades
+   and its finger; a mouse gets buttons. */
+.sn-arrow{display:none;flex:none;width:30px;align-items:center;justify-content:center;
+  font-size:17px;line-height:1;color:var(--sumi-3);background:none;transition:.14s}
+.sn-arrow:hover:not(:disabled){color:var(--shu)}
+.sn-arrow:disabled{opacity:.24;cursor:default}
+.snwrap.can-scroll .sn-arrow{display:flex}
+/* Below this a finger is the obvious tool and the 60px the two buttons cost is
+   better spent on chips; the fades still say there is more. Note the selector
+   MATCHES the specificity of the rule above — written as `.snwrap .sn-arrow`
+   it lost 0-2-1 to 0-1-1 regardless of source order, and the arrows stayed. */
+@media(max-width:560px){.snwrap.can-scroll .sn-arrow{display:none}}
 @media(max-width:640px){.secnav button{font-size:12px;padding:5px 10px}}
 
 /* -- hero bands + motif work ---------------------------------------- */
@@ -818,8 +876,12 @@ b.sw-r{color:var(--ai)}
 .reqbox .tiplist li{padding:5px 0 5px 18px;font-size:13.5px}
 .statusrow{display:flex;gap:9px;align-items:center;margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
 .statusrow span{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3)}
+/* `flex:1` sets the grow factor but leaves the BASIS at auto, and a <select>
+   measures auto against its widest option — so on a narrow phone it pushed its
+   own card off the screen. `min-width:0` lets it shrink below that. */
 .statusrow select{
-  flex:1;padding:6px 9px;border-radius:8px;border:1px solid var(--line-2);
+  flex:1;min-width:0;max-width:100%;padding:6px 9px;border-radius:8px;
+  border:1px solid var(--line-2);
   background:var(--card);color:var(--sumi);font-size:13px
 }
 /* Status colour carries the workflow, and stops short of ever saying "safe". */
@@ -2606,6 +2668,20 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',paintMotifs)
  * at all. Reading each one the way it is actually built beats forcing three
  * different pages into one shape.
  */
+/**
+ * Scroll the window, with smoothness as an enhancement rather than a
+ * requirement. `behavior:'smooth'` is driven by the same frame loop as
+ * requestAnimationFrame, which is PAUSED in a hidden document — so a smooth
+ * scroll there simply never happens and the reader is left where they were.
+ * Jump instead when an animation cannot arrive, or when it is not wanted.
+ */
+function pageScrollTo(top){
+  const y=Math.max(0,Math.round(top));
+  if(document.hidden||matchMedia('(prefers-reduced-motion: reduce)').matches)
+    scrollTo(0,y);
+  else scrollTo({top:y,behavior:'smooth'});
+}
+
 (function sectionNav(){
   const navEl=document.querySelector('nav');
   const MIN_SECTIONS=3;
@@ -2620,36 +2696,116 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',paintMotifs)
   const strips=new Map();
 
   const navH=()=>Math.round(navEl.getBoundingClientRect().height);
+  // Watch the bar itself rather than the window: the nav gains and loses rows
+  // as it wraps, and a resize listener does not fire for a font finishing.
+  const publishNavH=()=>document.documentElement.style
+    .setProperty('--navh',navH()+'px');
+  new ResizeObserver(publishNavH).observe(navEl);
+  publishNavH();
 
   function build(view){
-    const old=view.querySelector(':scope > .secnav');
+    const old=view.querySelector(':scope > .snwrap');
     if(old)old.remove();
     strips.delete(view.id);
     const secs=(SOURCES[view.id]||SOURCES.default)(view).filter(s=>s.label);
     if(secs.length<MIN_SECTIONS)return;
 
-    const strip=el('<div class="secnav"></div>');
+    const wrap=el(`<div class="snwrap">
+      <button class="sn-arrow sn-prev" type="button" aria-label="Earlier sections">&#8249;</button>
+      <div class="secnav" role="tablist"></div>
+      <button class="sn-arrow sn-next" type="button" aria-label="Later sections">&#8250;</button>
+    </div>`);
+    const strip=wrap.querySelector('.secnav');
     secs.forEach((sec,i)=>{
       if(!sec.el.id)sec.el.id=`${view.id}-s${i}`;
       strip.appendChild(el(`<button type="button" data-target="${sec.el.id}">`+
         `<span class="sn-n">${String(i+1).padStart(2,'0')}</span>${esc(sec.label)}</button>`));
     });
-    strip.style.top=navH()+'px';
     strip.addEventListener('click',e=>{
       const b=e.target.closest('[data-target]');if(!b)return;
       const t=document.getElementById(b.dataset.target);if(!t)return;
-      scrollTo({top:t.getBoundingClientRect().top+scrollY
-        -(navH()+strip.getBoundingClientRect().height+14),behavior:'smooth'});
+      pageScrollTo(t.getBoundingClientRect().top+scrollY
+        -(navH()+wrap.getBoundingClientRect().height+14));
     });
+
+    /* Every way a person might try to move this has to work. */
+    const page=()=>Math.max(120,strip.clientWidth*0.72);
+    const arrows=[...wrap.querySelectorAll('.sn-arrow')];
+    const [prev,next]=arrows;
+
+    /*
+     * Hand-rolled, because `scroll-behavior:smooth` on this element made every
+     * programmatic scroll a silent no-op — scrollBy with behavior:'smooth' and
+     * a plain scrollLeft assignment BOTH left it at zero, while the same
+     * assignment under behavior:auto worked. Rather than ship a control whose
+     * correctness depends on which engine is running it, tween it here and
+     * honour reduced-motion explicitly.
+     */
+    let anim=0;
+    const slideTo=(to)=>{
+      const max=strip.scrollWidth-strip.clientWidth;
+      const end=Math.max(0,Math.min(max,to));
+      cancelAnimationFrame(anim);
+      // Jump rather than animate when an animation cannot arrive or is not
+      // wanted. requestAnimationFrame is PAUSED in a hidden document, so a
+      // tween there never advances and the strip would simply never move —
+      // the end state is what matters and nobody is watching it happen.
+      if(document.hidden||matchMedia('(prefers-reduced-motion: reduce)').matches){
+        strip.scrollLeft=end;sync();return;
+      }
+      const from=strip.scrollLeft, dist=end-from, T=260;
+      let t0=null;
+      const step=(ts)=>{
+        if(t0===null)t0=ts;
+        const p=Math.min(1,(ts-t0)/T);
+        strip.scrollLeft=from+dist*(p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2);
+        if(p<1)anim=requestAnimationFrame(step); else sync();
+      };
+      anim=requestAnimationFrame(step);
+    };
+    prev.onclick=()=>slideTo(strip.scrollLeft-page());
+    next.onclick=()=>slideTo(strip.scrollLeft+page());
+    // A wheel over a horizontal strip does nothing by default, which is most of
+    // why the old nav felt broken on a desktop. Only claim the gesture while
+    // the strip can actually move, so the page still scrolls at either end.
+    strip.addEventListener('wheel',e=>{
+      if(e.deltaX)return;
+      const d=e.deltaY, at=strip.scrollLeft;
+      const max=strip.scrollWidth-strip.clientWidth;
+      if(max<1||(d<0&&at<=0)||(d>0&&at>=max-1))return;
+      e.preventDefault();strip.scrollLeft=at+d;
+    },{passive:false});
+    strip.addEventListener('keydown',e=>{
+      const k={ArrowRight:1,ArrowLeft:-1}[e.key];if(!k)return;
+      const btns=[...strip.children], i=btns.indexOf(document.activeElement);
+      const n=btns[Math.max(0,Math.min(btns.length-1,i+k))];
+      if(n){e.preventDefault();n.focus();
+        // Bring it fully into view without relying on engine smooth-scroll.
+        const nr=n.getBoundingClientRect(), sr=strip.getBoundingClientRect();
+        if(nr.left<sr.left)slideTo(strip.scrollLeft-(sr.left-nr.left)-12);
+        else if(nr.right>sr.right)slideTo(strip.scrollLeft+(nr.right-sr.right)+12);
+      }
+    });
+
+    const sync=()=>{
+      const max=strip.scrollWidth-strip.clientWidth;
+      wrap.classList.toggle('can-scroll',max>2);
+      prev.disabled=strip.scrollLeft<=1;
+      next.disabled=strip.scrollLeft>=max-1;
+    };
+    strip.addEventListener('scroll',sync,{passive:true});
+    new ResizeObserver(sync).observe(strip);
+    wrap._sync=sync;wrap._slide=slideTo;
+    sync();
+
     const band=view.querySelector(':scope > .hband');
-    band?band.after(strip):view.prepend(strip);
-    strips.set(view.id,{view,strip,secs});
+    band?band.after(wrap):view.prepend(wrap);
+    sync();
+    strips.set(view.id,{view,wrap,strip,secs});
   }
 
   document.querySelectorAll('.view').forEach(v=>{if(v.id!=='v-print')build(v)});
   window.rebuildSecNav=(id)=>{const v=document.getElementById(id);if(v){build(v);spy()}};
-
-  addEventListener('resize',()=>strips.forEach(({strip})=>strip.style.top=navH()+'px'));
 
   /*
    * Scroll spy on rAF rather than IntersectionObserver: the question is not
@@ -2662,7 +2818,7 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',paintMotifs)
     queued=false;
     const vis=[...strips.values()].find(({view})=>getComputedStyle(view).display!=='none');
     if(!vis)return;
-    const line=navH()+vis.strip.getBoundingClientRect().height+22;
+    const line=navH()+vis.wrap.getBoundingClientRect().height+22;
     let active=0;
     vis.secs.forEach((s,i)=>{if(s.el.getBoundingClientRect().top<=line)active=i});
     [...vis.strip.children].forEach((b,i)=>{
@@ -2670,13 +2826,24 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',paintMotifs)
       if((b.getAttribute('aria-current')==='true')!==on){
         b.setAttribute('aria-current',on?'true':'false');
         // Keep the current chip in view where the strip itself scrolls.
-        if(on&&vis.strip.scrollWidth>vis.strip.clientWidth+4)
-          b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+        if(on&&vis.strip.scrollWidth>vis.strip.clientWidth+4&&vis.wrap._slide){
+          const br=b.getBoundingClientRect(), sr=vis.strip.getBoundingClientRect();
+          vis.wrap._slide(vis.strip.scrollLeft+(br.left-sr.left)-(sr.width-br.width)/2);
+        }
       }
     });
   }
   addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(spy)}},{passive:true});
-  document.getElementById('tabs').addEventListener('click',()=>setTimeout(spy,0));
+  const syncVisible=()=>{
+    const vis=[...strips.values()].find(({view})=>getComputedStyle(view).display!=='none');
+    if(vis&&vis.wrap._sync)vis.wrap._sync();
+  };
+  document.getElementById('tabs').addEventListener('click',()=>{
+    // Two passes: one now, one after layout has settled on the newly shown view.
+    syncVisible();spy();
+    requestAnimationFrame(()=>{syncVisible();spy()});
+  });
+  addEventListener('resize',()=>{syncVisible();spy()});
   spy();
 })();
 
