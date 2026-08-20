@@ -17,11 +17,24 @@ const here = (p) => new URL(p, import.meta.url).pathname;
 // reach past this script.
 const win = {};
 const ctx = createContext({ window: win });
-for (const f of ['data-zones.js', 'data-allergens.js', 'data-destinations.js', 'data-destinations-2.js', 'data-destinations-3.js', 'data-destinations-4.js', 'data-destinations-5.js', 'data-geo.js', 'data-reviews.js', 'data-plan.js', 'data-plans.js', 'data-logistics.js', 'data-alternatives.js', 'data-eating.js', 'credits.js']) {
+/*
+ * The module list is READ OFF THE PAGE rather than kept here by hand.
+ *
+ * A hand-maintained copy of this list is exactly how two data files once got
+ * bundled out of the shipped artifact: the page loaded them, the tooling did
+ * not, and every render after the first missing global died silently. Deriving
+ * it means a new <script src> is audited the moment it is added, and a file
+ * that stops being loaded stops being audited.
+ */
+const pageHtml = readFileSync(here('./index.html'), 'utf8');
+const modules = [...pageHtml.matchAll(/<script src="([^"]+)"><\/script>/g)].map((m) => m[1]);
+if (!modules.length) throw new Error('no <script src> modules found in index.html');
+for (const f of modules) {
   runInContext(readFileSync(here('./' + f), 'utf8'), ctx, { filename: f });
 }
 const { DESTINATIONS: D, ITINERARY: IT, FOOD, CARD, LODGING, BUDGET, BOOKINGS, CREDITS,
-  LOGISTICS, ROUTEMAP, EATING, GROCERY, GROCERY_RULES, ALTS, GEO, REVIEWS, PLANS, ZONE, LEGS, FAR_MINUTES, BASES, TRAVEL_DAYS, ALLERGENS, FORMATS, DEFAULT_ALLERGENS } = win;
+  LOGISTICS, ROUTEMAP, EATING, GROCERY, GROCERY_RULES, ALTS, GEO, REVIEWS, PLANS, ZONE, LEGS, FAR_MINUTES, BASES, TRAVEL_DAYS, ALLERGENS, FORMATS, DEFAULT_ALLERGENS,
+  COSTS, LEVERS, STAY_TYPES, STAY_NOTES, COUNTDOWN, PACKING } = win;
 
 let fails = 0, warns = 0;
 const fail = (m) => { fails++; console.log('  FAIL  ' + m); };
@@ -181,16 +194,70 @@ head('No baked-in diet');
 }
 
 head('Budget');
-const lo = BUDGET.rows.reduce((s, r) => s + r.lo, 0);
-const hi = BUDGET.rows.reduce((s, r) => s + r.hi, 0);
-const mid = BUDGET.rows.reduce((s, r) => s + Math.round((r.lo + r.hi) / 2), 0);
-console.log(`  info  low ${lo} / mid ${mid} / high ${hi}; stated target ${BUDGET.target.lo}-${BUDGET.target.hi}`);
-BUDGET.rows.forEach((r) => { if (r.lo > r.hi) fail(`"${r.k}" low exceeds high`); });
-if (mid < BUDGET.target.lo || mid > BUDGET.target.hi) {
-  warn(`mid-case ${mid} sits outside the stated planning target`);
-} else console.log('  ok    mid-case lands inside the stated target');
-const lodgeBudget = BUDGET.rows.filter((r) => /apartment|villa|suite/i.test(r.k)).length;
-if (lodgeBudget !== LODGING.length) fail(`budget has ${lodgeBudget} lodging lines for ${LODGING.length} stays`);
+{
+  // The table's whole point is that it scales, so the checks scale with it:
+  // every row must declare what it scales with and which currency it is in,
+  // or the party stepper and the rate box quietly produce nonsense.
+  const CUR = ['usd', 'jpy'], PER = ['person', 'room', 'trip'];
+  const CATS = new Set();
+  for (const r of BUDGET.rows) {
+    for (const k of ['k', 'per', 'cur', 'cat', 'note']) if (!r[k]) fail(`budget row "${r.k || '?'}" missing ${k}`);
+    if (!CUR.includes(r.cur)) fail(`budget row "${r.k}" has currency "${r.cur}"`);
+    if (!PER.includes(r.per)) fail(`budget row "${r.k}" scales by "${r.per}"`);
+    if (!(r.lo <= r.mid && r.mid <= r.hi)) fail(`budget row "${r.k}" is not ordered lo <= mid <= hi`);
+    CATS.add(r.cat);
+  }
+  if (!BUDGET.rate || !BUDGET.party) fail('budget is missing its default rate or party size');
+  for (const st of BUDGET.styles) for (const k of ['id', 'name', 'jp', 'blurb']) if (!st[k]) fail(`style "${st.id||'?'}" missing ${k}`);
+  const ids = BUDGET.styles.map((s) => s.id).sort().join(',');
+  if (ids !== 'hi,lo,mid') fail(`styles must be lo/mid/hi, got ${ids}`);
+
+  // Totals at the defaults, so a bad figure shows up as an implausible trip
+  // rather than as a number nobody reads.
+  const total = (lv, party, rate) => BUDGET.rows.reduce((s, r) => {
+    const m = r.per === 'person' ? party : r.per === 'room' ? Math.ceil(party / 2) : 1;
+    const raw = r[lv] * m;
+    return s + (r.cur === 'jpy' ? raw / rate : raw);
+  }, 0);
+  const [P, R] = [BUDGET.party, BUDGET.rate];
+  const t = { lo: total('lo', P, R), mid: total('mid', P, R), hi: total('hi', P, R) };
+  console.log(`  info  ${P} travellers at ¥${R}: lean $${Math.round(t.lo)} / middle $${Math.round(t.mid)} / comfortable $${Math.round(t.hi)}`);
+  if (t.lo < 2000 || t.hi > 30000) fail(`totals are implausible for a 12-day trip: ${Math.round(t.lo)}-${Math.round(t.hi)}`);
+  if (!(t.lo < t.mid && t.mid < t.hi)) fail('the three styles do not increase in order');
+  // A single traveller must not be charged for half a room.
+  const solo = total('mid', 1, R);
+  if (solo >= t.mid) fail('a solo trip costs at least as much as a trip for two');
+  console.log(`  ok    13 rows across ${CATS.size} categories, scaling by party and rate`);
+
+  // Lodging lines and lodging stays have to stay in step, or the budget
+  // silently drops a city when the itinerary changes.
+  const lodgeRows = BUDGET.rows.filter((r) => r.cat === 'Lodging');
+  if (lodgeRows.length !== LODGING.length) fail(`budget has ${lodgeRows.length} lodging lines for ${LODGING.length} stays`);
+  for (const l of LODGING) if (!lodgeRows.some((r) => r.k.startsWith(l.city))) fail(`no budget line for the ${l.city} stay`);
+  for (const r of lodgeRows) {
+    const city = LODGING.find((l) => r.k.startsWith(l.city));
+    if (city && !r.k.includes(`${city.nights} nights`)) fail(`"${r.k}" disagrees with the ${city.nights}-night ${city.city} stay`);
+  }
+  console.log(`  ok    every lodging line matches a stay and its night count`);
+}
+
+head('Price reference');
+{
+  let items = 0;
+  for (const g of COSTS) {
+    for (const k of ['group', 'jp', 'tone', 'items']) if (!g[k]) fail(`cost group "${g.group||'?'}" missing ${k}`);
+    for (const it of g.items) {
+      items++;
+      for (const k of ['what', 'yen', 'note']) if (!it[k]) fail(`"${it.what||'?'}" missing ${k}`);
+      // Yen figures are printed after a literal ¥, so a second one doubles it.
+      if (/¥|\$/.test(it.yen)) fail(`"${it.what}" carries its own currency symbol`);
+      if (!/\d/.test(it.yen)) fail(`"${it.what}" has no number in its price`);
+    }
+  }
+  if (items < 30) fail(`only ${items} reference prices; the table needs to be worth opening`);
+  for (const l of LEVERS) for (const k of ['t', 'd', 'tone']) if (!l[k]) fail(`lever "${l.t||'?'}" missing ${k}`);
+  console.log(`  ok    ${items} prices in ${COSTS.length} groups, ${LEVERS.length} levers`);
+}
 
 head('Bookings');
 if (!BOOKINGS.some((b) => b.critical)) fail('nothing marked critical in the booking order');
@@ -226,23 +293,59 @@ head('Route map');
   console.log(`  ok    ${stops.length} stops, ${legs.length} connectors, ${branches.length} branches, all day links valid`);
 }
 
-head('Lodging options');
+head('Lodging');
 {
-  let opts = 0, linked = 0;
+  // Named properties are search links, never booking links: a booking URL
+  // rots into a 404 or, worse, into somebody else's hotel.
+  const TIERS = ['Lean', 'Middle', 'Splurge'];
+  let picks = 0;
+  for (const t of STAY_TYPES) {
+    for (const k of ['name', 'jp', 'yen', 'what', 'who', 'watch', 'tone']) if (!t[k]) fail(`stay type "${t.name||'?'}" missing ${k}`);
+  }
+  // The per-person / per-room distinction is the single most expensive thing
+  // to get wrong here, so every type has to state its unit.
+  for (const t of STAY_TYPES) if (!/\/\s*(room|person|house)/.test(t.yen)) fail(`stay type "${t.name}" does not say what its price is per`);
   for (const l of LODGING) {
-    if (!l.options?.length) { fail(`${l.city} has no property options`); continue; }
-    for (const o of l.options) {
-      opts++;
-      for (const k of ['name', 'price', 'note']) if (!o[k]) fail(`${l.city}/${o.name || '?'} missing ${k}`);
-      if (!['best', 'practical', 'note'].includes(o.fit)) fail(`${l.city}/${o.name} bad fit "${o.fit}"`);
-      if (o.url) {
-        linked++;
-        if (!/^https:\/\//.test(o.url)) fail(`${l.city}/${o.name} url is not https`);
+    for (const k of ['city', 'jp', 'nights', 'where', 'why', 'avoid', 'tiers']) if (!l[k]) fail(`${l.city||'?'} missing ${k}`);
+    if (l.tiers.map((t) => t.tier).join(',') !== TIERS.join(',')) fail(`${l.city} does not carry all three tiers in order`);
+    for (const t of l.tiers) {
+      if (!t.yen || !t.fit) fail(`${l.city}/${t.tier} missing price or fit`);
+      if (!['practical', 'best', 'splurge'].includes(t.fit)) fail(`${l.city}/${t.tier} bad fit "${t.fit}"`);
+      if (!t.picks?.length) fail(`${l.city}/${t.tier} names no properties`);
+      for (const p of t.picks) {
+        picks++;
+        for (const k of ['name', 'note', 'find']) if (!p[k]) fail(`${l.city}/${p.name||'?'} missing ${k}`);
+        if (!/^https:\/\/www\.google\.com\/maps\/search\//.test(p.find)) fail(`${l.city}/${p.name} find link is not a maps search`);
+        // Compare decoded, because encoders disagree about apostrophes.
+        if (!decodeURIComponent(p.find).includes(p.name)) fail(`${l.city}/${p.name} find link does not search for its own name`);
       }
     }
-    if (!l.options.some((o) => o.fit === 'best')) fail(`${l.city} has no recommended option`);
+    if (!l.tiers.some((t) => t.fit === 'best')) fail(`${l.city} has no recommended tier`);
   }
-  console.log(`  ok    ${opts} options across ${LODGING.length} stays, ${linked} linked`);
+  for (const n of STAY_NOTES) if (!n.k || !n.v) fail('a lodging note is malformed');
+  console.log(`  ok    ${STAY_TYPES.length} stay types, ${picks} properties across ${LODGING.length} cities at 3 tiers, ${STAY_NOTES.length} notes`);
+}
+
+head('Prep');
+{
+  let tasks = 0;
+  for (const c of COUNTDOWN) {
+    for (const k of ['when', 'jp', 'tone', 'lead', 'items']) if (!c[k]) fail(`countdown "${c.when||'?'}" missing ${k}`);
+    if (!c.items.length) fail(`countdown "${c.when}" has no tasks`);
+    tasks += c.items.length;
+  }
+  if (!COUNTDOWN.some((c) => c.critical)) fail('nothing in the countdown is flagged critical');
+  // Checklist state is keyed by position, so a reordered countdown would tick
+  // the wrong boxes for anyone who has already used it. Keys must stay unique.
+  const keys = new Set();
+  COUNTDOWN.forEach((c, i) => c.items.forEach((_, j) => keys.add(`d${i}-${j}`)));
+  if (keys.size !== tasks) fail('countdown checklist keys collide');
+  let packed = 0;
+  for (const p of PACKING) {
+    for (const k of ['group', 'jp', 'tone', 'items']) if (!p[k]) fail(`packing group "${p.group||'?'}" missing ${k}`);
+    for (const it of p.items) { packed++; if (!it.t || !it.d) fail(`packing item in "${p.group}" is malformed`); }
+  }
+  console.log(`  ok    ${tasks} countdown tasks in ${COUNTDOWN.length} stages, ${packed} packing items in ${PACKING.length} groups`);
 }
 
 head('Eating out');
@@ -556,6 +659,28 @@ head('Review links');
   }
   const without = D.filter((d) => !REVIEWS?.[d.id]).map((d) => d.id);
   console.log(`  ok    ${ok} review pages verified; ${without.length} without one (${without.join(', ')})`);
+}
+
+head('Element ids');
+{
+  /*
+   * A duplicated id is silent and total. The page fills most sections by bare
+   * global — `principles.innerHTML = ...` — and when two elements share an id
+   * that global resolves to an HTMLCollection, so the assignment lands on
+   * nothing and the tab opens with a heading over an empty box. That is
+   * exactly how the overview and the food tab both lost three sections.
+   */
+  const ids = [...pageHtml.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+  const seen = new Set(), dupes = new Set();
+  for (const id of ids) (seen.has(id) ? dupes : seen).add(id);
+  if (dupes.size) fail(`duplicate element ids: ${[...dupes].join(', ')}`);
+
+  // Every id the script writes to must exist exactly once in the markup.
+  const written = new Set([...pageHtml.matchAll(/^\s*([A-Za-z][A-Za-z0-9_]*)\.innerHTML\s*=/gm)].map((m) => m[1]));
+  const known = new Set(['document', 'body', 'el', 'host', 'tr', 'sw']);
+  const missing = [...written].filter((n) => !known.has(n) && !seen.has(n));
+  if (missing.length) fail(`script writes innerHTML on ids not in the markup: ${missing.join(', ')}`);
+  if (!dupes.size && !missing.length) console.log(`  ok    ${seen.size} unique element ids, ${written.size} written by the script, none duplicated`);
 }
 
 head('Scroll safety');

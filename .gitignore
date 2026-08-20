@@ -4,3 +4,5 @@ node_modules
 dist-images/
 artifact.html
 preview.html
+.env*
+.vercel/

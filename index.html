@@ -503,7 +503,78 @@ dialog::backdrop{background:rgba(20,17,12,.55);backdrop-filter:blur(3px)}
   background:var(--ai-soft);color:var(--ai);font-size:11.5px;font-weight:700;display:grid;place-items:center
 }
 
+/* -- lodging: types, tiers, small print ---------------------------- */
+.stype{padding:0;overflow:clip}
+.stype-h{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
+  padding:14px 20px;border-bottom:1px solid var(--line);border-left:4px solid var(--tc)}
+.stype-h h3{font-size:17px}
+.stype-h .j{font-family:var(--serif);font-size:12.5px;color:var(--sumi-3);margin-left:7px;letter-spacing:.14em}
+.stype-y{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--tc);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.stype-w{padding:14px 20px 4px;font-size:14px;color:var(--sumi-2)}
+.stype .logi{padding:0 20px 16px}
+.tiers{display:grid;gap:12px}
+.tier{border:1px solid var(--line);border-radius:10px;padding:13px 16px;background:var(--washi)}
+.tier-best{border-color:color-mix(in srgb,var(--matcha) 45%,transparent);
+  background:color-mix(in srgb,var(--matcha-soft) 55%,transparent)}
+.tier-splurge{border-color:color-mix(in srgb,var(--kin) 45%,transparent)}
+.tier-h{display:flex;gap:10px;align-items:baseline;margin-bottom:9px}
+.tier-h h4{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3)}
+.tier-y{margin-left:auto;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;
+  color:var(--sumi-2);text-align:right}
+.pick{padding:7px 0;border-top:1px solid var(--line)}
+.pick:first-of-type{border-top:none;padding-top:0}
+.pick-n{font-weight:700;font-size:14.5px;color:var(--ai);text-decoration:none}
+.pick-n:hover{text-decoration:underline}
+.pick p{font-size:13.5px;color:var(--sumi-2);margin-top:2px}
+
 /* -- budget ------------------------------------------------------- */
+/* Style, party size and exchange rate all drive the same table, so they
+   share one bar above it rather than being scattered down the page. */
+.bctl{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;
+  padding:14px 18px;border:1px solid var(--line-2);border-radius:12px;
+  background:var(--card);margin-bottom:12px}
+.bctl-g{display:flex;gap:9px;align-items:center}
+.bctl-l{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3);font-weight:600}
+.bctl-blurb{margin-bottom:20px;font-style:italic}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line-2);border-radius:8px;overflow:clip}
+.stepper button{width:28px;height:26px;font-size:15px;font-weight:700;color:var(--sumi-3);background:var(--card)}
+.stepper button:hover{background:var(--ai);color:#fff}
+.stepper b{min-width:26px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums;
+  border-inline:1px solid var(--line-2);line-height:26px}
+.rate{display:inline-flex;align-items:center;gap:3px;font-size:14px;color:var(--sumi-2);
+  font-variant-numeric:tabular-nums}
+.rate input{width:56px;padding:3px 7px;font:inherit;font-size:14px;text-align:center;
+  border:1px solid var(--line-2);border-radius:6px;background:var(--washi);color:var(--sumi);
+  -moz-appearance:textfield;appearance:textfield}
+.rate input::-webkit-outer-spin-button,.rate input::-webkit-inner-spin-button{
+  -webkit-appearance:none;margin:0}
+.total-sub{padding:0 12px 4px;color:var(--sumi-3)}
+.total-sub b{font-size:19px;color:var(--sumi-2)}
+.shbar{display:flex;height:15px;border-radius:8px;overflow:clip;margin-bottom:14px}
+.shbar span{transition:width .25s ease}
+.shkey{display:flex;flex-wrap:wrap;gap:8px 20px}
+.shk{display:inline-flex;align-items:baseline;gap:6px;font-size:13px;color:var(--sumi-2)}
+.shk i{width:9px;height:9px;border-radius:2px;display:inline-block;align-self:center}
+.shk b{font-variant-numeric:tabular-nums}
+.shk em{font-style:normal;color:var(--sumi-3);font-size:12.5px;font-variant-numeric:tabular-nums}
+
+/* -- price reference and packing (same card shape) ---------------- */
+.ctab{padding:0;overflow:clip}
+.ctab-h{display:flex;gap:10px;align-items:baseline;padding:13px 20px;
+  border-bottom:1px solid var(--line);border-left:4px solid var(--tc)}
+.ctab-h h3{font-size:16px}
+.ctab-h .j{font-family:var(--serif);font-size:12.5px;color:var(--sumi-3);margin-left:auto;letter-spacing:.16em}
+.ptable{width:100%;border-collapse:collapse}
+.ptable td{padding:9px 20px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--sumi)}
+.ptable small{display:block;color:var(--sumi-3);font-size:12.5px;margin-top:2px}
+.lever{padding:15px 18px;border-left:4px solid var(--tc)}
+.lever h4{font-size:15px;margin-bottom:5px}
+.lever p{font-size:13.5px;color:var(--sumi-2)}
+.cd-items{margin-top:4px}
+
 .btable{width:100%;border-collapse:collapse}
 .btable th{text-align:left;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sumi-3);padding:10px 12px;border-bottom:1px solid var(--line-2)}
 .btable td{padding:12px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:top}
@@ -715,13 +786,9 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
     <p class="sub">Three bases, four intercity moves, nothing repeated. Tap a stop to jump to that part of the plan.</p>
     <div class="card mapwrap"><div id="routemap"></div><p class="mapnote" id="mapnote"></p></div>
 
-    <div class="h-sec"><h2>The four principles</h2><div class="rule"></div></div>
-    <p class="sub">Japanese seasoning is built on a handful of fermented pastes and sauces that are structural in Japanese cooking. Even plain-looking meat, fish, vegetables, noodles, rice bowls and broths are seasoned with sauces made off-site. Everything below follows from that.</p>
-    <div class="grid g4" id="principles" style="margin-bottom:38px"></div>
-
-    <div class="h-sec"><h2>What the research changed</h2><div class="rule"></div></div>
-    <p class="sub" id="labelLead"></p>
-    <div id="findings" style="margin-bottom:38px"></div>
+    <div class="h-sec"><h2>How this plan is built</h2><div class="rule"></div></div>
+    <p class="sub">Four decisions the whole itinerary rests on. Knowing them makes the rest of the app read as a set of choices rather than a list.</p>
+    <div class="grid g4" id="approach" style="margin-bottom:38px"></div>
 
     <div class="h-sec"><h2>Book in this order</h2><div class="rule"></div></div>
     <p class="sub">One booking constrains everything else, so it goes first — including before flights.</p>
@@ -796,19 +863,60 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
 
   <!-- ══ STAY ══ -->
   <section class="view" id="v-stay">
-    <div class="h-sec"><h2>Where you sleep is half the food plan</h2><div class="rule"></div></div>
-    <p class="sub">A kitchen at every stop is what makes the rest of this possible. It is not about cooking every meal — it is about never being forced into an unsafe one.</p>
-    <div class="grid" id="lodging" style="gap:18px"></div>
+    <div class="h-sec"><h2>The kinds of place you can stay</h2><div class="rule"></div></div>
+    <p class="sub">Japan has categories of accommodation with no equivalent at home, and choosing the wrong <em>kind</em> costs more than choosing the wrong property. The number that matters most: a ryokan is priced per person and includes two meals, so its headline rate is not comparable to a hotel room at all.</p>
+    <div class="grid g2" id="stayTypes" style="gap:16px;margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>Where to sleep in each city</h2><div class="rule"></div></div>
+    <p class="sub">Three honest tiers per stop, with real properties named. These are search links rather than booking links on purpose — rates and availability change constantly, so confirm the room before you pay for it.</p>
+    <div class="grid" id="lodging" style="gap:18px;margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>The small print</h2><div class="rule"></div></div>
+    <p class="sub">The things that catch people out, in the order they catch them.</p>
+    <div class="card" style="padding:18px 22px"><dl class="logi" id="stayNotes"></dl></div>
   </section>
 
   <!-- ══ BUDGET ══ -->
   <section class="view" id="v-budget">
-    <div class="h-sec"><h2>Budget</h2><div class="rule"></div></div>
-    <p class="sub">Set each line to the low, middle or high end and the total follows. Saved in this browser.</p>
+    <div class="h-sec"><h2>What the trip costs</h2><div class="rule"></div></div>
+    <p class="sub">Pick a travel style and a party size and the whole table follows. Everything bought in Japan is held in yen and converted at the rate you set, so the total moves with the exchange rate the way your actual money will. Adjust any single line afterwards — it all saves in this browser.</p>
+
+    <div class="bctl">
+      <div class="bctl-g">
+        <span class="bctl-l">Travel style</span>
+        <span class="segbtns" id="styleBtns"></span>
+      </div>
+      <div class="bctl-g">
+        <span class="bctl-l">Travelling</span>
+        <span class="stepper"><button id="pMinus" aria-label="Fewer travellers">−</button><b id="pCount">2</b><button id="pPlus" aria-label="More travellers">+</button></span>
+      </div>
+      <div class="bctl-g">
+        <span class="bctl-l">Rate</span>
+        <span class="rate">¥<input id="rateIn" type="number" min="80" max="300" step="1" inputmode="numeric"> = $1</span>
+      </div>
+    </div>
+    <p class="sub bctl-blurb" id="styleBlurb"></p>
+
     <div class="card" style="padding:8px 14px 20px"><table class="btable" id="budget"></table>
       <div class="total"><span>Estimated total</span><b id="btotal">—</b></div>
+      <div class="total total-sub"><span id="pplabel">Per person</span><b id="bper">—</b></div>
       <p class="sub" style="padding:0 12px;font-size:13.5px" id="bnote"></p>
     </div>
+
+    <div class="h-sec" style="margin-top:38px"><h2>Where the money goes</h2><div class="rule"></div></div>
+    <p class="sub">The same total, by share. Two lines dominate every trip to Japan, and neither of them is the one people worry about.</p>
+    <div class="card" style="padding:22px 24px;margin-bottom:38px">
+      <div class="shbar" id="shbar"></div>
+      <div class="shkey" id="shkey"></div>
+    </div>
+
+    <div class="h-sec"><h2>What things actually cost</h2><div class="rule"></div></div>
+    <p class="sub" id="costLead"></p>
+    <div class="grid g2" id="costs" style="gap:16px;margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>The levers</h2><div class="rule"></div></div>
+    <p class="sub">Thrift on the small things is nearly pointless here. These are the decisions that actually move the number.</p>
+    <div class="grid g2" id="levers" style="gap:14px"></div>
   </section>
 
   <!-- ══ EATING OUT ══ -->
@@ -861,7 +969,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
     </div>
 
     <div class="h-sec"><h2>The realistic pattern</h2><div class="rule"></div></div>
-    <div class="grid g3" id="pattern" style="margin-bottom:34px"></div>
+    <div class="card" id="pattern" style="padding:6px 22px 14px;margin-bottom:34px"></div>
 
   </section>
 
@@ -881,7 +989,15 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
       <div><h3 style="font-size:16px;margin-bottom:12px">Carry with you</h3><div id="ck-carry"></div></div>
     </div>
     <div class="h-sec" style="margin-top:34px"><h2>Booking checklist</h2><div class="rule"></div></div>
-    <div id="ck-book"></div>
+    <div id="ck-book" style="margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>The countdown</h2><div class="rule"></div></div>
+    <p class="sub">Ordered by deadline rather than by category, because what ruins a trip is never the forgotten task — it is the right task done in the wrong month. A passport renewal at six weeks is routine; at six days it is a different trip.</p>
+    <div class="grid" id="countdown" style="gap:16px;margin-bottom:38px"></div>
+
+    <div class="h-sec"><h2>What to pack for Japan specifically</h2><div class="rule"></div></div>
+    <p class="sub">No socks-and-underwear list. Everything here is either something the country will expect of you, or something that is genuinely hard to buy once you land.</p>
+    <div class="grid g2" id="packing" style="gap:16px"></div>
   </section>
 
   <!-- print-only card -->
@@ -909,6 +1025,10 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
 <script src="data-plans.js"></script>
 <script src="data-allergens.js"></script>
 <script src="data-plan.js"></script>
+<script src="data-costs.js"></script>
+<script src="data-lodging.js"></script>
+<script src="data-prep.js"></script>
+<script src="data-approach.js"></script>
 <script src="data-logistics.js"></script>
 <script src="data-alternatives.js"></script>
 <script src="data-eating.js"></script>
@@ -983,8 +1103,10 @@ route.innerHTML=[['Tokyo','東京',4],['Hakone','箱根',2],['Kyoto','京都',5]
   .join('<span class="leg-sep">—</span>');
 
 /* ── overview ───────────────────────────────────────────────────── */
+/* The last stat is live: it follows whatever the budget tab is set to, so the
+   overview never quotes a number the reader has already changed. */
 stats.innerHTML=[[12,'Days'],[3,'Bases'],[DESTINATIONS.length,'Destinations'],
-  ['$11–12.5k','Target, two people']]
+  ['<span id="statBudget">—</span>','<span id="statBudgetL">Estimated total</span>']]
   .map(([n,l])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('');
 
 /* ── route map ──────────────────────────────────────────────────── */
@@ -1039,12 +1161,8 @@ stats.innerHTML=[[12,'Days'],[3,'Bases'],[DESTINATIONS.length,'Destinations'],
   });
 })();
 
-principles.innerHTML=FOOD.principles.map(p=>
+approach.innerHTML=(window.APPROACH||[]).map(p=>
   `<div class="principle"><div class="n">${p.n}</div><div><h4>${esc(p.t)}</h4><p>${esc(p.d)}</p></div></div>`).join('');
-
-labelLead.textContent=FOOD.labelling.headline;
-findings.innerHTML=FOOD.labelling.points.map(p=>
-  `<div class="finding"><h4>${esc(p.k)}</h4><p>${esc(p.v)}</p></div>`).join('');
 
 bookings.innerHTML=BOOKINGS.map(b=>
   `<div class="booking-row${b.critical?' crit':''}"><div class="booking-when">${esc(b.when)}</div>
@@ -1801,8 +1919,7 @@ const renderCard=()=>{
   printEN.innerHTML=en.join(''); printJP.innerHTML=jp.join('');
 };
 
-const renderFood=()=>{renderPicker();renderAllergens();renderCard();
-  if(typeof renderInq==='function')renderInq();};
+const renderFood=()=>{renderPicker();renderAllergens();renderCard();renderInq()};
 
 allergenPicker.addEventListener('click',e=>{
   const clear=e.target.closest('[data-allergen-clear]');
@@ -1828,7 +1945,9 @@ rhythm.innerHTML=[['Breakfast',FOOD.rhythm.breakfast],['Lunch',FOOD.rhythm.lunch
   .map(([h,b])=>`<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:5px;color:var(--kin)">${h}</h4><p style="font-size:14px;color:var(--sumi-2)">${esc(b)}</p></div>`).join('');
 emergency.innerHTML=`<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:8px">Emergency kit</h4><ul class="tiplist">${FOOD.emergency.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`;
 prepFood.innerHTML=`<div class="card" style="padding:18px 20px"><h4 style="font-size:15px;margin-bottom:8px">Established before departure</h4><ul class="tiplist">${FOOD.prepBeforeYouGo.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`;
-renderFood();
+/* The first paint happens once the eating-out section below has defined INQ:
+   renderFood() also rewrites the restaurant inquiry, and reaching a const
+   in its temporal dead zone throws rather than reading as undefined. */
 
 printCard.onclick=()=>{
   // Swap to the card for the duration of the print job, then put the page back
@@ -1960,15 +2079,15 @@ const inqText=()=>[
   ...INQ.fields.map(f=>`${f.k}: ${f.v}`),'',INQ.allowed,'','Please answer:',
   ...INQ.questions.map((q,i)=>`${i+1}. ${q.replace('[allergen]',inqNames())}`),
 ].join('\n');
-const renderInq=()=>{inquiry.innerHTML=`
+function renderInq(){inquiry.innerHTML=`
   <h4>SUBJECT</h4><p>${esc(INQ.subject)} &mdash; ${esc(inqNames())}</p>
   <h4>THE OPENING</h4><p>${esc(INQ.opening)}</p>
   <h4>WHAT TO INCLUDE</h4>
   <dl class="dl">${INQ.fields.map(f=>`<dt>${esc(f.k)}</dt><dd>${esc(f.v)}</dd>`).join('')}</dl>
   <h4>THE FRAMING THAT WORKS</h4><p>${esc(INQ.allowed)}</p>
   <h4>PLEASE ANSWER</h4>
-  <ol class="qlist">${INQ.questions.map(q=>`<li>${esc(q.replace('[allergen]',inqNames()))}</li>`).join('')}</ol>`;};
-renderInq();
+  <ol class="qlist">${INQ.questions.map(q=>`<li>${esc(q.replace('[allergen]',inqNames()))}</li>`).join('')}</ol>`;}
+renderFood();   // paints the allergen picker, the card AND the inquiry
 copyInq.onclick=async()=>{
   try{await navigator.clipboard.writeText(inqText());flash('Inquiry copied')}catch{flash('Copy failed')}
 };
@@ -1988,11 +2107,11 @@ grocery.innerHTML=GROCERY.map(g=>`
 groceryBuy.innerHTML=GROCERY_RULES.buy.map(x=>`<span class="chip-ok">${esc(x)}</span>`).join('');
 groceryAvoid.innerHTML=GROCERY_RULES.avoid.map(x=>`<span class="chip-no">${esc(x)}</span>`).join('');
 
-pattern.innerHTML=EATING.pattern.map(p=>`
-  <div class="card" style="padding:18px 20px">
-    <h3 style="font-size:17px;margin-bottom:8px">${esc(p.city)}</h3>
-    <ul class="tiplist">${p.lines.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>
-  </div>`).join('');
+/* These are numbered because they genuinely are a sequence — ask before you
+   fly, ask the venue before the dish, and so on down to what you carry on the
+   day. The order is the advice. */
+pattern.innerHTML=`<ol class="qlist">${
+  EATING.pattern.map(p=>`<li>${esc(p)}</li>`).join('')}</ol>`;
 
 
 /* ── logistics ──────────────────────────────────────────────────── */
@@ -2009,64 +2128,181 @@ logistics.innerHTML=LOGISTICS.map(g=>`
     </div></div>`).join('');
 
 /* ── lodging ────────────────────────────────────────────────────── */
-lodging.innerHTML=LODGING.map(l=>{
-  // One set per card, so a place links on its first mention here too.
-  const seen=new Set();
-  const lk=(t)=>linkifyDests(esc(t),seen);
+/**
+ * Three layers: what KIND of place to stay in, then which one per city,
+ * then the small print. The kind is the layer people skip and the one
+ * that costs them, because a ryokan rate is per person with two meals
+ * and a hotel rate is per room with none — comparing the headline
+ * numbers is comparing nothing at all.
+ */
+const TONE_BG=t=>`var(--${t==='sumi'?'sumi-3':t})`;
+
+stayTypes.innerHTML=(window.STAY_TYPES||[]).map(t=>`
+  <div class="card stype">
+    <div class="stype-h" style="--tc:${TONE_BG(t.tone)}">
+      <h3>${esc(t.name)}<span class="j">${esc(t.jp)}</span></h3>
+      <span class="stype-y">${esc(t.yen)}</span>
+    </div>
+    <p class="stype-w">${esc(t.what)}</p>
+    <dl class="logi">
+      <dt>Who it suits</dt><dd>${esc(t.who)}</dd>
+      <dt class="warn">Watch for</dt><dd>${esc(t.watch)}</dd>
+    </dl>
+  </div>`).join('');
+
+lodging.innerHTML=(window.LODGING||[]).map(l=>{
+  // One link set per card, so a place still links on its first mention here.
+  const seen=new Set(), lk=(t)=>linkifyDests(esc(t),seen);
   return `
   <div class="card" style="padding:22px 24px">
-    <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px">
-      <h3 style="font-size:20px">${esc(l.city)}</h3>
+    <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px">
+      <h3 style="font-size:20px">${esc(l.city)}<span class="j" style="margin-left:8px">${esc(l.jp)}</span></h3>
       <span class="pill shu">${l.nights} nights</span>
-      <span class="pill kin">${esc(l.est)}</span>
-      <span class="pill">${esc(l.style)}</span>
     </div>
-    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:10px"><b>Where:</b> ${lk(l.where)}</p>
-    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:14px">${lk(l.why)}</p>
-    ${/* Once real properties are listed below, the old "look at" hints just say
-          the same names again a paragraph earlier. */''}
-    <div class="${l.options?.length?'':'foodcols'}" style="gap:14px">
-      <div><h4 style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sumi-3);margin-bottom:6px">Non-negotiable</h4>
-        <div class="chiplist">${l.must.map(m=>`<span class="chip-ok">${esc(m)}</span>`).join('')}</div></div>
-      ${l.options?.length?'':`<div><h4 style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sumi-3);margin-bottom:6px">Look at</h4>
-        <ul class="tiplist" style="margin:0">${l.examples.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`}
+    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:8px"><b>Where:</b> ${lk(l.where)}</p>
+    <p style="font-size:14.5px;color:var(--sumi-2);margin-bottom:12px">${lk(l.why)}</p>
+    <div class="food-note warn" style="margin-bottom:16px"><b>Avoid</b> — ${lk(l.avoid)}</div>
+    <div class="tiers">
+      ${l.tiers.map(t=>`
+        <div class="tier tier-${t.fit}">
+          <div class="tier-h"><h4>${esc(t.tier)}</h4><span class="tier-y">${esc(t.yen)}</span></div>
+          ${t.picks.map(p=>`<div class="pick">
+            <a class="pick-n" href="${esc(p.find)}" target="_blank" rel="noopener">${esc(p.name)} <span aria-hidden="true">↗</span></a>
+            <p>${lk(p.note)}</p>
+          </div>`).join('')}
+        </div>`).join('')}
     </div>
-    ${l.warn?`<div class="food-note warn" style="margin-top:14px"><b>Careful</b> — ${lk(l.warn)}</div>`:''}
-    ${(l.options||[]).length?`<div class="opts">
-      <h4 class="opts-h">Actual properties</h4>
-      ${l.options.map(o=>`<div class="opt opt-${o.fit}">
-        <div class="opt-top">
-          ${o.url
-            ? `<a class="opt-name" href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.name)} <span aria-hidden="true">↗</span></a>`
-            : `<span class="opt-name">${esc(o.name)}</span>`}
-          <span class="opt-price">${esc(o.price)}</span>
-        </div>
-        ${o.total?`<div class="opt-total">${esc(o.total)}</div>`:''}
-        <p>${lk(o.note)}</p>
-      </div>`).join('')}
-    </div>`:''}
   </div>`;}).join('');
 
+stayNotes.innerHTML=(window.STAY_NOTES||[]).map(n=>
+  `<dt>${esc(n.k)}</dt><dd>${esc(n.v)}</dd>`).join('');
+
 /* ── budget ─────────────────────────────────────────────────────── */
-const money=n=>'$'+n.toLocaleString('en-US');
+/**
+ * Rows bought at home are priced in dollars; rows bought in Japan are
+ * priced in YEN and converted at whatever rate the reader sets. A budget
+ * silently denominated at last year's rate is worse than no budget, and
+ * the yen has moved far enough in recent years for that to be the
+ * difference between two very different trips.
+ *
+ * `per` says what the row scales with: a flight is per person, a hotel
+ * room is per room (two to a room), a courier delivery is per trip. That
+ * one field is why the party-size stepper works at all.
+ */
+const B=window.BUDGET||{rows:[],styles:[]};
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+const yen=n=>'¥'+Math.round(n).toLocaleString('en-US');
+if(typeof S.party!=='number')S.party=B.party||2;
+if(typeof S.rate!=='number')S.rate=B.rate||150;
+if(!S.style)S.style='mid';
+
+const mult=r=>r.per==='person'?S.party:r.per==='room'?Math.ceil(S.party/2):1;
+const lvOf=(i)=>S.budget[i]||S.style;
+/** One row in dollars, scaled for the party and converted if it is a yen row. */
+const rowUsd=(r,i)=>{
+  const raw=r[lvOf(i)]*mult(r);
+  return r.cur==='jpy'?raw/S.rate:raw;
+};
+
+const CAT_TONE={Flights:'shu',Lodging:'kin',Food:'matcha',Transport:'ai',Doing:'sumi-3',Other:'line-2'};
+
 function renderBudget(){
+  styleBtns.innerHTML=B.styles.map(st=>
+    `<button data-style="${st.id}" aria-pressed="${S.style===st.id}">${esc(st.name)}</button>`).join('');
+  const st=B.styles.find(x=>x.id===S.style);
+  styleBlurb.textContent=st?st.blurb:'';
+  pCount.textContent=S.party;
+  if(document.activeElement!==rateIn)rateIn.value=S.rate;
+  pplabel.textContent=S.party===1?'That is the whole trip':`Per person, split ${S.party} ways`;
+
   budget.innerHTML=`<tr class="bhead"><th>Line</th><th style="text-align:center">Level</th><th class="num" style="text-align:right">Amount</th></tr>`+
-    BUDGET.rows.map((r,i)=>{
-      const lv=S.budget[i]||'mid';
-      const val=lv==='lo'?r.lo:lv==='hi'?r.hi:Math.round((r.lo+r.hi)/2);
-      return `<tr><td>${esc(r.k)}${r.note?`<small>${esc(r.note)}</small>`:''}</td>
+    B.rows.map((r,i)=>{
+      const lv=lvOf(i), val=rowUsd(r,i);
+      const unit=r.per==='person'?`× ${S.party} people`:r.per==='room'?`× ${Math.ceil(S.party/2)} room${Math.ceil(S.party/2)>1?'s':''}`:'once';
+      const src=r.cur==='jpy'?`${yen(r[lv]*mult(r))} · ${unit}`:unit;
+      return `<tr><td>${esc(r.k)}<small>${esc(src)}${r.note?' — '+esc(r.note):''}</small></td>
         <td style="text-align:center"><span class="segbtns">
           ${['lo','mid','hi'].map(k=>`<button data-i="${i}" data-lv="${k}" aria-pressed="${lv===k}">${k==='lo'?'Low':k==='hi'?'High':'Mid'}</button>`).join('')}
         </span></td><td class="num">${money(val)}</td></tr>`;
     }).join('');
-  const total=BUDGET.rows.reduce((s,r,i)=>{const lv=S.budget[i]||'mid';
-    return s+(lv==='lo'?r.lo:lv==='hi'?r.hi:Math.round((r.lo+r.hi)/2))},0);
+
+  const total=B.rows.reduce((s,r,i)=>s+rowUsd(r,i),0);
   btotal.textContent=money(total);
-  bnote.textContent=`Planning target ${money(BUDGET.target.lo)}–${money(BUDGET.target.hi)}. ${BUDGET.note}`;
+  bper.textContent=money(total/S.party);
+  const custom=Object.keys(S.budget).length;
+  bnote.textContent=`${B.note} ${B.seasonNote}`+(custom?` (${custom} line${custom>1?'s':''} set by hand — changing the style resets them.)`:'');
+
+  // Share of spend, largest first, so the two lines that dominate lead.
+  const by={};
+  B.rows.forEach((r,i)=>{by[r.cat]=(by[r.cat]||0)+rowUsd(r,i)});
+  const parts=Object.entries(by).sort((a,b)=>b[1]-a[1]);
+  shbar.innerHTML=parts.map(([c,v])=>
+    `<span style="width:${(v/total*100).toFixed(2)}%;background:var(--${CAT_TONE[c]||'line-2'})" title="${esc(c)}"></span>`).join('');
+  shkey.innerHTML=parts.map(([c,v])=>
+    `<span class="shk"><i style="background:var(--${CAT_TONE[c]||'line-2'})"></i>${esc(c)}
+      <b>${(v/total*100).toFixed(0)}%</b><em>${money(v)}</em></span>`).join('');
+
+  costLead.textContent=`Prices in yen, with dollars converted at the ¥${S.rate} rate set above. This is the part that makes an envelope feel real instead of invented.`;
+
+  // The overview headline follows the budget tab rather than quoting a figure
+  // the reader has already changed underneath it.
+  const sb=document.getElementById('statBudget');
+  if(sb){
+    sb.textContent=total>=10000?'$'+(total/1000).toFixed(1)+'k':money(total);
+    document.getElementById('statBudgetL').textContent=
+      `${st?st.name.toLowerCase():'estimated'}, ${S.party} ${S.party===1?'person':'people'}`;
+  }
 }
-renderBudget();
+
+styleBtns.addEventListener('click',e=>{
+  const b=e.target.closest('[data-style]');if(!b)return;
+  // Picking a style is picking a default for every line, so hand-set rows
+  // are cleared — otherwise "Lean" leaves three expensive lines behind it.
+  S.style=b.dataset.style;S.budget={};save();renderBudget();
+});
 budget.addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(!b)return;
   S.budget[b.dataset.i]=b.dataset.lv;save();renderBudget()});
+pMinus.onclick=()=>{if(S.party>1){S.party--;save();renderBudget()}};
+pPlus.onclick=()=>{if(S.party<8){S.party++;save();renderBudget()}};
+rateIn.oninput=()=>{
+  const v=+rateIn.value;
+  if(v>=80&&v<=300){S.rate=v;save();renderBudget()}
+};
+renderBudget();
+
+costs.innerHTML=(window.COSTS||[]).map(g=>`
+  <div class="card ctab">
+    <div class="ctab-h" style="--tc:${TONE_BG(g.tone)}"><h3>${esc(g.group)}</h3><span class="j">${esc(g.jp)}</span></div>
+    <table class="ptable">${g.items.map(it=>
+      `<tr><td>${esc(it.what)}<small>${esc(it.note)}</small></td>
+        <td class="num"><b>¥${esc(it.yen)}</b></td></tr>`).join('')}</table>
+  </div>`).join('');
+
+levers.innerHTML=(window.LEVERS||[]).map(l=>`
+  <div class="card lever" style="--tc:${TONE_BG(l.tone)}">
+    <h4>${esc(l.t)}</h4><p>${esc(l.d)}</p>
+  </div>`).join('');
+
+/* ── prep: countdown and packing ────────────────────────────────── */
+countdown.innerHTML=(window.COUNTDOWN||[]).map((c,ci)=>`
+  <div class="level">
+    <div class="level-h ${c.critical?'lv-critical':'lv-flare'}">
+      <h3>${esc(c.when)}</h3><span class="j">${esc(c.jp)}</span>
+    </div>
+    <div class="level-b">
+      <p class="lead">${esc(c.lead)}</p>
+      <div class="cd-items" id="cd-${ci}"></div>
+    </div>
+  </div>`).join('');
+(window.COUNTDOWN||[]).forEach((c,ci)=>
+  checklist(document.getElementById('cd-'+ci),c.items,'d'+ci+'-'));
+
+packing.innerHTML=(window.PACKING||[]).map(p=>`
+  <div class="card ctab">
+    <div class="ctab-h" style="--tc:${TONE_BG(p.tone)}"><h3>${esc(p.group)}</h3><span class="j">${esc(p.jp)}</span></div>
+    <dl class="logi" style="padding:14px 20px 18px">${p.items.map(i=>
+      `<dt>${esc(i.t)}</dt><dd>${esc(i.d)}</dd>`).join('')}</dl>
+  </div>`).join('');
 
 /* ── checklists ─────────────────────────────────────────────────── */
 /** Items are a string, or {t,sub} where the timing is set apart from the task. */
