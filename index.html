@@ -503,14 +503,77 @@ dialog::backdrop{background:rgba(20,17,12,.55);backdrop-filter:blur(3px)}
   background:var(--ai-soft);color:var(--ai);font-size:11.5px;font-weight:700;display:grid;place-items:center
 }
 
+/* The first paragraph after a hero is the tab's lede, and setting it at body
+   size was a large part of what made every tab read as undifferentiated text.
+   One step up in size, one step down in measure. */
+.hband + .h-sec + .sub, .hband + .sub{font-size:16.5px;line-height:1.62;
+  color:var(--sumi-2);max-width:66ch}
+
+/* -- hero bands + motif work ---------------------------------------- */
+/* Every tab opens on a photograph instead of a paragraph. The band carries a
+   scrim so white type stays legible over any image, and the tab's motif tiles
+   over the top at low opacity to tie the band to the cards below it. */
+.hband{position:relative;border-radius:14px;overflow:clip;margin-bottom:26px;
+  min-height:212px;display:flex;align-items:flex-end;isolation:isolate}
+.hband img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+/* Legibility comes from a neutral dark ramp; the tab's colour is a tint on
+   top of it. A single heavy wash in the tone colour was doing both jobs and
+   flattened every photograph to sepia. */
+.hband::before{content:'';position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(102deg,rgba(0,0,0,.74) 0%,rgba(0,0,0,.46) 46%,rgba(0,0,0,.06) 100%),
+    linear-gradient(200deg,color-mix(in srgb,var(--hb) 46%,transparent) 0%,transparent 62%)}
+/* The motif earns its place behind the type and gets out of the way over the
+   photograph — a flat tile across the whole band read as wire mesh. Scaling
+   the tile up makes it legible as a pattern rather than as texture. */
+.hb-motif{position:absolute;inset:0;z-index:2;background-repeat:repeat;
+  background-size:82px auto;
+  -webkit-mask-image:linear-gradient(100deg,#000 0%,#000 30%,transparent 72%);
+  mask-image:linear-gradient(100deg,#000 0%,#000 30%,transparent 72%)}
+.hb-in{position:relative;z-index:3;padding:26px 30px;max-width:620px}
+.hb-eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.82);font-weight:600;display:block;margin-bottom:7px}
+.hb-t{font-family:var(--serif);font-size:34px;line-height:1.12;color:#fff;
+  text-wrap:balance;margin-bottom:7px;text-shadow:0 1px 14px rgba(0,0,0,.34)}
+.hb-t .j{font-size:15px;letter-spacing:.3em;opacity:.62;margin-left:12px;white-space:nowrap}
+.hb-line{font-size:14.5px;color:rgba(255,255,255,.9);max-width:52ch;
+  text-shadow:0 1px 10px rgba(0,0,0,.4)}
+/* In the flow, under the lede. Positioned absolutely it had to dodge a text
+   block whose height changes with the viewport, and lost at 375px. */
+.hb-credit{display:block;margin-top:9px;font-size:10px;letter-spacing:.04em;
+  color:rgba(255,255,255,.58);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+@media(max-width:640px){
+  .hband{min-height:168px}
+  .hb-in{padding:18px 20px}
+  .hb-t{font-size:25px}
+  .hb-t .j{display:none}
+  .hb-line{font-size:13.5px}
+}
+/* Card headers get the same motif as their tab's band, behind the title. */
+.mot{background-repeat:repeat;background-position:center;background-size:58px auto}
+#costs,#packing{grid-template-columns:repeat(auto-fit,minmax(min(100%,410px),1fr))}
+.place-img{height:118px;margin:-1px -1px 12px;border-radius:11px 11px 0 0;overflow:clip;position:relative}
+.place-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.place:hover .place-img img{transform:scale(1.05)}
+.place-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--card) 78%,transparent))}
+/* A photograph at the head of each lodging city, so the three stops read as
+   three places rather than three headings. */
+.city-img{position:relative;height:132px;border-radius:10px;overflow:clip;margin-bottom:14px}
+.city-img img{width:100%;height:100%;object-fit:cover}
+.city-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,color-mix(in srgb,var(--card) 82%,transparent))}
+
 /* -- lodging: types, tiers, small print ---------------------------- */
 .stype{padding:0;overflow:clip}
 .stype-h{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;
   padding:14px 20px;border-bottom:1px solid var(--line);border-left:4px solid var(--tc)}
 .stype-h h3{font-size:17px}
 .stype-h .j{font-family:var(--serif);font-size:12.5px;color:var(--sumi-3);margin-left:7px;letter-spacing:.14em}
+/* The hostel line carries two prices with two different units, which at
+   nowrap ran 428px wide and pushed its own card off the screen. */
 .stype-y{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--tc);
-  font-variant-numeric:tabular-nums;white-space:nowrap}
+  font-variant-numeric:tabular-nums;text-align:right;text-wrap:balance}
 .stype-w{padding:14px 20px 4px;font-size:14px;color:var(--sumi-2)}
 .stype .logi{padding:0 20px 16px}
 .tiers{display:grid;gap:12px}
@@ -1029,6 +1092,7 @@ footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--sumi-3);
 <script src="data-lodging.js"></script>
 <script src="data-prep.js"></script>
 <script src="data-approach.js"></script>
+<script src="data-art.js"></script>
 <script src="data-logistics.js"></script>
 <script src="data-alternatives.js"></script>
 <script src="data-eating.js"></script>
@@ -2013,7 +2077,9 @@ function renderPlaces(){
     <div class="grid g2" style="margin-bottom:22px">
     ${EATING.places.filter(p=>p.city===city).sort((a,b)=>a.rank-b.rank).map(p=>{
       const st=vstat(p.id), shown=st.status||p.status;
+      const pd=D[p.dest];
       return `<div class="card place">
+        ${pd&&pd.img?`<div class="place-img"><img src="${pd.img}" alt="${esc(pd.name)}" loading="lazy"></div>`:''}
         <div class="place-h">
           <span class="pill ${TONE[shown]}">${esc(STATUS_LABEL[shown])}</span>
           ${p.day?`<button class="pill ai daylink" data-day="${p.day}">Day ${p.day}</button>`:''}
@@ -2323,6 +2389,56 @@ document.addEventListener('change',e=>{
   const c=e.target.closest('input[data-k]');if(!c)return;
   S.checks[c.dataset.k]=c.checked;save();c.closest('.check').classList.toggle('done',c.checked);
 });
+
+/* ── art: hero bands and motif work ─────────────────────────────── */
+/**
+ * The tab was a heading over a paragraph over more paragraphs. It now opens
+ * on a photograph the app already ships — the destination images are inlined
+ * as data URIs inside the destination data, so reusing one here adds no
+ * weight at all — with the tab's traditional motif tiled over the scrim.
+ *
+ * Motifs are REPAINTED on every theme change rather than baked once. The
+ * palette tokens differ between light and dark by design, so a pattern drawn
+ * in the light-mode gold turns to mud on a near-black ground.
+ */
+const toneHex=(t)=>t.startsWith('#')?t
+  :(getComputedStyle(document.documentElement).getPropertyValue('--'+t).trim()||'#8a8272');
+function paintMotifs(){
+  document.querySelectorAll('[data-motif]').forEach(n=>{
+    const [name,tone,op]=n.dataset.motif.split('|');
+    n.style.backgroundImage=`url("${MOTIF(name,toneHex(tone),parseFloat(op))}")`;
+  });
+}
+Object.entries(window.HEROES||{}).forEach(([id,h])=>{
+  const view=document.getElementById('v-'+id); if(!view)return;
+  const d=D[h.img], credit=(window.CREDITS||{})[h.img];
+  view.prepend(el(
+    `<div class="hband" style="--hb:var(--${h.tone})">
+      ${d&&d.img?`<img src="${d.img}" alt="">`:''}
+      <div class="hb-motif" data-motif="${h.motif}|#ffffff|0.24"></div>
+      <div class="hb-in">
+        <span class="hb-eyebrow">${esc(h.eyebrow)}</span>
+        <h2 class="hb-t">${esc(h.title)}<span class="j">${esc(h.jp)}</span></h2>
+        <p class="hb-line">${esc(h.line)}</p>
+        ${credit?`<span class="hb-credit">${esc(d.name)} — ${esc(credit.licence)}</span>`:''}
+      </div>
+    </div>`));
+  // Card headers on this tab pick up the same motif, at a weight that stays
+  // behind the text rather than competing with it.
+  view.querySelectorAll('.stype-h,.ctab-h,.level-h').forEach(n=>{
+    n.classList.add('mot');
+    n.dataset.motif=`${h.motif}|${n.closest('.level')?'#ffffff':(n.style.getPropertyValue('--tc')?'sumi-3':'sumi-3')}|${n.closest('.level')?'0.16':'0.14'}`;
+  });
+});
+// Lodging cities lead with a photograph of the city rather than its name.
+document.querySelectorAll('#lodging > .card').forEach((card,i)=>{
+  const city=(window.LODGING||[])[i], id=city&&(window.CITY_IMG||{})[city.city], d=id&&D[id];
+  if(d&&d.img)card.prepend(el(`<div class="city-img"><img src="${d.img}" alt="${esc(d.name)}"></div>`));
+});
+paintMotifs();
+// Repaint when the theme flips, in either direction and by either route.
+new MutationObserver(paintMotifs).observe(document.documentElement,{attributeFilter:['data-theme']});
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',paintMotifs);
 
 /* ── credits ────────────────────────────────────────────────────── */
 credits.innerHTML=Object.entries(window.CREDITS||{}).map(([id,c])=>

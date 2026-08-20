@@ -149,7 +149,7 @@ window.EATING = {
   places: [
     /* ───────────────── TOKYO — near Tokyo Station ───────────────── */
     {
-      id: 'seo', name: 'Yakitori Seo', jp: '焼鳥 瀬尾',
+      id: 'seo', dest: 'eat-seo', name: 'Yakitori Seo', jp: '焼鳥 瀬尾',
       venue: 'The Tokyo Station Hotel, B1', city: 'Tokyo', travel: 'Walkable from the apartment',
       cuisine: 'Yakitori — chef-led counter', status: 'strong', rank: 1, day: 2,
       use: 'The first Japanese dinner, and an easy one',
@@ -160,7 +160,7 @@ window.EATING = {
       allergen: 'A yakitori counter is one of the lowest-risk formats there is — charcoal, chicken, salt. Ask what arrives as a free bar snack, and about the dessert course.',
     },
     {
-      id: 'asanogawa', name: 'Sushidokoro Asanogawa', jp: '鮨処 あさの川',
+      id: 'asanogawa', dest: 'eat-asanogawa', name: 'Sushidokoro Asanogawa', jp: '鮨処 あさの川',
       venue: 'The Tokyo Station Hotel, 2F', city: 'Tokyo', travel: 'Direct from the Marunouchi south exit',
       cuisine: 'Edomae sushi', status: 'strong', rank: 2, day: 4,
       use: 'The sushi dinner, a few minutes from the door',
@@ -171,7 +171,7 @@ window.EATING = {
       allergen: 'An Edomae counter has no nuts in the tradition. Ask about specialty rolls and the dessert course, which is where hotel sushi bars improvise.',
     },
     {
-      id: 'daian', name: 'Teppanyaki Daian Club', jp: '鉄板焼処 大安くらぶ',
+      id: 'daian', dest: 'eat-daian', name: 'Teppanyaki Daian Club', jp: '鉄板焼処 大安くらぶ',
       venue: 'Marunouchi Hotel', city: 'Tokyo', travel: '1 min from the Marunouchi north exit',
       cuisine: 'Teppanyaki — Wagyu and seafood', status: 'several', rank: 3, day: 3,
       use: 'The special Tokyo dinner',
@@ -182,7 +182,7 @@ window.EATING = {
       allergen: 'Hotel pastry kitchens carry nut pastes and garnishes. Ask about the dessert course and the bar by name, and ask whether anything nut-coated shares the griddle.',
     },
     {
-      id: 'sumida', name: 'Teppan-yaki Sumida', jp: '鉄板焼 すみだ',
+      id: 'sumida', dest: 'eat-sumida', name: 'Teppan-yaki Sumida', jp: '鉄板焼 すみだ',
       venue: 'Royal Park Hotel, 20F', city: 'Tokyo', travel: 'Suitengūmae, direct from the station — 10 min by taxi',
       cuisine: 'Teppanyaki — Wagyu', status: 'several', rank: 4,
       use: 'The higher-end teppanyaki, if you will travel for it',
@@ -193,7 +193,7 @@ window.EATING = {
       allergen: '⚠️ Its published allergen system covers Japan\'s mandatory eight, which includes peanut and walnut — genuinely useful. Cashew and almond are only on the recommended list, so raise those separately if they apply.',
     },
     {
-      id: 'camellia', name: 'Camellia', jp: 'カメリア',
+      id: 'camellia', dest: 'eat-camellia', name: 'Camellia', jp: 'カメリア',
       venue: 'The Tokyo Station Hotel', city: 'Tokyo', travel: 'A few minutes on foot',
       cuisine: 'Bar and café — all-day Western', status: 'several', rank: 5,
       use: 'The Western fallback, and a flexible one',
@@ -206,7 +206,7 @@ window.EATING = {
 
     /* ───────────────── HAKONE — around Gōra ───────────────── */
     {
-      id: 'gora-brewery', name: 'Gōra Brewery & Grill', jp: '強羅ブリュワリー&グリル',
+      id: 'gora-brewery', dest: 'eat-gora', name: 'Gōra Brewery & Grill', jp: '強羅ブリュワリー&グリル',
       venue: 'Gōra', city: 'Hakone', travel: '8 min walk from Gōra Station',
       cuisine: 'Grill, sushi and Japanese', status: 'strong', rank: 1, day: 6,
       use: 'The Hakone dinner — and it is walkable from the villa',
@@ -217,7 +217,7 @@ window.EATING = {
       allergen: 'A bar with a cocktail and dessert programme is the risk here rather than the kitchen. Ask about the bar explicitly, and about nut garnishes on the grill plates.',
     },
     {
-      id: 'yakiniku-rock', name: 'Yakiniku ROCK', jp: '焼肉ロック',
+      id: 'yakiniku-rock', dest: 'eat-rock', name: 'Yakiniku ROCK', jp: '焼肉ロック',
       venue: 'Hakone-Yumoto', city: 'Hakone', travel: '3 min from Hakone-Yumoto Station — 40 min down the mountain railway from Gōra',
       cuisine: 'Yakiniku — fully private rooms', status: 'strong', rank: 2,
       use: 'The format with the most control, in a private room',
@@ -228,7 +228,7 @@ window.EATING = {
       allergen: 'Rare in a yakiniku house, but the salt-and-sesame-oil dip is where to ask — peanut is a frequent extender in cheaper sesame blends. Check the dessert list too.',
     },
     {
-      id: 'hyatt-hakone', name: 'Dining Room — French', jp: 'ダイニングルーム',
+      id: 'hyatt-hakone', dest: 'eat-hyatt', name: 'Dining Room — French', jp: 'ダイニングルーム',
       venue: 'Hyatt Regency Hakone', city: 'Hakone', travel: 'Short hop from Gōra',
       cuisine: 'French', status: 'several', rank: 3,
       use: 'The Western alternative in the valley',
@@ -241,7 +241,7 @@ window.EATING = {
 
     /* ───────────────── KYOTO — Shijō–Karasuma ───────────────── */
     {
-      id: 'hiro', name: 'Kyō no Yakiniku-dokoro Hiro', jp: '京の焼肉処 弘 四条木屋町店',
+      id: 'hiro', dest: 'eat-hiro', name: 'Kyō no Yakiniku-dokoro Hiro', jp: '京の焼肉処 弘 四条木屋町店',
       venue: 'Shijō-Kiyamachi', city: 'Kyoto', travel: '10 min walk from the apartment, on the Takasegawa',
       cuisine: 'Kyoto wagyu yakiniku', status: 'strong', rank: 1, day: 7,
       use: 'The first Kyoto dinner, and it sits where the evening walk goes',
@@ -252,7 +252,7 @@ window.EATING = {
       allergen: '⚠️ Their signature マンゴータン (mango tan) is thick-cut beef tongue fanned out to look like mango slices — no fruit and no nuts in it at all. Worth knowing before the word appears on a menu. The real question here is the sesame-oil dip and whether peanut is in the blend.',
     },
     {
-      id: 'yonefuku', name: 'Yonefuku', jp: '米福',
+      id: 'yonefuku', dest: 'eat-yonefuku', name: 'Yonefuku', jp: '米福',
       venue: 'Shijō Karasuma', city: 'Kyoto', travel: '3 min walk',
       cuisine: 'Tempura, sushi and seafood', status: 'strong', rank: 2, day: 10,
       use: 'Tempura and sushi in one place, three minutes away',
@@ -263,7 +263,7 @@ window.EATING = {
       allergen: '⚠️ "Creative sushi" menus are where unexpected ingredients turn up in Japan — ask about the specialty rolls specifically, and about the dessert list.',
     },
     {
-      id: 'hyoto', name: 'Kyoto Hyōtō', jp: '京都 瓢斗',
+      id: 'hyoto', dest: 'eat-hyoto', name: 'Kyoto Hyōtō', jp: '京都 瓢斗',
       venue: 'Shijō Karasuma', city: 'Kyoto', travel: '4 min walk from Karasuma or Shijō Station',
       cuisine: 'Shabu-shabu', status: 'confirm', rank: 3,
       use: 'Shabu-shabu, if the broth clears',
@@ -274,7 +274,7 @@ window.EATING = {
       allergen: 'Low risk in the kitchen; the questions are the broth and both dipping sauces. Sesame dip is standard and peanut is a common extender in the cheaper blends — ask which they use.',
     },
     {
-      id: 'hanaroku', name: 'Teppan Hanaroku', jp: '鉄板 花六',
+      id: 'hanaroku', dest: 'eat-hanaroku', name: 'Teppan Hanaroku', jp: '鉄板 花六',
       venue: 'Hotel Kanra Kyoto', city: 'Kyoto', travel: 'Walkable',
       cuisine: 'Teppanyaki — Wagyu', status: 'several', rank: 4, day: 11,
       use: 'The last-night teppanyaki',
@@ -285,7 +285,7 @@ window.EATING = {
       allergen: 'Hotel pastry section — ask about dessert and the bar. On the griddle itself, ask about the garnishes and the finishing oils.',
     },
     {
-      id: 'forni', name: 'FORNI', jp: 'フォルニ',
+      id: 'forni', dest: 'eat-forni', name: 'FORNI', jp: 'フォルニ',
       venue: 'Hotel The Mitsui Kyoto', city: 'Kyoto', travel: 'Short hop — Nijō',
       cuisine: 'Italian', status: 'several', rank: 5,
       use: 'The Western special-occasion dinner',
@@ -296,7 +296,7 @@ window.EATING = {
       allergen: '⚠️ Its allergen framework covers Japan\'s recommended twenty as well as the mandatory eight, which is unusually thorough. Italian dessert is still the place to ask: nut pastes and praline are standard.',
     },
     {
-      id: 'yasaka', name: 'YASAKA', jp: '八坂',
+      id: 'yasaka', dest: 'eat-yasaka', name: 'YASAKA', jp: '八坂',
       venue: 'Park Hyatt Kyoto', city: 'Kyoto', travel: 'Higashiyama, above Yasaka Pagoda — 10 min walk from Gion-Shijō',
       cuisine: 'Teppanyaki, French technique', status: 'several', rank: 6,
       use: 'The splurge, on a Gion evening',
